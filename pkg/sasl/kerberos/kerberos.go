@@ -6,6 +6,7 @@ import (
 	"encoding/binary"
 	"fmt"
 	"net"
+	"os"
 	"runtime"
 	"strings"
 
@@ -115,6 +116,13 @@ func (c *closing) Close() {
 
 func (k) Name() string { return "GSSAPI" }
 func (k k) Authenticate(ctx context.Context, host string) (sasl.Session, []byte, error) {
+	// reset domain_realm for some cloud service, like huawei mrs
+	if domainRealm, ok := os.LookupEnv("DOMAIN_REALM"); ok {
+		if domainRealm != "" {
+			host = domainRealm
+		}
+	}
+
 	kerb, err := k(ctx)
 	if err != nil {
 		return nil, nil, err
