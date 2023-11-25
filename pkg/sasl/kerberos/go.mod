@@ -1,4 +1,4 @@
-module github.com/twmb/franz-go/pkg/sasl/kerberos
+module github.com/YenchangChan/franz-go/pkg/sasl/kerberos
 
 go 1.18
 
