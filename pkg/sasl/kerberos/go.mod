@@ -4,7 +4,7 @@ go 1.18
 
 require (
 	github.com/jcmturner/gokrb5/v8 v8.4.4
-	github.com/twmb/franz-go v1.14.3
+	github.com/YenchangChan/franz-go v1.14.3
 )
 
 require (

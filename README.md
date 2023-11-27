@@ -5,7 +5,7 @@ franz-go - A complete Apache Kafka client written in Go
 ![GitHub](https://img.shields.io/github/license/twmb/franz-go)
 [![Discord Chat](https://img.shields.io/badge/discord-online-brightgreen.svg)](https://discord.gg/K4R5c8zsMS)
 
-[godev]: https://pkg.go.dev/github.com/twmb/franz-go/pkg/kgo
+[godev]: https://pkg.go.dev/github.com/YenchangChan/franz-go/pkg/kgo
 
 Franz-go is an all-encompassing Apache Kafka client fully written Go. This library aims to provide **every Kafka feature** from
 Apache Kafka v0.8.0 onward. It has support for transactions, regex topic consuming, the latest partitioning strategies,
@@ -33,8 +33,8 @@ This library attempts to provide an intuitive API while interacting with Kafka t
 - An [admin client][KADMC] with many helper functions for easy admin tasks
 - A [schema registry client][SRC] and convenience Serde type for encoding and decoding
 
-[KADMC]: https://pkg.go.dev/github.com/twmb/franz-go/pkg/kadm
-[SRC]: https://pkg.go.dev/github.com/twmb/franz-go/pkg/sr
+[KADMC]: https://pkg.go.dev/github.com/YenchangChan/franz-go/pkg/kadm
+[SRC]: https://pkg.go.dev/github.com/YenchangChan/franz-go/pkg/sr
 
 ## Works with any Kafka compatible brokers:
 
@@ -53,25 +53,25 @@ released independently. The main client is in franz-go. Plugins are released
 from `plugin/{plugin}`. The raw-protocol package is released from `pkg/kmsg`,
 and the admin package is released from `pkg/kadm`.
 
-The main client is located in the package `github.com/twmb/franz-go/pkg/kgo`,
-while the root of the project is at `github.com/twmb/franz-go`. There are
+The main client is located in the package `github.com/YenchangChan/franz-go/pkg/kgo`,
+while the root of the project is at `github.com/YenchangChan/franz-go`. There are
 a few extra packages within the project, as well as a few sub-modules. To
 use the main kgo package,
 
 ```
-go get github.com/twmb/franz-go
+go get github.com/YenchangChan/franz-go
 ```
 
 To use a plugin,
 
 ```
-go get github.com/twmb/franz-go/plugin/kzap
+go get github.com/YenchangChan/franz-go/plugin/kzap
 ```
 
 To use kadm,
 
 ```
-go get github.com/twmb/franz-go/pkg/kadm
+go get github.com/YenchangChan/franz-go/pkg/kadm
 ```
 
 As an example, your require section in go.mod may look like this:
@@ -79,8 +79,8 @@ As an example, your require section in go.mod may look like this:
 
 ```
 require (
-	github.com/twmb/franz-go v1.12.0
-	github.com/twmb/franz-go/pkg/kmsg v1.4.0
+	github.com/YenchangChan/franz-go v1.12.0
+	github.com/YenchangChan/franz-go/pkg/kmsg v1.4.0
 )
 ```
 
@@ -191,7 +191,7 @@ In alphabetical order,
 * [Zomato](https://www.zomato.com/)
 
 If you use this library and want on the list above, please either open a PR
-or comment on [#142](https://github.com/twmb/franz-go/issues/142)!
+or comment on [#142](https://github.com/YenchangChan/franz-go/issues/142)!
 
 ## Version Pinning
 
@@ -209,7 +209,7 @@ MaxVersions option for the client if you do so.
 **Note** there exists plug-in packages that allow you to easily add prometheus
 metrics, go-metrics, zap logging, etc. to your client! See the [plugin](./plugin)
 directory for more information! These plugins are provided under dedicated
-modules, e.g. `github.com/twmb/franz-go/plugin/kprom@v1.0.0`.
+modules, e.g. `github.com/YenchangChan/franz-go/plugin/kprom@v1.0.0`.
 
 The franz-go client takes a neutral approach to metrics by providing hooks
 that you can use to plug in your own metrics.

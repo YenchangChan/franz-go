@@ -4,7 +4,7 @@ kprom
 kprom is a plug-in package to provide prometheus
 [metrics](https://pkg.go.dev/github.com/prometheus/client_golang/prometheus)
 through a
-[`kgo.Hook`](https://pkg.go.dev/github.com/twmb/franz-go/pkg/kgo#Hook).
+[`kgo.Hook`](https://pkg.go.dev/github.com/YenchangChan/franz-go/pkg/kgo#Hook).
 
 This package tracks the following metrics under the following names, all
 metrics being counter vecs:
@@ -39,4 +39,4 @@ cl, err := kgo.NewClient(
 ```
 
 You can use your own prometheus registry, as well as a few other options.
-See the package [documentation](https://pkg.go.dev/github.com/twmb/franz-go/plugin/kprom) for more info!
+See the package [documentation](https://pkg.go.dev/github.com/YenchangChan/franz-go/plugin/kprom) for more info!

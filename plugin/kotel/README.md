@@ -5,7 +5,7 @@ Kotel is an OpenTelemetry instrumentation plug-in package for franz-go. It
 provides [tracing](https://pkg.go.dev/go.opentelemetry.io/otel/trace)
 and [metrics](https://pkg.go.dev/go.opentelemetry.io/otel/metric) options
 through
-a [`kgo.Hook`](https://pkg.go.dev/github.com/twmb/franz-go/pkg/kgo#Hook). With
+a [`kgo.Hook`](https://pkg.go.dev/github.com/YenchangChan/franz-go/pkg/kgo#Hook). With
 kotel, you can trace records produced or consumed with franz-go. You can pass
 parent traces into records and extract parent traces from records. It also
 tracks metrics related to connections, errors, and bytes transferred.

@@ -3,8 +3,8 @@ module bench
 go 1.20
 
 require (
-	github.com/twmb/franz-go v1.14.3
-	github.com/twmb/franz-go/plugin/kprom v1.1.0
+	github.com/YenchangChan/franz-go v1.14.3
+	github.com/YenchangChan/franz-go/plugin/kprom v1.1.0
 	github.com/twmb/tlscfg v1.2.1
 )
 
@@ -19,7 +19,7 @@ require (
 	github.com/prometheus/client_model v0.4.0 // indirect
 	github.com/prometheus/common v0.44.0 // indirect
 	github.com/prometheus/procfs v0.11.1 // indirect
-	github.com/twmb/franz-go/pkg/kmsg v1.6.1 // indirect
+	github.com/YenchangChan/franz-go/pkg/kmsg v1.6.1 // indirect
 	golang.org/x/crypto v0.11.0 // indirect
 	golang.org/x/sys v0.10.0 // indirect
 	google.golang.org/protobuf v1.31.0 // indirect

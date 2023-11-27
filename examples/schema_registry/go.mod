@@ -4,8 +4,8 @@ go 1.20
 
 require (
 	github.com/hamba/avro/v2 v2.13.0
-	github.com/twmb/franz-go v1.14.3
-	github.com/twmb/franz-go/pkg/sr v0.0.0-20230803134058-4af255fa846b
+	github.com/YenchangChan/franz-go v1.14.3
+	github.com/YenchangChan/franz-go/pkg/sr v0.0.0-20230803134058-4af255fa846b
 )
 
 require (
@@ -16,5 +16,5 @@ require (
 	github.com/modern-go/reflect2 v1.0.2 // indirect
 	github.com/pierrec/lz4/v4 v4.1.18 // indirect
 	github.com/stretchr/testify v1.7.2 // indirect
-	github.com/twmb/franz-go/pkg/kmsg v1.6.1 // indirect
+	github.com/YenchangChan/franz-go/pkg/kmsg v1.6.1 // indirect
 )

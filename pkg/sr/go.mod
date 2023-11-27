@@ -1,3 +1,3 @@
-module github.com/twmb/franz-go/pkg/sr
+module github.com/YenchangChan/franz-go/pkg/sr
 
 go 1.19

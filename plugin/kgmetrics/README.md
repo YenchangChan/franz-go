@@ -3,7 +3,7 @@ kgmetrics
 
 kgmetrics is a plug-in package to provide
 [rcrowley/go-metrics](https://github.com/rcrowley/go-metrics) metrics through a
-[`kgo.Hook`](https://pkg.go.dev/github.com/twmb/franz-go/pkg/kgo#Hook).
+[`kgo.Hook`](https://pkg.go.dev/github.com/YenchangChan/franz-go/pkg/kgo#Hook).
 
 This package tracks the following metrics under the following names, all
 metrics are meters:
@@ -33,5 +33,5 @@ cl, err := kgo.NewClient(
 ```
 
 You can use your own metrics registry, as well as specify a prefix on metrics.
-See the package [documentation](https://pkg.go.dev/github.com/twmb/franz-go/plugin/kgmetrics) for more info!
+See the package [documentation](https://pkg.go.dev/github.com/YenchangChan/franz-go/plugin/kgmetrics) for more info!
 

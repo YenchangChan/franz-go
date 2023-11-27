@@ -17,13 +17,13 @@ provide a drop-in package for, please open an issue and we can add it. It is
 recommended to use an info logging level: if you find that too noisy, please
 open an issue and we can figure out if some logs need to be changed.
 
-[1]: https://pkg.go.dev/github.com/twmb/franz-go/pkg/kgo#WithLogger
-[2]: https://pkg.go.dev/github.com/twmb/franz-go/pkg/kgo#Logger
-[3]: https://pkg.go.dev/github.com/twmb/franz-go/pkg/kgo#BasicLogger
+[1]: https://pkg.go.dev/github.com/YenchangChan/franz-go/pkg/kgo#WithLogger
+[2]: https://pkg.go.dev/github.com/YenchangChan/franz-go/pkg/kgo#Logger
+[3]: https://pkg.go.dev/github.com/YenchangChan/franz-go/pkg/kgo#BasicLogger
 [4]: https://github.com/uber-go/zap
-[5]: https://pkg.go.dev/github.com/twmb/franz-go/plugin/kzap
+[5]: https://pkg.go.dev/github.com/YenchangChan/franz-go/plugin/kzap
 [6]: https://pkg.go.dev/github.com/rs/zerolog
-[7]: https://pkg.go.dev/github.com/twmb/franz-go/plugin/kzerolog
+[7]: https://pkg.go.dev/github.com/YenchangChan/franz-go/plugin/kzerolog
 
 ## Metrics
 
@@ -38,9 +38,9 @@ Similar to logging, franz-go provides drop-in packages that provide some
 opinion of which metrics may be useful to monitoring: [`kprom`][9] for
 prometheus, and [`kgmetrics`][10] for gmetrics.
 
-[8]: https://pkg.go.dev/github.com/twmb/franz-go/pkg/kgo#Hook
-[9]: https://pkg.go.dev/github.com/twmb/franz-go/plugin/kprom
-[10]: https://pkg.go.dev/github.com/twmb/franz-go/plugin/kgmetrics
+[8]: https://pkg.go.dev/github.com/YenchangChan/franz-go/pkg/kgo#Hook
+[9]: https://pkg.go.dev/github.com/YenchangChan/franz-go/plugin/kprom
+[10]: https://pkg.go.dev/github.com/YenchangChan/franz-go/plugin/kgmetrics
 
 ## Latency: brokers, requests, records
 
@@ -70,5 +70,5 @@ to producing: it is more beneficial to measure fetch request latency, but
 per-record timestamp delta's can be used to glean producer <=> consumer e2e
 latency.
 
-[130]: https://github.com/twmb/franz-go/issues/130
+[130]: https://github.com/YenchangChan/franz-go/issues/130
 

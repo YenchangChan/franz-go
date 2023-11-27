@@ -4,8 +4,8 @@ go 1.20
 
 require (
 	github.com/aws/aws-sdk-go v1.44.316
-	github.com/twmb/franz-go v1.14.3
-	github.com/twmb/franz-go/pkg/kmsg v1.6.1
+	github.com/YenchangChan/franz-go v1.14.3
+	github.com/YenchangChan/franz-go/pkg/kmsg v1.6.1
 )
 
 require (

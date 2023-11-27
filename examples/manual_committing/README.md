@@ -2,7 +2,7 @@ Assigning partitions manually and committing
 ===
 
 If you consume outside the context of a group, but still want to use Kafka to
-manage offsets, you can use the `kadm` [package](https://pkg.go.dev/github.com/twmb/franz-go/pkg/kadm)
+manage offsets, you can use the `kadm` [package](https://pkg.go.dev/github.com/YenchangChan/franz-go/pkg/kadm)
 to manually commit offsets.
 
 This contains an example that consumes records from manually assigned partitions

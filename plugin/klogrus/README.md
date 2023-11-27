@@ -1,7 +1,7 @@
 klogrus
 ===
 
-klogrus is a plug-in package to use [logrus](https://github.com/sirupsen/logrus) as a [`kgo.Logger`](https://pkg.go.dev/github.com/twmb/franz-go/pkg/kgo#Logger)
+klogrus is a plug-in package to use [logrus](https://github.com/sirupsen/logrus) as a [`kgo.Logger`](https://pkg.go.dev/github.com/YenchangChan/franz-go/pkg/kgo#Logger)
 
 To use,
 

@@ -5,10 +5,10 @@ This patch release fixes two bugs and changes Mark functions to be no-ops when
 not using AutoCommitMarks to avoid confusion. This also includes a minor commit
 further improving the sticky balancer. See the commits for more details.
 
-- [`72778cb`](https://github.com/twmb/franz-go/commit/72778cb) **behavior change** kgo: no-op mark functions when not using AutoCommitMarks
-- [`e209bb6`](https://github.com/twmb/franz-go/commit/e209bb6) **bugfix** kgo: pin AddPartitionsToTxn to v3 when using one transaction
-- [`36b4437`](https://github.com/twmb/franz-go/commit/36b4437) sticky: further improvements
-- [`af5bc1f`](https://github.com/twmb/franz-go/commit/af5bc1f) **bugfix** kgo: be sure to use topics when other topics are paused
+- [`72778cb`](https://github.com/YenchangChan/franz-go/commit/72778cb) **behavior change** kgo: no-op mark functions when not using AutoCommitMarks
+- [`e209bb6`](https://github.com/YenchangChan/franz-go/commit/e209bb6) **bugfix** kgo: pin AddPartitionsToTxn to v3 when using one transaction
+- [`36b4437`](https://github.com/YenchangChan/franz-go/commit/36b4437) sticky: further improvements
+- [`af5bc1f`](https://github.com/YenchangChan/franz-go/commit/af5bc1f) **bugfix** kgo: be sure to use topics when other topics are paused
 
 v1.15.1
 ===
@@ -28,18 +28,18 @@ importantly, fixes a data race in the ApiVersions request.
 
 #### franz-go
 
-- [`2a3b6bd`](https://github.com/twmb/franz-go/commit/2a3b6bd) **improvement** kversion: detect 3.6
-- [`fe5a660`](https://github.com/twmb/franz-go/commit/fe5a660) **improvement** kgo: add sharding for AddPartitionsToTxn for KIP-890
-- [`b2ccc2f`](https://github.com/twmb/franz-go/commit/b2ccc2f) **improvement** kgo: reintroduce random broker iteration
-- [`54a7418`](https://github.com/twmb/franz-go/commit/54a7418) **improvement** kgo: allow PreTxnCommitFnContext to modify empty offsets
-- [`c013050`](https://github.com/twmb/franz-go/commit/c013050) **bugfix** kgo: avoid rare panic
-- [`0ecb52b`](https://github.com/twmb/franz-go/commit/0ecb52b) **improvement** kgo: do not rotate the consumer session when pausing topics/partitions
-- [`1429d47`](https://github.com/twmb/franz-go/commit/1429d47) **improvement** sticky balancer: try for better topic distribution among members
+- [`2a3b6bd`](https://github.com/YenchangChan/franz-go/commit/2a3b6bd) **improvement** kversion: detect 3.6
+- [`fe5a660`](https://github.com/YenchangChan/franz-go/commit/fe5a660) **improvement** kgo: add sharding for AddPartitionsToTxn for KIP-890
+- [`b2ccc2f`](https://github.com/YenchangChan/franz-go/commit/b2ccc2f) **improvement** kgo: reintroduce random broker iteration
+- [`54a7418`](https://github.com/YenchangChan/franz-go/commit/54a7418) **improvement** kgo: allow PreTxnCommitFnContext to modify empty offsets
+- [`c013050`](https://github.com/YenchangChan/franz-go/commit/c013050) **bugfix** kgo: avoid rare panic
+- [`0ecb52b`](https://github.com/YenchangChan/franz-go/commit/0ecb52b) **improvement** kgo: do not rotate the consumer session when pausing topics/partitions
+- [`1429d47`](https://github.com/YenchangChan/franz-go/commit/1429d47) **improvement** sticky balancer: try for better topic distribution among members
 
 #### kadm
 
-- [`1955938`](https://github.com/twmb/franz-go/commit/1955938) **bugfix** kadm: do not reuse ApiVersions in many concurrent requests
-- [`66974e8`](https://github.com/twmb/franz-go/commit/66974e8) **feature** kadm: include ErrMessage in topic response
+- [`1955938`](https://github.com/YenchangChan/franz-go/commit/1955938) **bugfix** kadm: do not reuse ApiVersions in many concurrent requests
+- [`66974e8`](https://github.com/YenchangChan/franz-go/commit/66974e8) **feature** kadm: include ErrMessage in topic response
 
 v1.15.0
 ===
@@ -54,7 +54,7 @@ addressed (and one _very_ minor bug fixed).
   topic (not just individual partitions while other partitions are still
   consumed on the broker). For long-running clients where partitions move
   around the cluster a bunch over time, this ensures we are not sending requests
-  with null topics / null topic IDs. See [#535](https://github.com/twmb/franz-go/issues/535)
+  with null topics / null topic IDs. See [#535](https://github.com/YenchangChan/franz-go/issues/535)
    for more details.
 * If the client talks to an http endpoint, we now properly detect the bytes
   'HTTP' and send a more relevant error message. This previously existed, but
@@ -87,25 +87,25 @@ addressed (and one _very_ minor bug fixed).
 
 #### franz-go
 
-- [`4dcfb06`](https://github.com/twmb/franz-go/commit/4dcfb06) **feature** kgo: add LeaveGroupContext
-- [`910e91d`](https://github.com/twmb/franz-go/commit/910e91d) and [`60b601a`](https://github.com/twmb/franz-go/commit/60b601a) **feature** kgo: add PreTxnCommitFnContext
-- [`c80d6f4`](https://github.com/twmb/franz-go/commit/c80d6f4) **feature** kgo: add Buffered{Fetch,Produce}Bytes
-- [`304559f`](https://github.com/twmb/franz-go/commit/304559f) **feature** kgo: support MaxBufferedBytes
-- [`310a5da`](https://github.com/twmb/franz-go/commit/310a5da) **feature** kgo: add NewErrFetch
-- [`504a9d7`](https://github.com/twmb/franz-go/commit/504a9d7) **feature** kgo: expose ConsiderMissingTopicDeletedAfter
-- [`253e1a9`](https://github.com/twmb/franz-go/commit/253e1a9) **feature** kgo: add PurgeTopicsFrom{Producing,Consuming}
-- [`055e2d8`](https://github.com/twmb/franz-go/commit/055e2d8) **improvement** kgo record formatter: accept %v{} to be a no-op (plain read/format)
-- [`37edfb9`](https://github.com/twmb/franz-go/commit/37edfb9) **improvement** kgo.RecordReader: support %v{json} to read json values
-- [`8a9a459`](https://github.com/twmb/franz-go/commit/8a9a459) **bugfix** kgo: track topic IDs in the fetch session
-- [`9d25d3a`](https://github.com/twmb/franz-go/commit/9d25d3a) **bugfix** kgo: fix typo in parseReadSize to properly detect and warn about talking to HTTP endpoints (thanks [@alistairking](https://github.com/alistairking)!)
+- [`4dcfb06`](https://github.com/YenchangChan/franz-go/commit/4dcfb06) **feature** kgo: add LeaveGroupContext
+- [`910e91d`](https://github.com/YenchangChan/franz-go/commit/910e91d) and [`60b601a`](https://github.com/YenchangChan/franz-go/commit/60b601a) **feature** kgo: add PreTxnCommitFnContext
+- [`c80d6f4`](https://github.com/YenchangChan/franz-go/commit/c80d6f4) **feature** kgo: add Buffered{Fetch,Produce}Bytes
+- [`304559f`](https://github.com/YenchangChan/franz-go/commit/304559f) **feature** kgo: support MaxBufferedBytes
+- [`310a5da`](https://github.com/YenchangChan/franz-go/commit/310a5da) **feature** kgo: add NewErrFetch
+- [`504a9d7`](https://github.com/YenchangChan/franz-go/commit/504a9d7) **feature** kgo: expose ConsiderMissingTopicDeletedAfter
+- [`253e1a9`](https://github.com/YenchangChan/franz-go/commit/253e1a9) **feature** kgo: add PurgeTopicsFrom{Producing,Consuming}
+- [`055e2d8`](https://github.com/YenchangChan/franz-go/commit/055e2d8) **improvement** kgo record formatter: accept %v{} to be a no-op (plain read/format)
+- [`37edfb9`](https://github.com/YenchangChan/franz-go/commit/37edfb9) **improvement** kgo.RecordReader: support %v{json} to read json values
+- [`8a9a459`](https://github.com/YenchangChan/franz-go/commit/8a9a459) **bugfix** kgo: track topic IDs in the fetch session
+- [`9d25d3a`](https://github.com/YenchangChan/franz-go/commit/9d25d3a) **bugfix** kgo: fix typo in parseReadSize to properly detect and warn about talking to HTTP endpoints (thanks [@alistairking](https://github.com/alistairking)!)
 
 #### kadm
 
 This release comes with a corresponding kadm release that contains a few
 behavior changes and improvements.
 
-- [`bfd07b2`](https://github.com/twmb/franz-go/commit/bfd07b2) kadm: fix occasionally empty topic/partitions in Lag
-- [`00ac608`](https://github.com/twmb/franz-go/commit/00ac608) kadm: change FetchOffsetsForTopics to only return requested topics by default
+- [`bfd07b2`](https://github.com/YenchangChan/franz-go/commit/bfd07b2) kadm: fix occasionally empty topic/partitions in Lag
+- [`00ac608`](https://github.com/YenchangChan/franz-go/commit/00ac608) kadm: change FetchOffsetsForTopics to only return requested topics by default
 
 v1.14.4
 ===
@@ -113,7 +113,7 @@ v1.14.4
 This small patch fixes kversion.VersionGuess to properly guess versions against
 zookeeper broker versions v2.7 through 3.4. See the commit for details.
 
-- [`5978156`](https://github.com/twmb/franz-go/commit/5978156) **bugfix** kversion: fix version detection for Kafka v2.7 through 3.4
+- [`5978156`](https://github.com/YenchangChan/franz-go/commit/5978156) **bugfix** kversion: fix version detection for Kafka v2.7 through 3.4
 
 v1.14.3
 ===
@@ -121,7 +121,7 @@ v1.14.3
 This patch fixes regex consuming a deleted topic causing an unending internal
 loop of metadata reloading (trying to discover where the topic went).
 
-- [`627d39a`](https://github.com/twmb/franz-go/commit/627d39a) **bugfix** kgo: fix / improve handling deleted topics while regex consuming
+- [`627d39a`](https://github.com/YenchangChan/franz-go/commit/627d39a) **bugfix** kgo: fix / improve handling deleted topics while regex consuming
 
 v1.14.2
 ===
@@ -132,7 +132,7 @@ consumer could just stop consuming for an indeterminite amount of time. This
 bug has existed for a _long_ time and relies on both the client being slow and
 the broker being fast to hit.
 
-- [`1f696ca`](https://github.com/twmb/franz-go/commit/1f696ca) **bugfix** kgo: avoid a consumer logic race where the consumer stops consuming
+- [`1f696ca`](https://github.com/YenchangChan/franz-go/commit/1f696ca) **bugfix** kgo: avoid a consumer logic race where the consumer stops consuming
 
 v1.14.1
 ===
@@ -140,12 +140,12 @@ v1.14.1
 This patch release, quick on the heels of v1.14.0, fixes a race condition
 introduced in v1.14 in the `PauseFetchTopics` and `PauseFetchPartitions`
 functions, a second race condition that can occur when purging a topic, and
-fully addresses [#493][https://github.com/twmb/franz-go/issues/493] which was
+fully addresses [#493][https://github.com/YenchangChan/franz-go/issues/493] which was
 not completely addressed in v1.14.0.
 
-- [`8c785fa`](https://github.com/twmb/franz-go/commit/8c785fa) **bugfix** kgo: fix race between client closing and purging
-- [`dc5283e`](https://github.com/twmb/franz-go/commit/dc5283e) kgo: re-fix #493, supporting other buggy clients, and add a test
-- [`32ac27f`](https://github.com/twmb/franz-go/commit/32ac27f) **bugfix** kgo: ensure assignPartitions is locked when pausing topics/partitions
+- [`8c785fa`](https://github.com/YenchangChan/franz-go/commit/8c785fa) **bugfix** kgo: fix race between client closing and purging
+- [`dc5283e`](https://github.com/YenchangChan/franz-go/commit/dc5283e) kgo: re-fix #493, supporting other buggy clients, and add a test
+- [`32ac27f`](https://github.com/YenchangChan/franz-go/commit/32ac27f) **bugfix** kgo: ensure assignPartitions is locked when pausing topics/partitions
 
 v1.14.0
 ===
@@ -190,22 +190,22 @@ underscore has been added).
 
 ## Relevant commits
 
-- [`c3b083b`](https://github.com/twmb/franz-go/commit/c3b083b) **improvement** kgo: do not returned paused topics/partitions after pausing
-- [`e224e90`](https://github.com/twmb/franz-go/commit/e224e90) **bugfix** kgo: allow HookBrokerRead and HookBrokerE2E to both be called
-- [`875761a`](https://github.com/twmb/franz-go/commit/875761a) **feature** kgo Offset: add EpochOffset getter field
-- [`c5d0fc5`](https://github.com/twmb/franz-go/commit/c5d0fc5) kgo: add a debug log for stripping retryable errors from fetches
-- [`b45d663`](https://github.com/twmb/franz-go/commit/b45d663) kgo: add more context to opportunistic metadata loads while fetching
-- [`9dae366`](https://github.com/twmb/franz-go/commit/9dae366) kgo: allow retries on dial timeouts
-- [`00e4e76`](https://github.com/twmb/franz-go/commit/00e4e76) kgo: tolerate buggy v1 group member metadata
-- [`34c8b3d`](https://github.com/twmb/franz-go/commit/34c8b3d) **feature** kgo: add AddConsumePartitions and RemoveConsumePartitions
-- [`b5cafba`](https://github.com/twmb/franz-go/commit/b5cafba) sasl: validate non-empty user/pass/token
-- [`76d2e71`](https://github.com/twmb/franz-go/commit/76d2e71) **feature** kgo: add KeepRetryableFetchErrors
-- [`0df3ec0`](https://github.com/twmb/franz-go/commit/0df3ec0) kgo: fix new niche CI problem against Kafka 3.5
-- [`8ff1d0d`](https://github.com/twmb/franz-go/commit/8ff1d0d) **feature** pkg/kversion: attempt to guess KRaft by default as well
-- [`e92f5d9`](https://github.com/twmb/franz-go/commit/e92f5d9) **feature** pkg/kversion: detect v3.5
-- [`f1b923e`](https://github.com/twmb/franz-go/commit/f1b923e) **feature** kgo: add DialTLS option
-- [`9667967`](https://github.com/twmb/franz-go/commit/9667967) **feature** kgo.Client: add Opts to return the original opts, to allow seeding new clients
-- [`8e14928`](https://github.com/twmb/franz-go/commit/8e14928) **feature** kgo: add NodeName for easy user formatting of internal seed node IDs
+- [`c3b083b`](https://github.com/YenchangChan/franz-go/commit/c3b083b) **improvement** kgo: do not returned paused topics/partitions after pausing
+- [`e224e90`](https://github.com/YenchangChan/franz-go/commit/e224e90) **bugfix** kgo: allow HookBrokerRead and HookBrokerE2E to both be called
+- [`875761a`](https://github.com/YenchangChan/franz-go/commit/875761a) **feature** kgo Offset: add EpochOffset getter field
+- [`c5d0fc5`](https://github.com/YenchangChan/franz-go/commit/c5d0fc5) kgo: add a debug log for stripping retryable errors from fetches
+- [`b45d663`](https://github.com/YenchangChan/franz-go/commit/b45d663) kgo: add more context to opportunistic metadata loads while fetching
+- [`9dae366`](https://github.com/YenchangChan/franz-go/commit/9dae366) kgo: allow retries on dial timeouts
+- [`00e4e76`](https://github.com/YenchangChan/franz-go/commit/00e4e76) kgo: tolerate buggy v1 group member metadata
+- [`34c8b3d`](https://github.com/YenchangChan/franz-go/commit/34c8b3d) **feature** kgo: add AddConsumePartitions and RemoveConsumePartitions
+- [`b5cafba`](https://github.com/YenchangChan/franz-go/commit/b5cafba) sasl: validate non-empty user/pass/token
+- [`76d2e71`](https://github.com/YenchangChan/franz-go/commit/76d2e71) **feature** kgo: add KeepRetryableFetchErrors
+- [`0df3ec0`](https://github.com/YenchangChan/franz-go/commit/0df3ec0) kgo: fix new niche CI problem against Kafka 3.5
+- [`8ff1d0d`](https://github.com/YenchangChan/franz-go/commit/8ff1d0d) **feature** pkg/kversion: attempt to guess KRaft by default as well
+- [`e92f5d9`](https://github.com/YenchangChan/franz-go/commit/e92f5d9) **feature** pkg/kversion: detect v3.5
+- [`f1b923e`](https://github.com/YenchangChan/franz-go/commit/f1b923e) **feature** kgo: add DialTLS option
+- [`9667967`](https://github.com/YenchangChan/franz-go/commit/9667967) **feature** kgo.Client: add Opts to return the original opts, to allow seeding new clients
+- [`8e14928`](https://github.com/YenchangChan/franz-go/commit/8e14928) **feature** kgo: add NodeName for easy user formatting of internal seed node IDs
 
 v1.13.6
 ===
@@ -220,7 +220,7 @@ unable to join a group -- the client injects a fake fetch to notify you, the
 client, that an error occurred. This patch actually allows you to consume that
 error.
 
-- [`5c87ce0`](https://github.com/twmb/franz-go/commit/5c87ce0) consumer: return from Poll if the only error is an injected fake
+- [`5c87ce0`](https://github.com/YenchangChan/franz-go/commit/5c87ce0) consumer: return from Poll if the only error is an injected fake
 
 v1.13.5
 ===
@@ -233,19 +233,19 @@ itself both seem to ignore extra data once auth is successful, and if a broker
 actually _rejected_ the auth then the broker would close the connection, so
 ignoring this data seems fine.
 
-- [`3addecc`](https://github.com/twmb/franz-go/commit/3addecc) sasl plain: ignore any challenge data
+- [`3addecc`](https://github.com/YenchangChan/franz-go/commit/3addecc) sasl plain: ignore any challenge data
 
 v1.13.4
 ===
 
 This bugfix release fixes a race condition when calling client.Close.
-This bug was introduced in commit [`e45cd72`](https://github.com/twmb/franz-go/commit/e45cd72) in
+This bug was introduced in commit [`e45cd72`](https://github.com/YenchangChan/franz-go/commit/e45cd72) in
 release v1.13.0. If a metadata request discovers a new broker as the client is
 closing, there is a tiny window where the metadata goroutine can update a map
 that the Close function is also concurrently accessing. The commit in this
 release fixes that by guarding the Close access with a mutex.
 
-- [`ee3d7c1`](https://github.com/twmb/franz-go/commit/ee3d7c1) **bugfix** kgo: fix race condition in close (thanks [@matino](https://github.com/matino)
+- [`ee3d7c1`](https://github.com/YenchangChan/franz-go/commit/ee3d7c1) **bugfix** kgo: fix race condition in close (thanks [@matino](https://github.com/matino)
 
 v1.13.3
 ===
@@ -270,14 +270,14 @@ internally purges and stops fetching those topics. Previously, any topic
 discovered while regex consuming was permanently consumed until you manually
 called `PurgeTopicsFromClient`.
 
-- [`bb66f24`](https://github.com/twmb/franz-go/commit/bb66f24) kgo: purge missing-from-meta topics while regex consuming
-- [`f72fdaf`](https://github.com/twmb/franz-go/commit/f72fdaf) kgo: always retry on NotLeader for sharded requests
-- [`682d1f8`](https://github.com/twmb/franz-go/commit/682d1f8) kgo: add info log when the client is throttled
-- [`88fa883`](https://github.com/twmb/franz-go/commit/88fa883) kgo: avoid counting pinReq version failures against retries
-- [`de53fda`](https://github.com/twmb/franz-go/commit/de53fda) kgo: add a bit more context to sharded logs, avoid info log on Close
-- [`7338bcf`](https://github.com/twmb/franz-go/commit/7338bcf) kgo: avoiding context.Canceled fetch from List/Epoch, improve testing&logs
-- [`055b349`](https://github.com/twmb/franz-go/commit/055b349) consumer: do not use the partition epoch when assigning offsets
-- [`d833f61`](https://github.com/twmb/franz-go/commit/d833f61) group consuming: block LeaveGroup between join&sync
+- [`bb66f24`](https://github.com/YenchangChan/franz-go/commit/bb66f24) kgo: purge missing-from-meta topics while regex consuming
+- [`f72fdaf`](https://github.com/YenchangChan/franz-go/commit/f72fdaf) kgo: always retry on NotLeader for sharded requests
+- [`682d1f8`](https://github.com/YenchangChan/franz-go/commit/682d1f8) kgo: add info log when the client is throttled
+- [`88fa883`](https://github.com/YenchangChan/franz-go/commit/88fa883) kgo: avoid counting pinReq version failures against retries
+- [`de53fda`](https://github.com/YenchangChan/franz-go/commit/de53fda) kgo: add a bit more context to sharded logs, avoid info log on Close
+- [`7338bcf`](https://github.com/YenchangChan/franz-go/commit/7338bcf) kgo: avoiding context.Canceled fetch from List/Epoch, improve testing&logs
+- [`055b349`](https://github.com/YenchangChan/franz-go/commit/055b349) consumer: do not use the partition epoch when assigning offsets
+- [`d833f61`](https://github.com/YenchangChan/franz-go/commit/d833f61) group consuming: block LeaveGroup between join&sync
 
 v1.13.2
 ===
@@ -305,7 +305,7 @@ during a commit at all with any balancer unless something is going quite wrong
 This does mean that OffsetCommit may take longer if you happen to commit in
 while a client is joining and the join&sync takes a long time.
 
-- [`ee70930`](https://github.com/twmb/franz-go/commit/ee70930) kgo groups: block join&sync while a commit is inflight
+- [`ee70930`](https://github.com/YenchangChan/franz-go/commit/ee70930) kgo groups: block join&sync while a commit is inflight
 
 v1.13.1
 ===
@@ -313,7 +313,7 @@ v1.13.1
 This patch release fixes a bug where a producer could enter a deadlock if a
 topic is deleted and recreated very quickly while producing.
 
-- [`769e02f`](https://github.com/twmb/franz-go/commit/769e02f) producer: avoid deadlock when when quickly recreating a topic
+- [`769e02f`](https://github.com/YenchangChan/franz-go/commit/769e02f) producer: avoid deadlock when when quickly recreating a topic
 
 v1.13.0
 ===
@@ -367,19 +367,19 @@ consuming.
 
 ## Relevant commits
 
-- [`1b229ce`](https://github.com/twmb/franz-go/commit/1b229ce) kgo: bugfix transaction ending & beginning
-- [`461d2ef`](https://github.com/twmb/franz-go/commit/461d2ef) kgo: add HookClientClosed and HookProduceRecordPartitioned
-- [`3a7f35e`](https://github.com/twmb/franz-go/commit/3a7f35e) kgo.Client: add UpdateFetchMaxBytes
-- [`b0fa1a0`](https://github.com/twmb/franz-go/commit/b0fa1a0) kgo.Client: add ConfigValue and ConfigValues
-- [`b487a15`](https://github.com/twmb/franz-go/commit/b487a15) kgo: inject the group lost error into polling as `*ErrGroupLost`
-- [`bc638b0`](https://github.com/twmb/franz-go/commit/bc638b0) plugin/kotel.Tracer: add KeyFormatter, only accept utf8 keys
-- [`a568b21`](https://github.com/twmb/franz-go/commit/a568b21) bugfix kgo: do not default to eager if there is any eager balancer
-- [`bf20ac0`](https://github.com/twmb/franz-go/commit/bf20ac0) plugin/kzap: support LogLevelNone
-- [`a9369be`](https://github.com/twmb/franz-go/commit/a9369be) kadm: add state config altering using the older AlterConfigs request
-- [`f5ddf71`](https://github.com/twmb/franz-go/commit/f5ddf71) kadm: add NumPartitions,ReplicationFactor,Configs to CreateTopicResponse
-- [`e45cd72`](https://github.com/twmb/franz-go/commit/e45cd72) consuming: close fetch sessions when closing the client
-- [`d8230ca`](https://github.com/twmb/franz-go/commit/d8230ca) plugin/klogr: support for go-logr
-- [`0f42e43`](https://github.com/twmb/franz-go/commit/0f42e43) check hooks and flatten slices of hooks
+- [`1b229ce`](https://github.com/YenchangChan/franz-go/commit/1b229ce) kgo: bugfix transaction ending & beginning
+- [`461d2ef`](https://github.com/YenchangChan/franz-go/commit/461d2ef) kgo: add HookClientClosed and HookProduceRecordPartitioned
+- [`3a7f35e`](https://github.com/YenchangChan/franz-go/commit/3a7f35e) kgo.Client: add UpdateFetchMaxBytes
+- [`b0fa1a0`](https://github.com/YenchangChan/franz-go/commit/b0fa1a0) kgo.Client: add ConfigValue and ConfigValues
+- [`b487a15`](https://github.com/YenchangChan/franz-go/commit/b487a15) kgo: inject the group lost error into polling as `*ErrGroupLost`
+- [`bc638b0`](https://github.com/YenchangChan/franz-go/commit/bc638b0) plugin/kotel.Tracer: add KeyFormatter, only accept utf8 keys
+- [`a568b21`](https://github.com/YenchangChan/franz-go/commit/a568b21) bugfix kgo: do not default to eager if there is any eager balancer
+- [`bf20ac0`](https://github.com/YenchangChan/franz-go/commit/bf20ac0) plugin/kzap: support LogLevelNone
+- [`a9369be`](https://github.com/YenchangChan/franz-go/commit/a9369be) kadm: add state config altering using the older AlterConfigs request
+- [`f5ddf71`](https://github.com/YenchangChan/franz-go/commit/f5ddf71) kadm: add NumPartitions,ReplicationFactor,Configs to CreateTopicResponse
+- [`e45cd72`](https://github.com/YenchangChan/franz-go/commit/e45cd72) consuming: close fetch sessions when closing the client
+- [`d8230ca`](https://github.com/YenchangChan/franz-go/commit/d8230ca) plugin/klogr: support for go-logr
+- [`0f42e43`](https://github.com/YenchangChan/franz-go/commit/0f42e43) check hooks and flatten slices of hooks
 
 v1.12.1
 ===
@@ -394,7 +394,7 @@ deleted and recreated. By returning the error, end users can notified that
 their client is in a fatal state and they should restart. In the future, I will
 add an option to consume recreated topics.
 
-- [`efe1cdb`](https://github.com/twmb/franz-go/commit/efe1cdb) consumer: return UnknownTopicID even though it is retryable
+- [`efe1cdb`](https://github.com/YenchangChan/franz-go/commit/efe1cdb) consumer: return UnknownTopicID even though it is retryable
 
 v1.12.0
 ===
@@ -412,10 +412,10 @@ Internally,
 
 * KIP-792 improves fencing of zombie group consumers using cooperative rebalancing
 
-- [`c5f86ea`](https://github.com/twmb/franz-go/commit/c5f86ea) **feature** kgo.Client: add `UpdateSeedBrokers(...string) error`
-- [`3e45339`](https://github.com/twmb/franz-go/commit/3e45339) **internal improvement** group balancer: support KIP-792
-- [`fe727f8`](https://github.com/twmb/franz-go/commit/fe727f8) **feature** kversion: cut Kafka 3.4
-- [`6751589`](https://github.com/twmb/franz-go/commit/6751589) **feature** pkg/kgo: add `Client.CommitMarkedOffsets` (thanks [@celrenheit](https://github.com/celrenheit)!)
+- [`c5f86ea`](https://github.com/YenchangChan/franz-go/commit/c5f86ea) **feature** kgo.Client: add `UpdateSeedBrokers(...string) error`
+- [`3e45339`](https://github.com/YenchangChan/franz-go/commit/3e45339) **internal improvement** group balancer: support KIP-792
+- [`fe727f8`](https://github.com/YenchangChan/franz-go/commit/fe727f8) **feature** kversion: cut Kafka 3.4
+- [`6751589`](https://github.com/YenchangChan/franz-go/commit/6751589) **feature** pkg/kgo: add `Client.CommitMarkedOffsets` (thanks [@celrenheit](https://github.com/celrenheit)!)
 
 v1.11.7
 ===
@@ -437,8 +437,8 @@ errors that are retryable.
 This is the last commit in the v1.11 series -- immediately after tagging this,
 I will be working on v1.12 which will officially test against Kafka 3.4.
 
-- [`17567b0..78a12c3`](https://github.com/twmb/franz-go/compare/17567b0..78a12c3) **bugfix** consumer: fix potential panic when calling PurgeTopicsFromClient
-- [`17567b0`](https://github.com/twmb/franz-go/commit/17567b0) **improvement** kgo: always strip retryable errors when consuming
+- [`17567b0..78a12c3`](https://github.com/YenchangChan/franz-go/compare/17567b0..78a12c3) **bugfix** consumer: fix potential panic when calling PurgeTopicsFromClient
+- [`17567b0`](https://github.com/YenchangChan/franz-go/commit/17567b0) **improvement** kgo: always strip retryable errors when consuming
 
 v1.11.6
 ===
@@ -459,7 +459,7 @@ the direct consumer, and makes it possible to re-add a topic. Lastly, three
 integration tests were added to ensure that the problems fixed in 1.11.5 and in
 this patch do not crop up again.
 
-* [`edd0985`](https://github.com/twmb/franz-go/commit/edd0985) **bugfix** kgo: patch ConsumePartitions regression from 1.11.5
+* [`edd0985`](https://github.com/YenchangChan/franz-go/commit/edd0985) **bugfix** kgo: patch ConsumePartitions regression from 1.11.5
 
 v1.11.5
 ===
@@ -486,8 +486,8 @@ More minor: previously, `AddConsumeTopics` did not work on direct consumers nor
 on a client that consumed nothing to begin with. These shortcomings have been
 addressed.
 
-* [`12e3c11`](https://github.com/twmb/franz-go/commit/12e3c11) **bugfix** franz-go: support 64 bit timestamp deltas
-* [`f613fb8`](https://github.com/twmb/franz-go/commit/f613fb8) **bugfix** pkg/kgo: patch AddConsumeTopics
+* [`12e3c11`](https://github.com/YenchangChan/franz-go/commit/12e3c11) **bugfix** franz-go: support 64 bit timestamp deltas
+* [`f613fb8`](https://github.com/YenchangChan/franz-go/commit/f613fb8) **bugfix** pkg/kgo: patch AddConsumeTopics
 
 v1.11.3
 ===
@@ -510,7 +510,7 @@ against a new cluster. The first time a group request is seen, the group
 coordinator loads. While loading, group requests are failed with
 `COORDINATOR_LOAD_IN_PROGRESS` or some other similar error.
 
-* [`5289ef6`](https://github.com/twmb/franz-go/commit/5289ef6) **bugfix** kgo.Client: avoid panic in OffsetFetchRequest when coordinator is not loaded
+* [`5289ef6`](https://github.com/YenchangChan/franz-go/commit/5289ef6) **bugfix** kgo.Client: avoid panic in OffsetFetchRequest when coordinator is not loaded
 
 v1.11.2
 ===
@@ -520,7 +520,7 @@ hook also implemented `HookFetchRecordBuffered`. No existing plugin currently
 implements these hooks (though one will soon), so this patch is only relevant
 to you if you manually have added these hooks.
 
-* [`2a37df9`](https://github.com/twmb/franz-go/commit/2a37df9) **bugfix** kgo: patch HookFetchRecordUnbuffered
+* [`2a37df9`](https://github.com/YenchangChan/franz-go/commit/2a37df9) **bugfix** kgo: patch HookFetchRecordUnbuffered
 
 
 v1.11.1
@@ -541,7 +541,7 @@ in a panic when the fetch request was built.
 
 See the commit for more details.
 
-* [`38f2ec6`](https://github.com/twmb/franz-go/commit/38f2ec6) **bugfix** pkg/kgo: bugfix ConsumePreferringLagFn
+* [`38f2ec6`](https://github.com/YenchangChan/franz-go/commit/38f2ec6) **bugfix** pkg/kgo: bugfix ConsumePreferringLagFn
 
 v1.11.0
 ===
@@ -570,11 +570,11 @@ having a GitHub workflow that ran `go vet` on qemu armv7 emulation, but
 apparently that was not comprehensive enough. Now, if you use a 32 bit arch, it
 is recommended to just compile with 1.19+.
 
-* [`d1b6897`](https://github.com/twmb/franz-go/commit/d1b6897) **feature** kgo: add UnsafeAbortBufferedRecords
-* [`d0c42ad`](https://github.com/twmb/franz-go/commit/d0c42ad) **improvement** kgo source: do not use fetch topic IDs if the broker returns no ID
-* [`cc3a355`](https://github.com/twmb/franz-go/commit/cc3a355) and [`a2c4bad`](https://github.com/twmb/franz-go/commit/a2c4bad) **improvement** kgo: universally switch to 1.19's atomics if on Go 1.19+
-* [`66e626f`](https://github.com/twmb/franz-go/commit/66e626f) producer: set Record.Topic earlier
-* [`3186e61`](https://github.com/twmb/franz-go/commit/3186e61) **feature** kgo: add MarkedOffsets function
+* [`d1b6897`](https://github.com/YenchangChan/franz-go/commit/d1b6897) **feature** kgo: add UnsafeAbortBufferedRecords
+* [`d0c42ad`](https://github.com/YenchangChan/franz-go/commit/d0c42ad) **improvement** kgo source: do not use fetch topic IDs if the broker returns no ID
+* [`cc3a355`](https://github.com/YenchangChan/franz-go/commit/cc3a355) and [`a2c4bad`](https://github.com/YenchangChan/franz-go/commit/a2c4bad) **improvement** kgo: universally switch to 1.19's atomics if on Go 1.19+
+* [`66e626f`](https://github.com/YenchangChan/franz-go/commit/66e626f) producer: set Record.Topic earlier
+* [`3186e61`](https://github.com/YenchangChan/franz-go/commit/3186e61) **feature** kgo: add MarkedOffsets function
 
 v1.10.4
 ===
@@ -590,13 +590,13 @@ nil pointer could be accessed and panic the program. These changes also
 introduced a bug that did not properly mirror one field for batched
 `FindCoordinator` requests.
 
-- [`ca67da4`](https://github.com/twmb/franz-go/commit/ca67da4) **bugfix** kgo: fix batch coordinator fetching
-- [`c6f7f9a`](https://github.com/twmb/franz-go/commit/c6f7f9a) **bugfix** kgo: allow empty groups when finding coordinator / fetching offsets
+- [`ca67da4`](https://github.com/YenchangChan/franz-go/commit/ca67da4) **bugfix** kgo: fix batch coordinator fetching
+- [`c6f7f9a`](https://github.com/YenchangChan/franz-go/commit/c6f7f9a) **bugfix** kgo: allow empty groups when finding coordinator / fetching offsets
 
 v1.10.3
 ===
 
-This small patch release is another attempted fix at [#239](https://github.com/twmb/franz-go/issues/239).
+This small patch release is another attempted fix at [#239](https://github.com/YenchangChan/franz-go/issues/239).
 It is only possible to encounter this bug if a broker completely dies and never
 comes back, and you do not replace the broker (i.e., broker 3 dies and it is
 just gone forever).
@@ -619,7 +619,7 @@ broker and it exists.
 Lastly, we change the default max produce record batch bytes from 1,000,000 to
 1,000,012, to exactly mirror Kafka's max.message.bytes.
 
-- [`e2e80bf`](https://github.com/twmb/franz-go/commit/e2e80bf) kgo: clear controller/coordinator caches on failed dials
+- [`e2e80bf`](https://github.com/YenchangChan/franz-go/commit/e2e80bf) kgo: clear controller/coordinator caches on failed dials
 
 v1.10.2
 ===
@@ -646,10 +646,10 @@ request would never be written and the records could never be failed. The
 tightened failure scenario allows records to be failed all the way up until
 they are actually serialized and written.
 
-- [`d620765`](https://github.com/twmb/franz-go/commit/d620765) sink: tighten canFailFromLoadErrs
-- [`6c0abd1`](https://github.com/twmb/franz-go/commit/6c0abd1) **minor bugfix** source: avoid backoff / session reset when there is no consumed data
-- [`6ce8bdf`](https://github.com/twmb/franz-go/commit/6ce8bdf) kerr: add two missing errors to ErrorForCode
-- [PR #264](https://github.com/twmb/franz-go/pull/264) fix `isNetClosedErr` build constraints: franz-go was using the `strings.Contains` version, which was meant for Go 1.15 only (thanks [@PleasingFungus][1.10.2:pf]!)
+- [`d620765`](https://github.com/YenchangChan/franz-go/commit/d620765) sink: tighten canFailFromLoadErrs
+- [`6c0abd1`](https://github.com/YenchangChan/franz-go/commit/6c0abd1) **minor bugfix** source: avoid backoff / session reset when there is no consumed data
+- [`6ce8bdf`](https://github.com/YenchangChan/franz-go/commit/6ce8bdf) kerr: add two missing errors to ErrorForCode
+- [PR #264](https://github.com/YenchangChan/franz-go/pull/264) fix `isNetClosedErr` build constraints: franz-go was using the `strings.Contains` version, which was meant for Go 1.15 only (thanks [@PleasingFungus][1.10.2:pf]!)
 
 v1.10.1
 ===
@@ -662,10 +662,10 @@ This is released in tandem with kadm v1.6.0, which contains a small kadm bugfix
 for `DeleteRecords`, `OffsetForLeaderEpoch`, and `DescribeProducers`, and
 (hopefully) finishes support for all current admin APIs.
 
-- [`56fcfb4`](https://github.com/twmb/franz-go/commit/56fcfb4) sink: log all aspects of wanting to / failing records
-- [`9ee5efa`](https://github.com/twmb/franz-go/commit/9ee5efa) sink: update metadata when AddPartitionsToTxn fails repeatedly
-- [`bc6810d`](https://github.com/twmb/franz-go/commit/bc6810d) broker: hide retryable errors *once*
-- [`83f0dbe`](https://github.com/twmb/franz-go/commit/83f0dbe) kgo: add support for sharding WriteTxnMarkers
+- [`56fcfb4`](https://github.com/YenchangChan/franz-go/commit/56fcfb4) sink: log all aspects of wanting to / failing records
+- [`9ee5efa`](https://github.com/YenchangChan/franz-go/commit/9ee5efa) sink: update metadata when AddPartitionsToTxn fails repeatedly
+- [`bc6810d`](https://github.com/YenchangChan/franz-go/commit/bc6810d) broker: hide retryable errors *once*
+- [`83f0dbe`](https://github.com/YenchangChan/franz-go/commit/83f0dbe) kgo: add support for sharding WriteTxnMarkers
 
 v1.10.0
 ===
@@ -687,11 +687,11 @@ The kadm module is also released with v1.4.0, which contains new APIs to find
 coordinators for groups or transactional IDs, and an API to fetch API versions
 for all brokers in the cluster.
 
-- [`a995b1b`](https://github.com/twmb/franz-go/commit/a995b1b) kgo broker: retry sasl auth failures during reauthentication
-- [`8ab8074`](https://github.com/twmb/franz-go/commit/8ab8074) kgo connection: always allow one request after SASL
-- [`dcfcacb`](https://github.com/twmb/franz-go/commit/dcfcacb) **bugfix** `{Cooperative,Sticky}Balancer`: bug fix lack of stickiness
-- [`76430a8`](https://github.com/twmb/franz-go/commit/76430a8) **feature** kgo: add `ConsumePreferringLagFn` to consume preferring laggy partitions
-- [`9ac6c97`](https://github.com/twmb/franz-go/commit/9ac6c97) **improvement** kgo: support forward & backward batch requests for FindCoordinator, OffsetFetch
+- [`a995b1b`](https://github.com/YenchangChan/franz-go/commit/a995b1b) kgo broker: retry sasl auth failures during reauthentication
+- [`8ab8074`](https://github.com/YenchangChan/franz-go/commit/8ab8074) kgo connection: always allow one request after SASL
+- [`dcfcacb`](https://github.com/YenchangChan/franz-go/commit/dcfcacb) **bugfix** `{Cooperative,Sticky}Balancer`: bug fix lack of stickiness
+- [`76430a8`](https://github.com/YenchangChan/franz-go/commit/76430a8) **feature** kgo: add `ConsumePreferringLagFn` to consume preferring laggy partitions
+- [`9ac6c97`](https://github.com/YenchangChan/franz-go/commit/9ac6c97) **improvement** kgo: support forward & backward batch requests for FindCoordinator, OffsetFetch
 
 
 v1.9.1
@@ -714,8 +714,8 @@ imminent), but Redpanda can return `UNKNOWN_SERVER_ERROR` a bit more than Kafka
 does. These errors are being ironed out, but there is no harm in the client to
 pre-emptively handling these as retryable.
 
-- [`3ecaff2`](https://github.com/twmb/franz-go/commit/3ecaff2) kgo txn: handle `UNKNOWN_SERVER_ERROR` more widely
-- [`eb6e3b5`](https://github.com/twmb/franz-go/commit/eb6e3b5) kgo sasl reauth: be more pessimistic
+- [`3ecaff2`](https://github.com/YenchangChan/franz-go/commit/3ecaff2) kgo txn: handle `UNKNOWN_SERVER_ERROR` more widely
+- [`eb6e3b5`](https://github.com/YenchangChan/franz-go/commit/eb6e3b5) kgo sasl reauth: be more pessimistic
 
 v1.9.0
 ===
@@ -742,20 +742,20 @@ Lastly, the corresponding kadm v1.3.0 release adds new LeaveGroup admin APIs.
 
 #### franz-go
 
-- [`b18341d`](https://github.com/twmb/franz-go/commit/b18341d) kgo: work around KIP-814 limitations
-- [`6cac810`](https://github.com/twmb/franz-go/commit/6cac810) kversions: bump Stable from 3.0 to 3.3
-- [PR #227](https://github.com/twmb/franz-go/pull/227) **bugfix** further sequence number overflows fix (thanks [@ladislavmacoun](https://github.com/ladislavmacoun)!)
-- [PR #223](https://github.com/twmb/franz-go/pull/223) add GitHub actions integration test (thanks [@mihaitodor](https://github.com/mihaitodor)!) and [PR #224](https://github.com/twmb/franz-go/pull/224) fixup kgo guts to work around new kraft failures
-- [`203a837`](https://github.com/twmb/franz-go/commit/203a837) franz-go: fix 32 bit alignment, fix a few lints
-- [`719c6f4`](https://github.com/twmb/franz-go/commit/719c6f4) kgo: avoid overflow on 32 bit systems
-- [`db5c159`](https://github.com/twmb/franz-go/commit/db5c159) **feature** kgo: add DialTimeout function, complementing DialTLSConfig
-- [`b4aebf4`](https://github.com/twmb/franz-go/commit/b4aebf4) kgo: add ErrFirstReadEOF, which unwraps to io.EOF
-- [`bbac68b`](https://github.com/twmb/franz-go/commit/bbac68b) RecordFormatter: support %a; formatter&reader: support 'bool'
+- [`b18341d`](https://github.com/YenchangChan/franz-go/commit/b18341d) kgo: work around KIP-814 limitations
+- [`6cac810`](https://github.com/YenchangChan/franz-go/commit/6cac810) kversions: bump Stable from 3.0 to 3.3
+- [PR #227](https://github.com/YenchangChan/franz-go/pull/227) **bugfix** further sequence number overflows fix (thanks [@ladislavmacoun](https://github.com/ladislavmacoun)!)
+- [PR #223](https://github.com/YenchangChan/franz-go/pull/223) add GitHub actions integration test (thanks [@mihaitodor](https://github.com/mihaitodor)!) and [PR #224](https://github.com/YenchangChan/franz-go/pull/224) fixup kgo guts to work around new kraft failures
+- [`203a837`](https://github.com/YenchangChan/franz-go/commit/203a837) franz-go: fix 32 bit alignment, fix a few lints
+- [`719c6f4`](https://github.com/YenchangChan/franz-go/commit/719c6f4) kgo: avoid overflow on 32 bit systems
+- [`db5c159`](https://github.com/YenchangChan/franz-go/commit/db5c159) **feature** kgo: add DialTimeout function, complementing DialTLSConfig
+- [`b4aebf4`](https://github.com/YenchangChan/franz-go/commit/b4aebf4) kgo: add ErrFirstReadEOF, which unwraps to io.EOF
+- [`bbac68b`](https://github.com/YenchangChan/franz-go/commit/bbac68b) RecordFormatter: support %a; formatter&reader: support 'bool'
 
 #### kadm
 
-- [`d3ee144`](https://github.com/twmb/franz-go/commit/d3ee144) kadm: add LeaveGroup api
-- [`7b8d404`](https://github.com/twmb/franz-go/commit/7b8d404) kadm: ListOffsetsAfterMill(future) should return end offsets
+- [`d3ee144`](https://github.com/YenchangChan/franz-go/commit/d3ee144) kadm: add LeaveGroup api
+- [`7b8d404`](https://github.com/YenchangChan/franz-go/commit/7b8d404) kadm: ListOffsetsAfterMill(future) should return end offsets
 
 v1.8.0
 ===
@@ -776,13 +776,13 @@ new line describing that it may have poor interaction with lingering. See the
 doc comment for more details as well as the linked Kafka issue. This library
 does not use lingering by default.
 
-- [`f35ef66`](https://github.com/twmb/franz-go/commit/f35ef66) make `errUnknown{Controller,Coordinator}` retryable, improve error wording
-- [`750bf54`](https://github.com/twmb/franz-go/commit/750bf54) kversion: stabilize v3.3
-- [`3e02574`](https://github.com/twmb/franz-go/commit/3e02574) kgo: occasionally use seed brokers when choosing "random" brokers
-- [`3ebd775`](https://github.com/twmb/franz-go/commit/3ebd775) UniformBytesPartitioner: note sub-optimal batches with lingering
-- [PR #206](https://github.com/twmb/franz-go/pull/206) **bugfix** Record.TimestampType function to correctly return 1 for broker-set timestamps (thanks [@JacobSMoller](https://github.com/JacobSMoller))
-- [PR #201](https://github.com/twmb/franz-go/pull/201) **feature** add Context field to Record to enable more end-user instrumentation (thanks [@yianni](https://github.com/yianni))
-- [PR #197](https://github.com/twmb/franz-go/pull/197) **feature** add ValidateOpts to validate options before client initialization (thanks [@dwagin](https://github.com/dwagin))
+- [`f35ef66`](https://github.com/YenchangChan/franz-go/commit/f35ef66) make `errUnknown{Controller,Coordinator}` retryable, improve error wording
+- [`750bf54`](https://github.com/YenchangChan/franz-go/commit/750bf54) kversion: stabilize v3.3
+- [`3e02574`](https://github.com/YenchangChan/franz-go/commit/3e02574) kgo: occasionally use seed brokers when choosing "random" brokers
+- [`3ebd775`](https://github.com/YenchangChan/franz-go/commit/3ebd775) UniformBytesPartitioner: note sub-optimal batches with lingering
+- [PR #206](https://github.com/YenchangChan/franz-go/pull/206) **bugfix** Record.TimestampType function to correctly return 1 for broker-set timestamps (thanks [@JacobSMoller](https://github.com/JacobSMoller))
+- [PR #201](https://github.com/YenchangChan/franz-go/pull/201) **feature** add Context field to Record to enable more end-user instrumentation (thanks [@yianni](https://github.com/yianni))
+- [PR #197](https://github.com/YenchangChan/franz-go/pull/197) **feature** add ValidateOpts to validate options before client initialization (thanks [@dwagin](https://github.com/dwagin))
 
 v1.7.1
 ===
@@ -813,14 +813,14 @@ be internally problematic, but there would be no visible problem (the partition
 would be produced to two brokers, the produce to the wrong broker would fail
 while the correct broker would succeed),
 
-[171a]: https://github.com/twmb/franz-go/commit/3191842a81033342e8d37a529bd0a1b3d190fd9f
-[171b]: https://github.com/twmb/franz-go/commit/0ca6478600c632deed4c7d65c13c3459d19071bd
+[171a]: https://github.com/YenchangChan/franz-go/commit/3191842a81033342e8d37a529bd0a1b3d190fd9f
+[171b]: https://github.com/YenchangChan/franz-go/commit/0ca6478600c632deed4c7d65c13c3459d19071bd
 
 ## Relevant commits
 
-- [`0ca6478`](https://github.com/twmb/franz-go/commit/0ca6478) kgo: avoid pointer reuse in metadata across producers & consumers
-- [`3191842`](https://github.com/twmb/franz-go/commit/3191842) consumer: bugfix fetch concurrency loop
-- [`5f24fae`](https://github.com/twmb/franz-go/commit/5f24fae) kgo: fix an incorrect log line, add another log line
+- [`0ca6478`](https://github.com/YenchangChan/franz-go/commit/0ca6478) kgo: avoid pointer reuse in metadata across producers & consumers
+- [`3191842`](https://github.com/YenchangChan/franz-go/commit/3191842) consumer: bugfix fetch concurrency loop
+- [`5f24fae`](https://github.com/YenchangChan/franz-go/commit/5f24fae) kgo: fix an incorrect log line, add another log line
 
 v1.7.0
 ===
@@ -832,22 +832,22 @@ error, and we previously did not properly load the partition leader epochs for
 a brief period of time when the client started which prevented truncation
 detection. See the commits below for more details.
 
-- [`3a229d9`](https://github.com/twmb/franz-go/commit/3a229d9) kgo.Fetches: add Err0
-- [`5dd3321`](https://github.com/twmb/franz-go/commit/5dd3321) kgo.EpochOffset: export Less, add docs
-- [`2b38ec5`](https://github.com/twmb/franz-go/commit/2b38ec5) kgo: add CloseAllowingRebalance
-- [`ac2f97b`](https://github.com/twmb/franz-go/commit/ac2f97b) kgo.Client: add GroupMetadata, ProducerID, PartitionLeader functions
-- [`9497cf3`](https://github.com/twmb/franz-go/commit/9497cf3) **minor bugfix** kgo client.go: bugfix -1 leader epoch for a few minutes
-- [`11e3277`](https://github.com/twmb/franz-go/commit/11e3277) **bugfix** consumer groups: do not commit empty topics
-- [`52126de`](https://github.com/twmb/franz-go/commit/52126de) kgo: add optional interface to close sasls on client close
-- [`#193`](https://github.com/twmb/franz-go/pull/193) **minor logging bugfix** Use correct error in debug log for request failure (thanks [@keitwb](https://github.com/keitwb))
-- [`#191`](https://github.com/twmb/franz-go/pull/191) Add Fetches.NumRecords(), Fetches.Empty() (thanks [@un000](https://github.com/un000))
-- [`669a761`](https://github.com/twmb/franz-go/commit/669a761) kerr: add two new errors
+- [`3a229d9`](https://github.com/YenchangChan/franz-go/commit/3a229d9) kgo.Fetches: add Err0
+- [`5dd3321`](https://github.com/YenchangChan/franz-go/commit/5dd3321) kgo.EpochOffset: export Less, add docs
+- [`2b38ec5`](https://github.com/YenchangChan/franz-go/commit/2b38ec5) kgo: add CloseAllowingRebalance
+- [`ac2f97b`](https://github.com/YenchangChan/franz-go/commit/ac2f97b) kgo.Client: add GroupMetadata, ProducerID, PartitionLeader functions
+- [`9497cf3`](https://github.com/YenchangChan/franz-go/commit/9497cf3) **minor bugfix** kgo client.go: bugfix -1 leader epoch for a few minutes
+- [`11e3277`](https://github.com/YenchangChan/franz-go/commit/11e3277) **bugfix** consumer groups: do not commit empty topics
+- [`52126de`](https://github.com/YenchangChan/franz-go/commit/52126de) kgo: add optional interface to close sasls on client close
+- [`#193`](https://github.com/YenchangChan/franz-go/pull/193) **minor logging bugfix** Use correct error in debug log for request failure (thanks [@keitwb](https://github.com/keitwb))
+- [`#191`](https://github.com/YenchangChan/franz-go/pull/191) Add Fetches.NumRecords(), Fetches.Empty() (thanks [@un000](https://github.com/un000))
+- [`669a761`](https://github.com/YenchangChan/franz-go/commit/669a761) kerr: add two new errors
 
 Also recently and newly released:
 
-* [pkg/kmsg v1.2.0](https://github.com/twmb/franz-go/releases/tag/pkg%2Fkmsg%2Fv1.2.0), adding protocol support for new incoming KIPs.
-* [pkg/kadm v1.2.1](https://github.com/twmb/franz-go/releases/tag/pkg%2Fkadm%2Fv1.2.1), removing sorting from metadata response replica fields (v1.2 added new helpers)
-* [pkg/sasl/kerberos v1.1.0](https://github.com/twmb/franz-go/releases/tag/pkg%2Fsasl%2Fkerberos%2Fv1.1.0), making it easier to persist and shutdown the Kerberos client
+* [pkg/kmsg v1.2.0](https://github.com/YenchangChan/franz-go/releases/tag/pkg%2Fkmsg%2Fv1.2.0), adding protocol support for new incoming KIPs.
+* [pkg/kadm v1.2.1](https://github.com/YenchangChan/franz-go/releases/tag/pkg%2Fkadm%2Fv1.2.1), removing sorting from metadata response replica fields (v1.2 added new helpers)
+* [pkg/sasl/kerberos v1.1.0](https://github.com/YenchangChan/franz-go/releases/tag/pkg%2Fsasl%2Fkerberos%2Fv1.1.0), making it easier to persist and shutdown the Kerberos client
 
 v1.6.0
 ===
@@ -868,9 +868,9 @@ have more freedom to make major-version-changing breaking changes if Confluent
 decides to change some of their HTTP API. I expect to stabilize sr once I know
 of at least one use case that helps double check the API is alright.
 
-[160kadmdoc]: https://pkg.go.dev/github.com/twmb/franz-go/pkg/kadm
-[160kadmtag]: https://github.com/twmb/franz-go/releases/tag/pkg%2Fkadm%2Fv1.0.0
-[160srdoc]: https://pkg.go.dev/github.com/twmb/franz-go/pkg/sr
+[160kadmdoc]: https://pkg.go.dev/github.com/YenchangChan/franz-go/pkg/kadm
+[160kadmtag]: https://github.com/YenchangChan/franz-go/releases/tag/pkg%2Fkadm%2Fv1.0.0
+[160srdoc]: https://pkg.go.dev/github.com/YenchangChan/franz-go/pkg/sr
 
 ## Bugfix
 
@@ -908,13 +908,13 @@ you may want to tune this up or down if you produce in high or low throughput.
 
 ## Relevant commits
 
-- [`b279658`](https://github.com/twmb/franz-go/commit/b279658) kadm: break APIs for 1.0
-- [`a23a076`](https://github.com/twmb/franz-go/commit/a23a076) **bugfix** source: properly set Timestamp for LogAppendTime records
-- [`653010d`](https://github.com/twmb/franz-go/commit/653010d) **improvement** producer: allow the user to set Timestamp
-- [`d53c0fe`](https://github.com/twmb/franz-go/commit/d53c0fe) **feature** kmsg: add new UnsafeReadFrom interface
-- [`5536ec1`](https://github.com/twmb/franz-go/commit/5536ec1) **feature** kversion: add `V3_2_0`
-- [`0f65bb1`](https://github.com/twmb/franz-go/commit/0f65bb1) **feature** kgo: expose UniformBytesPartitioner
-- [`82af4a1`](https://github.com/twmb/franz-go/commit/82af4a1) and followup commits: add package sr, providing a client for the schema registry
+- [`b279658`](https://github.com/YenchangChan/franz-go/commit/b279658) kadm: break APIs for 1.0
+- [`a23a076`](https://github.com/YenchangChan/franz-go/commit/a23a076) **bugfix** source: properly set Timestamp for LogAppendTime records
+- [`653010d`](https://github.com/YenchangChan/franz-go/commit/653010d) **improvement** producer: allow the user to set Timestamp
+- [`d53c0fe`](https://github.com/YenchangChan/franz-go/commit/d53c0fe) **feature** kmsg: add new UnsafeReadFrom interface
+- [`5536ec1`](https://github.com/YenchangChan/franz-go/commit/5536ec1) **feature** kversion: add `V3_2_0`
+- [`0f65bb1`](https://github.com/YenchangChan/franz-go/commit/0f65bb1) **feature** kgo: expose UniformBytesPartitioner
+- [`82af4a1`](https://github.com/YenchangChan/franz-go/commit/82af4a1) and followup commits: add package sr, providing a client for the schema registry
 
 v1.5.3
 ===
@@ -942,10 +942,10 @@ This release also includes a few commits that eliminate two external
 dependencies, and contains a patch in kadm to avoid a panic on nil input to a
 function.
 
-- [`4e2fa3f`](https://github.com/twmb/franz-go/commit/4e2fa3f) sticky: vendor go-rbtree, drop external dep
-- [`6c0756d`](https://github.com/twmb/franz-go/commit/6c0756d) drop go-cmp dep
-- [`27880b4`](https://github.com/twmb/franz-go/commit/27880b4) **bugfix** sink: sequence number wrapping for EOS
-- [`afc9017`](https://github.com/twmb/franz-go/commit/afc9017) kadm.CalculateGroupLag: avoid panic if input maps are nil
+- [`4e2fa3f`](https://github.com/YenchangChan/franz-go/commit/4e2fa3f) sticky: vendor go-rbtree, drop external dep
+- [`6c0756d`](https://github.com/YenchangChan/franz-go/commit/6c0756d) drop go-cmp dep
+- [`27880b4`](https://github.com/YenchangChan/franz-go/commit/27880b4) **bugfix** sink: sequence number wrapping for EOS
+- [`afc9017`](https://github.com/YenchangChan/franz-go/commit/afc9017) kadm.CalculateGroupLag: avoid panic if input maps are nil
 
 v1.5.2
 ===
@@ -964,8 +964,8 @@ added. Note that this feature is niche _and_ new, so this is a very minor bug.
 want to periodically mark to move forward; the behavior now is more in line
 with what people expect.
 
-- [`ff5a3ed`](https://github.com/twmb/franz-go/commit/ff5a3ed) MarkCommitRecords: forbid rewinds
-- [`41284b3`](https://github.com/twmb/franz-go/commit/41284b3) RecordReader: fix regex reading even more
+- [`ff5a3ed`](https://github.com/YenchangChan/franz-go/commit/ff5a3ed) MarkCommitRecords: forbid rewinds
+- [`41284b3`](https://github.com/YenchangChan/franz-go/commit/41284b3) RecordReader: fix regex reading even more
 
 v1.5.1
 ===
@@ -983,10 +983,10 @@ the poll and return. This change introduces a new corresponding function,
 `Fetches.Err() error`. The thought here is that now we have more injected
 errors, so `Fetches.Err` can make it easier to check various errors.
 
-- [`cbc8962`](https://github.com/twmb/franz-go/commit/cbc8962) **behavior change** Poll{Records,Fetches}: inject an error for canceled context
-- [#163](https://github.com/twmb/franz-go/pull/163) docs: updates StickyBalancer godoc (thanks [@Streppel](https://github.com/Streppel))
-- [`2018d20`](https://github.com/twmb/franz-go/commit/2018d20) **bugfix** RecordReader: properly return `io.ErrUnexpectedEOF`
-- [#161](https://github.com/twmb/franz-go/pull/161) examples: avoid duplicated module name (thanks [@robsonpeixoto](https://github.com/robsonpeixoto))
+- [`cbc8962`](https://github.com/YenchangChan/franz-go/commit/cbc8962) **behavior change** Poll{Records,Fetches}: inject an error for canceled context
+- [#163](https://github.com/YenchangChan/franz-go/pull/163) docs: updates StickyBalancer godoc (thanks [@Streppel](https://github.com/Streppel))
+- [`2018d20`](https://github.com/YenchangChan/franz-go/commit/2018d20) **bugfix** RecordReader: properly return `io.ErrUnexpectedEOF`
+- [#161](https://github.com/YenchangChan/franz-go/pull/161) examples: avoid duplicated module name (thanks [@robsonpeixoto](https://github.com/robsonpeixoto))
 
 v1.5.0
 ===
@@ -1014,8 +1014,8 @@ franz-go only will _not_ cause an indirect dependency on gokrb5.
 If your upgrade is broken by this change, run:
 
 ```go
-go get github.com/twmb/franz-go/pkg/sasl/kerberos@v1.0.0
-go get github.com/twmb/franz-go@v1.5.0
+go get github.com/YenchangChan/franz-go/pkg/sasl/kerberos@v1.0.0
+go get github.com/YenchangChan/franz-go@v1.5.0
 ```
 
 ## Behavior changes
@@ -1033,7 +1033,7 @@ records: previously, abort would hang until a topic was loaded.
 
 * New APIs are added to kmsg to deprecate the previous `Into` functions. The
   `Into` functions still exist and will not be removed until kadm is stabilized
-(see [#141](https://github.com/twmb/franz-go/issues/141)).
+(see [#141](https://github.com/YenchangChan/franz-go/issues/141)).
 
 ## Features
 
@@ -1065,17 +1065,17 @@ when the time arises.
 
 ## Relevant commits
 
-- [`a2cbbf8`](https://github.com/twmb/franz-go/commit/a2cbbf8) go.{mod,sum}: go get -u ./...; go mod tidy
-- [`ce7a84f`](https://github.com/twmb/franz-go/commit/ce7a84f) kerberos: split into dedicated module, p1
-- [`e8e5c82`](https://github.com/twmb/franz-go/commit/e8e5c82) and [`744a60e`](https://github.com/twmb/franz-go/commit/744a60e) kgo: improve ConsumeResetOffset, NoResetOffset, add Offset.AfterMilli
-- [`78fff0f`](https://github.com/twmb/franz-go/commit/78fff0f) and [`e8e5117`](https://github.com/twmb/franz-go/commit/e8e5117) and [`b457742`](https://github.com/twmb/franz-go/commit/b457742): add GroupMemberBalancerOrError
-- [`b5256c7`](https://github.com/twmb/franz-go/commit/b5256c7) kadm: fix long standing poor API (Into fns)
-- [`8148c55`](https://github.com/twmb/franz-go/commit/8148c55) BalancePlan: add AsMemberIDMap
-- [`113a2c0`](https://github.com/twmb/franz-go/commit/113a2c0) add OnOffsetsFetched function to allow inspecting commit metadata
-- [`0a4f2ec`](https://github.com/twmb/franz-go/commit/0a4f2ec) and [`cba9e26`](https://github.com/twmb/franz-go/commit/cba9e26) kgo: add PreCommitFnContext, enabling pre-commit interceptors for metadata
-- [`42e5b57`](https://github.com/twmb/franz-go/commit/42e5b57) producer: allow a canceled context & aborting to quit unknown wait
-- [`96d647a`](https://github.com/twmb/franz-go/commit/96d647a) UnknownTopicRetries: allow -1 to disable the option
-- [`001c6d3`](https://github.com/twmb/franz-go/commit/001c6d3) RecordReader: support regular expressions for text values
+- [`a2cbbf8`](https://github.com/YenchangChan/franz-go/commit/a2cbbf8) go.{mod,sum}: go get -u ./...; go mod tidy
+- [`ce7a84f`](https://github.com/YenchangChan/franz-go/commit/ce7a84f) kerberos: split into dedicated module, p1
+- [`e8e5c82`](https://github.com/YenchangChan/franz-go/commit/e8e5c82) and [`744a60e`](https://github.com/YenchangChan/franz-go/commit/744a60e) kgo: improve ConsumeResetOffset, NoResetOffset, add Offset.AfterMilli
+- [`78fff0f`](https://github.com/YenchangChan/franz-go/commit/78fff0f) and [`e8e5117`](https://github.com/YenchangChan/franz-go/commit/e8e5117) and [`b457742`](https://github.com/YenchangChan/franz-go/commit/b457742): add GroupMemberBalancerOrError
+- [`b5256c7`](https://github.com/YenchangChan/franz-go/commit/b5256c7) kadm: fix long standing poor API (Into fns)
+- [`8148c55`](https://github.com/YenchangChan/franz-go/commit/8148c55) BalancePlan: add AsMemberIDMap
+- [`113a2c0`](https://github.com/YenchangChan/franz-go/commit/113a2c0) add OnOffsetsFetched function to allow inspecting commit metadata
+- [`0a4f2ec`](https://github.com/YenchangChan/franz-go/commit/0a4f2ec) and [`cba9e26`](https://github.com/YenchangChan/franz-go/commit/cba9e26) kgo: add PreCommitFnContext, enabling pre-commit interceptors for metadata
+- [`42e5b57`](https://github.com/YenchangChan/franz-go/commit/42e5b57) producer: allow a canceled context & aborting to quit unknown wait
+- [`96d647a`](https://github.com/YenchangChan/franz-go/commit/96d647a) UnknownTopicRetries: allow -1 to disable the option
+- [`001c6d3`](https://github.com/YenchangChan/franz-go/commit/001c6d3) RecordReader: support regular expressions for text values
 
 v1.4.2
 ===
@@ -1108,12 +1108,12 @@ supporting `EndBeginTxnUnsafe` into `EndTransaction` itself. This also fixes a
 very rare data race that _realistically_ would result in a new connection being
 killed immediately (since at the CPU, reads/writes of pointers is atomic).
 
-- [`2faf459`](https://github.com/twmb/franz-go/commit/2faf459) **bugfix** broker: fix rare data race
-- [`8f7c8cd`](https://github.com/twmb/franz-go/commit/8f7c8cd) **bugfix** EndBeginTxnUnsafe: partially back out of [`83b0a32`][83b0a32]
-- [`85a680e`](https://github.com/twmb/franz-go/commit/85a680e) **bugfix** consuming: do not continually try to create fetch sessions
-- [`2decd27`](https://github.com/twmb/franz-go/commit/2decd27) **bugfix** EndTransaction: mirror EndBeginTxnUnsafe logic
+- [`2faf459`](https://github.com/YenchangChan/franz-go/commit/2faf459) **bugfix** broker: fix rare data race
+- [`8f7c8cd`](https://github.com/YenchangChan/franz-go/commit/8f7c8cd) **bugfix** EndBeginTxnUnsafe: partially back out of [`83b0a32`][83b0a32]
+- [`85a680e`](https://github.com/YenchangChan/franz-go/commit/85a680e) **bugfix** consuming: do not continually try to create fetch sessions
+- [`2decd27`](https://github.com/YenchangChan/franz-go/commit/2decd27) **bugfix** EndTransaction: mirror EndBeginTxnUnsafe logic
 
-[83b0a32]: https://github.com/twmb/franz-go/commit/83b0a32
+[83b0a32]: https://github.com/YenchangChan/franz-go/commit/83b0a32
 
 v1.4.1
 ===
@@ -1136,12 +1136,12 @@ that have been addressed.
 
 Notable commits & PRs:
 
-- [`83b0a32`](https://github.com/twmb/franz-go/commit/83b0a32) **bugfix** kgo: EndAndBeginTransaction w/ EndBeginTxnUnsafe: fix three issues
-- [`bd1d43d`](https://github.com/twmb/franz-go/commit/bd1d43d) sink: small AddPartitionsToTxn improvements
-- [`65ca0bd`](https://github.com/twmb/franz-go/commit/65ca0bd) **bugfix** kerr: ProducerFenced is not retriable
-- [PR #148](https://github.com/twmb/franz-go/pull/148) lower `FetchMaxPartitionBytes` to 1MiB to be in line with the Kafka default (thanks [@jcsp](https://github.com/jcsp))
-- [`806cf53`](https://github.com/twmb/franz-go/commit/806cf53) **feature** kmsg: add TextMarshaler/TextUnmarshaler to enums
-- [`49f678d`](https://github.com/twmb/franz-go/commit/49f678d) update deps, pulling in klauspost/compress v1.15.1 which makes zstd encoding & decoding stateless
+- [`83b0a32`](https://github.com/YenchangChan/franz-go/commit/83b0a32) **bugfix** kgo: EndAndBeginTransaction w/ EndBeginTxnUnsafe: fix three issues
+- [`bd1d43d`](https://github.com/YenchangChan/franz-go/commit/bd1d43d) sink: small AddPartitionsToTxn improvements
+- [`65ca0bd`](https://github.com/YenchangChan/franz-go/commit/65ca0bd) **bugfix** kerr: ProducerFenced is not retriable
+- [PR #148](https://github.com/YenchangChan/franz-go/pull/148) lower `FetchMaxPartitionBytes` to 1MiB to be in line with the Kafka default (thanks [@jcsp](https://github.com/jcsp))
+- [`806cf53`](https://github.com/YenchangChan/franz-go/commit/806cf53) **feature** kmsg: add TextMarshaler/TextUnmarshaler to enums
+- [`49f678d`](https://github.com/YenchangChan/franz-go/commit/49f678d) update deps, pulling in klauspost/compress v1.15.1 which makes zstd encoding & decoding stateless
 
 v1.4.0
 ===
@@ -1241,24 +1241,24 @@ is booted from the group. Two examples were added using these options.
 
 ## Relevant commits
 
-- [PR #137](https://github.com/twmb/franz-go/pull/137) and [`c3fc8e0`](https://github.com/twmb/franz-go/commit/c3fc8e0): add two more goroutine per consumer examples (thanks [@JacobSMoller](https://github.com/JacobSMoller))
-- [`cffbee7`](https://github.com/twmb/franz-go/commit/cffbee7) consumer: add BlockRebalancesOnPoll option, AllowRebalance (commit accidentally pluralized)
-- [`39af436`](https://github.com/twmb/franz-go/commit/39af436) docs: add metrics-and-logging.md
-- [`83dfa9d`](https://github.com/twmb/franz-go/commit/83dfa9d) client: add EndAndBeginTransaction
-- [`d11066f`](https://github.com/twmb/franz-go/commit/d11066f) committing: internally retry on some errors when cooperative
-- [`31f3f5f`](https://github.com/twmb/franz-go/commit/31f3f5f) producer: serialize promises
-- [`e3ef142`](https://github.com/twmb/franz-go/commit/e3ef142) txn: move concurrent transactions log to debug level
-- [`10ee8dd`](https://github.com/twmb/franz-go/commit/10ee8dd) group consuming: add reasons to JoinGroup, LeaveGroup per KIP-800
-- [`0bfaf64`](https://github.com/twmb/franz-go/commit/0bfaf64) consumer group: track topics that the leader is not interested in
-- [`e8495bb`](https://github.com/twmb/franz-go/commit/e8495bb) client: add ForceMetadataRefresh
-- [`c763c9b`](https://github.com/twmb/franz-go/commit/c763c9b) consuming: add NoResetOffset
-- [`4e0e1d7`](https://github.com/twmb/franz-go/commit/4e0e1d7) config: add UnknownTopicRetries option, use more widely
-- [`7f58a97`](https://github.com/twmb/franz-go/commit/7f58a97) config: lower default MetadataMinAge to 2.5s
-- [`e7bd28f`](https://github.com/twmb/franz-go/commit/e7bd28f) Client,GroupTransactSession: add TryProduce
-- [`2a2cf66`](https://github.com/twmb/franz-go/commit/2a2cf66) consumer: add AddConsumeTopics
-- [`d178e26`](https://github.com/twmb/franz-go/commit/d178e26) client: add PurgeTopicsFromClient
-- [`336d2c9`](https://github.com/twmb/franz-go/commit/336d2c9) kgo: add ConcurrentTransactionsBackoff, MaxProduceRequestsInflightPerBroker
-- [`fb04711`](https://github.com/twmb/franz-go/commit/fb04711) kversion: cut v3.1
+- [PR #137](https://github.com/YenchangChan/franz-go/pull/137) and [`c3fc8e0`](https://github.com/YenchangChan/franz-go/commit/c3fc8e0): add two more goroutine per consumer examples (thanks [@JacobSMoller](https://github.com/JacobSMoller))
+- [`cffbee7`](https://github.com/YenchangChan/franz-go/commit/cffbee7) consumer: add BlockRebalancesOnPoll option, AllowRebalance (commit accidentally pluralized)
+- [`39af436`](https://github.com/YenchangChan/franz-go/commit/39af436) docs: add metrics-and-logging.md
+- [`83dfa9d`](https://github.com/YenchangChan/franz-go/commit/83dfa9d) client: add EndAndBeginTransaction
+- [`d11066f`](https://github.com/YenchangChan/franz-go/commit/d11066f) committing: internally retry on some errors when cooperative
+- [`31f3f5f`](https://github.com/YenchangChan/franz-go/commit/31f3f5f) producer: serialize promises
+- [`e3ef142`](https://github.com/YenchangChan/franz-go/commit/e3ef142) txn: move concurrent transactions log to debug level
+- [`10ee8dd`](https://github.com/YenchangChan/franz-go/commit/10ee8dd) group consuming: add reasons to JoinGroup, LeaveGroup per KIP-800
+- [`0bfaf64`](https://github.com/YenchangChan/franz-go/commit/0bfaf64) consumer group: track topics that the leader is not interested in
+- [`e8495bb`](https://github.com/YenchangChan/franz-go/commit/e8495bb) client: add ForceMetadataRefresh
+- [`c763c9b`](https://github.com/YenchangChan/franz-go/commit/c763c9b) consuming: add NoResetOffset
+- [`4e0e1d7`](https://github.com/YenchangChan/franz-go/commit/4e0e1d7) config: add UnknownTopicRetries option, use more widely
+- [`7f58a97`](https://github.com/YenchangChan/franz-go/commit/7f58a97) config: lower default MetadataMinAge to 2.5s
+- [`e7bd28f`](https://github.com/YenchangChan/franz-go/commit/e7bd28f) Client,GroupTransactSession: add TryProduce
+- [`2a2cf66`](https://github.com/YenchangChan/franz-go/commit/2a2cf66) consumer: add AddConsumeTopics
+- [`d178e26`](https://github.com/YenchangChan/franz-go/commit/d178e26) client: add PurgeTopicsFromClient
+- [`336d2c9`](https://github.com/YenchangChan/franz-go/commit/336d2c9) kgo: add ConcurrentTransactionsBackoff, MaxProduceRequestsInflightPerBroker
+- [`fb04711`](https://github.com/YenchangChan/franz-go/commit/fb04711) kversion: cut v3.1
 
 v1.3.5
 ===
@@ -1271,17 +1271,17 @@ this release.
 The next release aims to be v1.4.0, this release is a small one to address a
 few issues before the much larger and feature filled v1.4 release.
 
-- [`010e8e1`](https://github.com/twmb/franz-go/commit/010e8e1) txn: fix panic in GroupTransactSession.End
-- [`f9cd625`](https://github.com/twmb/franz-go/commit/f9cd625) consuming: handle exact offset consuming better
-- [`2ab1978`](https://github.com/twmb/franz-go/commit/2ab1978) EndTransaction: return nil rather than an error if not in a transaction
-- [`96bfe52`](https://github.com/twmb/franz-go/commit/96bfe52) broker: remove 5s minimum for sasl session lifetime
+- [`010e8e1`](https://github.com/YenchangChan/franz-go/commit/010e8e1) txn: fix panic in GroupTransactSession.End
+- [`f9cd625`](https://github.com/YenchangChan/franz-go/commit/f9cd625) consuming: handle exact offset consuming better
+- [`2ab1978`](https://github.com/YenchangChan/franz-go/commit/2ab1978) EndTransaction: return nil rather than an error if not in a transaction
+- [`96bfe52`](https://github.com/YenchangChan/franz-go/commit/96bfe52) broker: remove 5s minimum for sasl session lifetime
 
 v1.3.4
 ===
 
 This small patch release fixes a problem with
-[`4f2e7fe3`](https://github.com/twmb/franz-go/commit/4f2e7fe3) which was meant
-to address [#98](https://github.com/twmb/franz-go/issues/98). The fix was not
+[`4f2e7fe3`](https://github.com/YenchangChan/franz-go/commit/4f2e7fe3) which was meant
+to address [#98](https://github.com/YenchangChan/franz-go/issues/98). The fix was not
 complete in that the fix would only trigger if a group member had partitions
 added to it. We now rearrange the logic such that it occurs always. This bug
 was found while making a change in the code in support of a new feature in the
@@ -1293,7 +1293,7 @@ properly tagged as v9+.
 The next release will be v1.4, which is nearly ready to be merged into this
 branch and tagged. Follow issue #135 for more details.
 
-- [`02560c7`](https://github.com/twmb/franz-go/commit/02560c7) consumer group: bugfix fetch offsets spanning rebalance
+- [`02560c7`](https://github.com/YenchangChan/franz-go/commit/02560c7) consumer group: bugfix fetch offsets spanning rebalance
 
 v1.3.3
 ===
@@ -1363,14 +1363,14 @@ behavior.
 
 ## Relevant commits
 
-- [`b39ca31`](https://github.com/twmb/franz-go/commit/b39ca31) fetchOffsets: fix data race
-- [`4156e9f`](https://github.com/twmb/franz-go/commit/4156e9f) kgo: fix one bug found by linting
-- [`72760bf..ad991d8`](https://github.com/twmb/franz-go/compare/72760bf..ad991d8) kmsg, kversion, kgo: support KIP-814 (SkipAssignment in JoinGroupResponse)
-- [`db9017a`](https://github.com/twmb/franz-go/commit/db9017a) broker: allow the acks==0 producing discard goroutine to die
-- [`eefb1f3`](https://github.com/twmb/franz-go/commit/eefb1f3) consuming: update docs & simplify; `MarkCommitRecords`: allow rewinds
-- [`8808b94`](https://github.com/twmb/franz-go/commit/8808b94) sink: remove 50ms wait on new drain loops
-- [`a13f918`](https://github.com/twmb/franz-go/commit/a13f918) kmsg & kversion: add support for KIP-784 (ErrorCode in DescribeLogDirs response)
-- [PR #133](https://github.com/twmb/franz-go/pull/133) - lower concurrent transactions retry to 20ms; configurability will be in the next release (thanks [@eduard-netsajev](https://github.com/eduard-netsajev))
+- [`b39ca31`](https://github.com/YenchangChan/franz-go/commit/b39ca31) fetchOffsets: fix data race
+- [`4156e9f`](https://github.com/YenchangChan/franz-go/commit/4156e9f) kgo: fix one bug found by linting
+- [`72760bf..ad991d8`](https://github.com/YenchangChan/franz-go/compare/72760bf..ad991d8) kmsg, kversion, kgo: support KIP-814 (SkipAssignment in JoinGroupResponse)
+- [`db9017a`](https://github.com/YenchangChan/franz-go/commit/db9017a) broker: allow the acks==0 producing discard goroutine to die
+- [`eefb1f3`](https://github.com/YenchangChan/franz-go/commit/eefb1f3) consuming: update docs & simplify; `MarkCommitRecords`: allow rewinds
+- [`8808b94`](https://github.com/YenchangChan/franz-go/commit/8808b94) sink: remove 50ms wait on new drain loops
+- [`a13f918`](https://github.com/YenchangChan/franz-go/commit/a13f918) kmsg & kversion: add support for KIP-784 (ErrorCode in DescribeLogDirs response)
+- [PR #133](https://github.com/YenchangChan/franz-go/pull/133) - lower concurrent transactions retry to 20ms; configurability will be in the next release (thanks [@eduard-netsajev](https://github.com/eduard-netsajev))
 
 v1.3.2
 ===
@@ -1397,7 +1397,7 @@ pipeline would stall anyway.
 All told, it's not entirely clear what the ramifications for this bug are, and
 it is recommended that if you use transactions, you should update immediately.
 
-- [PR #131](https://github.com/twmb/franz-go/pull/131) - txns: don't ignore error in doWithConcurrentTransactions
+- [PR #131](https://github.com/YenchangChan/franz-go/pull/131) - txns: don't ignore error in doWithConcurrentTransactions
 
 v1.3.1
 ===
@@ -1418,8 +1418,8 @@ the same topic in both options would silently ignore the topic in
 `ConsumePartitions`. Now, the client will return an error that using the same
 topic in both options is invalid.
 
-- [`ea11266`](https://github.com/twmb/franz-go/commit/ea11266) config: add duplicately specified topic validation
-- [`bb581f4`](https://github.com/twmb/franz-go/commit/bb581f4) **bugfix** client: unbuffer fetches on Close to allow mangeFetchConcurrency to quit
+- [`ea11266`](https://github.com/YenchangChan/franz-go/commit/ea11266) config: add duplicately specified topic validation
+- [`bb581f4`](https://github.com/YenchangChan/franz-go/commit/bb581f4) **bugfix** client: unbuffer fetches on Close to allow mangeFetchConcurrency to quit
 
 v1.3.0
 ===
@@ -1448,14 +1448,14 @@ Lastly, as a small bugfix, `client.Close()` did not properly stop seed brokers.
 A previous commit split seed brokers and non-seed brokers internally into two
 fields but did not add broker shutdown on the now-split seed broker field.
 
-- [`e0b520c`](https://github.com/twmb/franz-go/commit/e0b520c) **behavior change** kadm: set per-partition errors on missing offsets in CommitOffsets
-- [`32425df`](https://github.com/twmb/franz-go/commit/32425df) **feature** client: add Ping method
-- [`a059901`](https://github.com/twmb/franz-go/commit/a059901) **behavior change**  txns: sleep 200ms on commit, preventing rebalance / new commit
-- [`12eaa1e`](https://github.com/twmb/franz-go/commit/12eaa1e) **behavior change** metadata: allow leader epoch rewinds after 5 tries
-- [`029e655`](https://github.com/twmb/franz-go/commit/029e655) **feature-ish** Produce{,Sync}: default to context.Background if no ctx is provided
-- [`eb2cec3`](https://github.com/twmb/franz-go/commit/eb2cec3) **bugfix** client: stop seed brokers on client.Close
-- [`2eae20d`](https://github.com/twmb/franz-go/commit/2eae20d) **feature** consumer: allow SetOffsets for direct partition consuming
-- [pr #120](https://github.com/twmb/franz-go/pull/120) **feature** Add groupopt to swizzle offset assignments before consumption (thanks [@michaelwilner](https://github.com/michaelwilner)!)
+- [`e0b520c`](https://github.com/YenchangChan/franz-go/commit/e0b520c) **behavior change** kadm: set per-partition errors on missing offsets in CommitOffsets
+- [`32425df`](https://github.com/YenchangChan/franz-go/commit/32425df) **feature** client: add Ping method
+- [`a059901`](https://github.com/YenchangChan/franz-go/commit/a059901) **behavior change**  txns: sleep 200ms on commit, preventing rebalance / new commit
+- [`12eaa1e`](https://github.com/YenchangChan/franz-go/commit/12eaa1e) **behavior change** metadata: allow leader epoch rewinds after 5 tries
+- [`029e655`](https://github.com/YenchangChan/franz-go/commit/029e655) **feature-ish** Produce{,Sync}: default to context.Background if no ctx is provided
+- [`eb2cec3`](https://github.com/YenchangChan/franz-go/commit/eb2cec3) **bugfix** client: stop seed brokers on client.Close
+- [`2eae20d`](https://github.com/YenchangChan/franz-go/commit/2eae20d) **feature** consumer: allow SetOffsets for direct partition consuming
+- [pr #120](https://github.com/YenchangChan/franz-go/pull/120) **feature** Add groupopt to swizzle offset assignments before consumption (thanks [@michaelwilner](https://github.com/michaelwilner)!)
 
 v1.2.6
 ===
@@ -1484,14 +1484,14 @@ no starvation, but really due to the randomness of the prior behavior, the new
 semantics may be a wash. However, the new semantics are the original intended
 semantics.
 
-- [`bc391a3`](https://github.com/twmb/franz-go/commit/bc391a3) **improvement** source: rotate through topics/partitions as we fetch
-- [`6bbdaa2`](https://github.com/twmb/franz-go/commit/6bbdaa2) **bugfix** client: create a sink & source for all partition replicas
+- [`bc391a3`](https://github.com/YenchangChan/franz-go/commit/bc391a3) **improvement** source: rotate through topics/partitions as we fetch
+- [`6bbdaa2`](https://github.com/YenchangChan/franz-go/commit/6bbdaa2) **bugfix** client: create a sink & source for all partition replicas
 - [`8325ba7`][8325ba7] **behavior change** metadata: minor changes, & wait a bit when looping for now triggers
-- [`b8b7bd1`](https://github.com/twmb/franz-go/commit/b8b7bd1) **behavior change** RecordFormatter: always use UTC
-- [`6ab9044`](https://github.com/twmb/franz-go/commit/6ab9044) kadm: return defined errors for On functions
+- [`b8b7bd1`](https://github.com/YenchangChan/franz-go/commit/b8b7bd1) **behavior change** RecordFormatter: always use UTC
+- [`6ab9044`](https://github.com/YenchangChan/franz-go/commit/6ab9044) kadm: return defined errors for On functions
 
-[8325ba7]: https://github.com/twmb/franz-go/commit/8325ba7
-[issue114]: https://github.com/twmb/franz-go/issues/114
+[8325ba7]: https://github.com/YenchangChan/franz-go/commit/8325ba7
+[issue114]: https://github.com/YenchangChan/franz-go/issues/114
 
 v1.2.5
 ===
@@ -1524,12 +1524,12 @@ Lastly, a few bugs have been fixed in the not-yet-stable,
 currently-separate-module kadm package. If you use that package, you may have
 already pulled in these fixes.
 
-- [`17dfae8`](https://github.com/twmb/franz-go/commit/17dfae8) go.{mod,sum}: update deps
-- [`3b34db0`](https://github.com/twmb/franz-go/commit/3b34db0) txn test: remove increasing-from-0 strictness when producing
-- [`d0a27f3`](https://github.com/twmb/franz-go/commit/d0a27f3) testing: remove dependency on kcl
-- [`8edf934`](https://github.com/twmb/franz-go/commit/8edf934) txn: allow more commit errors to just trigger abort
-- [`03c58cb`](https://github.com/twmb/franz-go/commit/03c58cb) scram: use c-nonce s-nonce, not just c-nonce, in client-reply-final
-- [`8f34083`](https://github.com/twmb/franz-go/commit/8f34083) consumer group: avoid regex log if no topics were added/skipped
+- [`17dfae8`](https://github.com/YenchangChan/franz-go/commit/17dfae8) go.{mod,sum}: update deps
+- [`3b34db0`](https://github.com/YenchangChan/franz-go/commit/3b34db0) txn test: remove increasing-from-0 strictness when producing
+- [`d0a27f3`](https://github.com/YenchangChan/franz-go/commit/d0a27f3) testing: remove dependency on kcl
+- [`8edf934`](https://github.com/YenchangChan/franz-go/commit/8edf934) txn: allow more commit errors to just trigger abort
+- [`03c58cb`](https://github.com/YenchangChan/franz-go/commit/03c58cb) scram: use c-nonce s-nonce, not just c-nonce, in client-reply-final
+- [`8f34083`](https://github.com/YenchangChan/franz-go/commit/8f34083) consumer group: avoid regex log if no topics were added/skipped
 
 v1.2.4
 ===
@@ -1545,11 +1545,11 @@ that any `io.Reader` would result in infinite messages.
 
 Lastly, some log messages have been improved.
 
-- [`db90100`](https://github.com/twmb/franz-go/commit/db90100) consuming: improve error messages
-- [`101d6bd`](https://github.com/twmb/franz-go/commit/101d6bd) consuming: log added/skipped when consuming by regex
-- [`b6759bc`](https://github.com/twmb/franz-go/commit/b6759bc) **improvement** consumer: allow disabling fetch sessions with a config opt
-- [`7cd959c`](https://github.com/twmb/franz-go/commit/7cd959c) **bugfix** source: use forgotten topics for sessions
-- [`cfb4a7f`](https://github.com/twmb/franz-go/commit/cfb4a7f) **bugfix** kgo: error if RecordReader layout is empty
+- [`db90100`](https://github.com/YenchangChan/franz-go/commit/db90100) consuming: improve error messages
+- [`101d6bd`](https://github.com/YenchangChan/franz-go/commit/101d6bd) consuming: log added/skipped when consuming by regex
+- [`b6759bc`](https://github.com/YenchangChan/franz-go/commit/b6759bc) **improvement** consumer: allow disabling fetch sessions with a config opt
+- [`7cd959c`](https://github.com/YenchangChan/franz-go/commit/7cd959c) **bugfix** source: use forgotten topics for sessions
+- [`cfb4a7f`](https://github.com/YenchangChan/franz-go/commit/cfb4a7f) **bugfix** kgo: error if RecordReader layout is empty
 
 v1.2.3
 ===
@@ -1573,15 +1573,15 @@ rather than 100ms-1s. The old backoff retried too quickly in all cases.
 Logs for assigned partitions have been improved, as have logs for inner
 metadata request / fetch request failures.
 
-- [`07a38bc`](https://github.com/twmb/franz-go/commit/07a38bc) **bugfix** client: support non-zero/one node IDs
-- [`3cbaa5f`](https://github.com/twmb/franz-go/commit/3cbaa5f) add more context to metadata reloads on inner partition errors
-- [`1bc1156`](https://github.com/twmb/franz-go/commit/1bc1156) **feature** FetchTopic: add EachRecord, Records helper methods
-- [`0779837`](https://github.com/twmb/franz-go/commit/0779837) consuming, group: improve logging, simplify code
-- [`d378b32`](https://github.com/twmb/franz-go/commit/d378b32) config: edit comment for FetchMaxWait (about Java setting) (thanks [@dwagin](https://github.com/dwagin)!)
-- [`df80a52`](https://github.com/twmb/franz-go/commit/df80a52) **behavior change** config: drop ProduceRequestTimeout to 10s, doc more
-- [`6912cfe`](https://github.com/twmb/franz-go/commit/6912cfe) **behavior change** config: change default backoff from 100ms-1s to 250ms-2.5s
-- [`c197efd`](https://github.com/twmb/franz-go/commit/c197efd) **behavior change** client: remove 30s default write timeout for SASL
-- [`10ff785`](https://github.com/twmb/franz-go/commit/10ff785) metadata: drop timer based info log, reword
+- [`07a38bc`](https://github.com/YenchangChan/franz-go/commit/07a38bc) **bugfix** client: support non-zero/one node IDs
+- [`3cbaa5f`](https://github.com/YenchangChan/franz-go/commit/3cbaa5f) add more context to metadata reloads on inner partition errors
+- [`1bc1156`](https://github.com/YenchangChan/franz-go/commit/1bc1156) **feature** FetchTopic: add EachRecord, Records helper methods
+- [`0779837`](https://github.com/YenchangChan/franz-go/commit/0779837) consuming, group: improve logging, simplify code
+- [`d378b32`](https://github.com/YenchangChan/franz-go/commit/d378b32) config: edit comment for FetchMaxWait (about Java setting) (thanks [@dwagin](https://github.com/dwagin)!)
+- [`df80a52`](https://github.com/YenchangChan/franz-go/commit/df80a52) **behavior change** config: drop ProduceRequestTimeout to 10s, doc more
+- [`6912cfe`](https://github.com/YenchangChan/franz-go/commit/6912cfe) **behavior change** config: change default backoff from 100ms-1s to 250ms-2.5s
+- [`c197efd`](https://github.com/YenchangChan/franz-go/commit/c197efd) **behavior change** client: remove 30s default write timeout for SASL
+- [`10ff785`](https://github.com/YenchangChan/franz-go/commit/10ff785) metadata: drop timer based info log, reword
 
 v1.2.2
 ===
@@ -1595,7 +1595,7 @@ This release fixes that by tracking a bit of fetch state across rebalances for
 cooperative consumers. See the embedded comments in the commit for more
 details.
 
-- [`4f2e7fe`](https://github.com/twmb/franz-go/commit/4f2e7fe) **bugfix** consumer group: fix cooperative rebalancing losing offset fetches
+- [`4f2e7fe`](https://github.com/YenchangChan/franz-go/commit/4f2e7fe) **bugfix** consumer group: fix cooperative rebalancing losing offset fetches
 
 
 v1.2.1
@@ -1611,7 +1611,7 @@ events:
 Whenever a client closes, `Close` calls `LeaveGroup` (even if not in a group),
 and there is a small window of time before the metadata loop quits.
 
-- [`864526a`](https://github.com/twmb/franz-go/commit/864526a) **bugfix** consuming: avoid setting cursors to nil on LeaveGroup
+- [`864526a`](https://github.com/YenchangChan/franz-go/commit/864526a) **bugfix** consuming: avoid setting cursors to nil on LeaveGroup
 
 
 v1.2.0
@@ -1649,17 +1649,17 @@ no longer uses snappy by default.
 
 Non-formatter/reader/kadm commits worth mentioning:
 
-- [`a8dbd2f`](https://github.com/twmb/franz-go/commit/a8dbd2f) broker: add context to responses that look like HTTP
-- [`ec0d81f`](https://github.com/twmb/franz-go/commit/ec0d81f) broker: avoid non-debug logs on ErrClientClosed
-- [`af4fce4`](https://github.com/twmb/franz-go/commit/af4fce4) **beahvior change** bench: use no compression by default, remove -no-compression flag
-- [`d368d11`](https://github.com/twmb/franz-go/commit/d368d11) bench: allow custom certs with -ca-cert, -client-cert, -client-key
-- [`fbf9239`](https://github.com/twmb/franz-go/commit/fbf9239) broker: add two new connection types, cxnGroup and cxnSlow
-- [`2d6c1a8`](https://github.com/twmb/franz-go/commit/2d6c1a8) **behavior change** client: lower RequestTimeoutOverhead and RetryTimeout defaults
-- [`9bcfc98`](https://github.com/twmb/franz-go/commit/9bcfc98) kgo: only run req/resp handling goroutines when needed
-- [`b9b592e`](https://github.com/twmb/franz-go/commit/b9b592e) **behavior change** kgo: change default MaxBufferedRecords from unlimited to 10,000
-- [`19f4e9b`](https://github.com/twmb/franz-go/commit/19f4e9b) and [`58bf74a`](https://github.com/twmb/franz-go/commit/58bf74a) client: collapse shard errors
-- [`126778a`](https://github.com/twmb/franz-go/commit/126778a) client: avoid sharding to partitions with no leader
-- [`254764a`](https://github.com/twmb/franz-go/commit/254764a) **behavior change** kversion: skip WriteTxnMarkers for version guessing
+- [`a8dbd2f`](https://github.com/YenchangChan/franz-go/commit/a8dbd2f) broker: add context to responses that look like HTTP
+- [`ec0d81f`](https://github.com/YenchangChan/franz-go/commit/ec0d81f) broker: avoid non-debug logs on ErrClientClosed
+- [`af4fce4`](https://github.com/YenchangChan/franz-go/commit/af4fce4) **beahvior change** bench: use no compression by default, remove -no-compression flag
+- [`d368d11`](https://github.com/YenchangChan/franz-go/commit/d368d11) bench: allow custom certs with -ca-cert, -client-cert, -client-key
+- [`fbf9239`](https://github.com/YenchangChan/franz-go/commit/fbf9239) broker: add two new connection types, cxnGroup and cxnSlow
+- [`2d6c1a8`](https://github.com/YenchangChan/franz-go/commit/2d6c1a8) **behavior change** client: lower RequestTimeoutOverhead and RetryTimeout defaults
+- [`9bcfc98`](https://github.com/YenchangChan/franz-go/commit/9bcfc98) kgo: only run req/resp handling goroutines when needed
+- [`b9b592e`](https://github.com/YenchangChan/franz-go/commit/b9b592e) **behavior change** kgo: change default MaxBufferedRecords from unlimited to 10,000
+- [`19f4e9b`](https://github.com/YenchangChan/franz-go/commit/19f4e9b) and [`58bf74a`](https://github.com/YenchangChan/franz-go/commit/58bf74a) client: collapse shard errors
+- [`126778a`](https://github.com/YenchangChan/franz-go/commit/126778a) client: avoid sharding to partitions with no leader
+- [`254764a`](https://github.com/YenchangChan/franz-go/commit/254764a) **behavior change** kversion: skip WriteTxnMarkers for version guessing
 
 v1.1.4
 ===
@@ -1667,7 +1667,7 @@ v1.1.4
 This includes on more patch for the prior tag to fully make `InitProducerID`
 retriable when it encounters a retriable error.
 
-- [`d623ffe`](https://github.com/twmb/franz-go/commit/d623ffe) errors: make errProducerIDLoadFail retriable
+- [`d623ffe`](https://github.com/YenchangChan/franz-go/commit/d623ffe) errors: make errProducerIDLoadFail retriable
 
 
 v1.1.3
@@ -1690,9 +1690,9 @@ that is yet to be stabilized on the main branch.
 
 Notable commits:
 
-- [`747ab0c`](https://github.com/twmb/franz-go/commit/747ab0c) kerr: make BrokerNotAvailable retriable
-- [`f494301`](https://github.com/twmb/franz-go/commit/f494301) errors: make dial errors non-retriable
-- [`4a76861`](https://github.com/twmb/franz-go/commit/4a76861) config: default to kgo dep version in ApiVersions
+- [`747ab0c`](https://github.com/YenchangChan/franz-go/commit/747ab0c) kerr: make BrokerNotAvailable retriable
+- [`f494301`](https://github.com/YenchangChan/franz-go/commit/f494301) errors: make dial errors non-retriable
+- [`4a76861`](https://github.com/YenchangChan/franz-go/commit/4a76861) config: default to kgo dep version in ApiVersions
 
 v1.1.2
 ===
@@ -1701,7 +1701,7 @@ This patch release fixes processing the `LogAppendTime` timestamp for message
 set v1 formatted records. Message set v1 records were used only during the
 Kafka v0.10 releases.
 
-- [`5fee169..688d6fb`](https://github.com/twmb/franz-go/compare/5fee169..688d6fb): **bugfix** message set v1: fix bit 4 as the timestamp bit
+- [`5fee169..688d6fb`](https://github.com/YenchangChan/franz-go/compare/5fee169..688d6fb): **bugfix** message set v1: fix bit 4 as the timestamp bit
 
 v1.1.1
 ===
@@ -1709,8 +1709,8 @@ v1.1.1
 This patch release fixes a bug in `PollRecords` that could cause a panic during
 cluster instability. This also defines Kafka 3.0 in kversion.
 
-- [`847aeb9`](https://github.com/twmb/franz-go/commit/847aeb9) **bugfix** consumer: do not buffer partitions we reload
-- [`49f82b9`](https://github.com/twmb/franz-go/commit/49f82b9) kversion: cut 3.0
+- [`847aeb9`](https://github.com/YenchangChan/franz-go/commit/847aeb9) **bugfix** consumer: do not buffer partitions we reload
+- [`49f82b9`](https://github.com/YenchangChan/franz-go/commit/49f82b9) kversion: cut 3.0
 
 v1.1.0
 ===
@@ -1719,14 +1719,14 @@ This minor release contains a few useful features, an incredibly minor bugfix
 (fixing an error message), and a behavior change around buffering produced
 records for unknown topics. As well, all plugins have been tagged v1.0.0.
 
-- [`cf04997`](https://github.com/twmb/franz-go/commit/cf04997) errors: export ErrRecordRetries, ErrRecordTimeout
-- [`ee8b12d`](https://github.com/twmb/franz-go/commit/ee8b12d) producer: fail topics that repeatedly fail to load after 5 tries
-- [`f6a8c9a`](https://github.com/twmb/franz-go/commit/f6a8c9a) **very minor bugfix** ErrDataLoss: use the new offset **after** we create the error
-- [`8216b7c`](https://github.com/twmb/franz-go/commit/8216b7c) and [`c153b9a`](https://github.com/twmb/franz-go/commit/c153b9a) **feature** kmsg: add EnumStrings(), ParseEnum() functions
-- [`e44dde9`](https://github.com/twmb/franz-go/commit/e44dde9) add `goroutine_per_partition` consuming example
-- [`cedffb7`](https://github.com/twmb/franz-go/commit/cedffb7) **feature** plugins: Add kzerolog logging adapter (thanks [@fsaintjacques](https://github.com/fsaintjacques)!)
-- [`563e016`](https://github.com/twmb/franz-go/commit/563e016) **feature** FetchTopic: add EachPartition; FetchPartition: add EachRecord
-- [`8f648e7`](https://github.com/twmb/franz-go/commit/8f648e7) consumer group: document actual behavior for on revoked / lost
+- [`cf04997`](https://github.com/YenchangChan/franz-go/commit/cf04997) errors: export ErrRecordRetries, ErrRecordTimeout
+- [`ee8b12d`](https://github.com/YenchangChan/franz-go/commit/ee8b12d) producer: fail topics that repeatedly fail to load after 5 tries
+- [`f6a8c9a`](https://github.com/YenchangChan/franz-go/commit/f6a8c9a) **very minor bugfix** ErrDataLoss: use the new offset **after** we create the error
+- [`8216b7c`](https://github.com/YenchangChan/franz-go/commit/8216b7c) and [`c153b9a`](https://github.com/YenchangChan/franz-go/commit/c153b9a) **feature** kmsg: add EnumStrings(), ParseEnum() functions
+- [`e44dde9`](https://github.com/YenchangChan/franz-go/commit/e44dde9) add `goroutine_per_partition` consuming example
+- [`cedffb7`](https://github.com/YenchangChan/franz-go/commit/cedffb7) **feature** plugins: Add kzerolog logging adapter (thanks [@fsaintjacques](https://github.com/fsaintjacques)!)
+- [`563e016`](https://github.com/YenchangChan/franz-go/commit/563e016) **feature** FetchTopic: add EachPartition; FetchPartition: add EachRecord
+- [`8f648e7`](https://github.com/YenchangChan/franz-go/commit/8f648e7) consumer group: document actual behavior for on revoked / lost
 
 v1.0.0
 ===
@@ -1747,10 +1747,10 @@ This is a patch release to a bug introduced in v0.10.3 / v0.11.0.
 
 The intent is to tag v1.0 either Friday (tomorrow) or Monday.
 
-- [`1469495`](https://github.com/twmb/franz-go/commit/1469495) **bugfix** isRetriableBrokerErr: nil error is **not** retriable (thanks [@Neal](https://github.com/Neal)!)
-- [`33635e2`](https://github.com/twmb/franz-go/commit/33635e2) **feature** consumer: add pausing / unpausing topics and partitions
-- [`082db89`](https://github.com/twmb/franz-go/commit/082db89) **bugfix** add locking to g.uncommitted MarkCommitRecords (thanks [@vtolstov](https://github.com/vtolstov)!)
-- [`3684df2`](https://github.com/twmb/franz-go/commit/3684df2) fetches: rename CollectRecords to Records
+- [`1469495`](https://github.com/YenchangChan/franz-go/commit/1469495) **bugfix** isRetriableBrokerErr: nil error is **not** retriable (thanks [@Neal](https://github.com/Neal)!)
+- [`33635e2`](https://github.com/YenchangChan/franz-go/commit/33635e2) **feature** consumer: add pausing / unpausing topics and partitions
+- [`082db89`](https://github.com/YenchangChan/franz-go/commit/082db89) **bugfix** add locking to g.uncommitted MarkCommitRecords (thanks [@vtolstov](https://github.com/vtolstov)!)
+- [`3684df2`](https://github.com/YenchangChan/franz-go/commit/3684df2) fetches: rename CollectRecords to Records
 
 v0.11.0
 ===
@@ -1776,15 +1776,15 @@ purpose and to hopefully be slightly less confusing.
 **If you have any API suggestions that should be addressed before a 1.0 API
 stabilization release, please open an issue.**
 
-- [`577c73a`](https://github.com/twmb/franz-go/commit/577c73a) **breaking**: rename RecordTimeout to RecordDeliveryTimeout
-- [`76ae8f5`](https://github.com/twmb/franz-go/commit/76ae8f5) **breaking**: rename {,Stop}OnDataLoss to {,Stop}ProducerOnDataLossDetected
-- [`6272a3b`](https://github.com/twmb/franz-go/commit/6272a3b) **breaking**: rename BatchMaxBytes to ProducerBatchMaxBytes
-- [`9a76213`](https://github.com/twmb/franz-go/commit/9a76213) **breaking**: rename Linger to ProducerLinger
-- [`3d354bc`](https://github.com/twmb/franz-go/commit/3d354bc) **breaking**: rename BatchCompression to ProducerBatchCompression
-- [`8c3eb3c`](https://github.com/twmb/franz-go/commit/8c3eb3c) **breaking**: renaming OnXyz to OnPartitionsXyz
-- [`525b2d2`](https://github.com/twmb/franz-go/commit/525b2d2) **breaking**: rename CommitCallback to AutoCommitCallback
-- [`ac9fd1c`](https://github.com/twmb/franz-go/commit/ac9fd1c) docs: clarify Balancer is equivalent to Java's PartitionAssignor
-- [`2109ed4`](https://github.com/twmb/franz-go/commit/2109ed4) **breaking**: rename ConnTimeoutOverhead to RequestTimeoutOverhead
+- [`577c73a`](https://github.com/YenchangChan/franz-go/commit/577c73a) **breaking**: rename RecordTimeout to RecordDeliveryTimeout
+- [`76ae8f5`](https://github.com/YenchangChan/franz-go/commit/76ae8f5) **breaking**: rename {,Stop}OnDataLoss to {,Stop}ProducerOnDataLossDetected
+- [`6272a3b`](https://github.com/YenchangChan/franz-go/commit/6272a3b) **breaking**: rename BatchMaxBytes to ProducerBatchMaxBytes
+- [`9a76213`](https://github.com/YenchangChan/franz-go/commit/9a76213) **breaking**: rename Linger to ProducerLinger
+- [`3d354bc`](https://github.com/YenchangChan/franz-go/commit/3d354bc) **breaking**: rename BatchCompression to ProducerBatchCompression
+- [`8c3eb3c`](https://github.com/YenchangChan/franz-go/commit/8c3eb3c) **breaking**: renaming OnXyz to OnPartitionsXyz
+- [`525b2d2`](https://github.com/YenchangChan/franz-go/commit/525b2d2) **breaking**: rename CommitCallback to AutoCommitCallback
+- [`ac9fd1c`](https://github.com/YenchangChan/franz-go/commit/ac9fd1c) docs: clarify Balancer is equivalent to Java's PartitionAssignor
+- [`2109ed4`](https://github.com/YenchangChan/franz-go/commit/2109ed4) **breaking**: rename ConnTimeoutOverhead to RequestTimeoutOverhead
 
 v0.10.3
 ===
@@ -1794,15 +1794,15 @@ not want to update the API. The next release, v0.11.0, is going to contain
 breaking config option changes. The point of the intermediate release is to
 allow a few days for anybody to raise issues for better suggestions.
 
-- [`31ed46b`](https://github.com/twmb/franz-go/commit/31ed46b) **feature** consuming: add autocommitting marked records
-- [`c973268`](https://github.com/twmb/franz-go/commit/c973268) **feature** fetches: add CollectRecords convenience function
-- [`a478251`](https://github.com/twmb/franz-go/commit/a478251) **bugfix** source: advance offsets even if we return no records
-- [`307c22e`](https://github.com/twmb/franz-go/commit/307c22e) **minor bugfix** client retriable req: fix err bug
-- [`fcaaf3f`](https://github.com/twmb/franz-go/commit/fcaaf3f) breaking kmsg: update per protocol changes
-- [`262afb4`](https://github.com/twmb/franz-go/commit/262afb4) **bugfix** offset commit: use -1 for RetentionTimeMillis
-- [`c6df11d`](https://github.com/twmb/franz-go/commit/c6df11d) consumer: commit all dirty offsets when _entering_ poll
-- [`e185676`](https://github.com/twmb/franz-go/commit/e185676) (minor) breaking change: `AllowedConcurrentFetches` => `MaxConcurrentFetches`
-- [`d5e80b3`](https://github.com/twmb/franz-go/commit/d5e80b3) bump min go version to go1.15
+- [`31ed46b`](https://github.com/YenchangChan/franz-go/commit/31ed46b) **feature** consuming: add autocommitting marked records
+- [`c973268`](https://github.com/YenchangChan/franz-go/commit/c973268) **feature** fetches: add CollectRecords convenience function
+- [`a478251`](https://github.com/YenchangChan/franz-go/commit/a478251) **bugfix** source: advance offsets even if we return no records
+- [`307c22e`](https://github.com/YenchangChan/franz-go/commit/307c22e) **minor bugfix** client retriable req: fix err bug
+- [`fcaaf3f`](https://github.com/YenchangChan/franz-go/commit/fcaaf3f) breaking kmsg: update per protocol changes
+- [`262afb4`](https://github.com/YenchangChan/franz-go/commit/262afb4) **bugfix** offset commit: use -1 for RetentionTimeMillis
+- [`c6df11d`](https://github.com/YenchangChan/franz-go/commit/c6df11d) consumer: commit all dirty offsets when _entering_ poll
+- [`e185676`](https://github.com/YenchangChan/franz-go/commit/e185676) (minor) breaking change: `AllowedConcurrentFetches` => `MaxConcurrentFetches`
+- [`d5e80b3`](https://github.com/YenchangChan/franz-go/commit/d5e80b3) bump min go version to go1.15
 
 v0.10.2
 ===
@@ -1816,13 +1816,13 @@ autocommitting, just to prevent any unnecessary duplicate messages.
 The aim is to let this release bake for a day / a few days / a week so that if
 anybody tries it out, I can receive any bug reports.
 
-- [`31754a9`](https://github.com/twmb/franz-go/commit/31754a9) **feature-ish** compression: switch snappy to @klauspost's s2
-- [`28bba43`](https://github.com/twmb/franz-go/commit/28bba43) autocommitting: only commit previously polled fetches
-- [`4fb0de2`](https://github.com/twmb/franz-go/commit/4fb0de2) `isRetriableBrokerErr`: opt in `net.ErrClosed`, restructure
-- [`0d01f74`](https://github.com/twmb/franz-go/commit/0d01f74) **feature** add `RoundRobinPartitioner`
-- [`5be804d`](https://github.com/twmb/franz-go/commit/5be804d) `LeastBackupPartitioner`: fix, speedup
-- [`733848b`](https://github.com/twmb/franz-go/commit/733848b) **bugfix** CommitRecords: commit next offset to move forward
-- [`4c20135`](https://github.com/twmb/franz-go/commit/4c20135) **bugfix/simplification** sink: simplify decInflight for batches in req
+- [`31754a9`](https://github.com/YenchangChan/franz-go/commit/31754a9) **feature-ish** compression: switch snappy to @klauspost's s2
+- [`28bba43`](https://github.com/YenchangChan/franz-go/commit/28bba43) autocommitting: only commit previously polled fetches
+- [`4fb0de2`](https://github.com/YenchangChan/franz-go/commit/4fb0de2) `isRetriableBrokerErr`: opt in `net.ErrClosed`, restructure
+- [`0d01f74`](https://github.com/YenchangChan/franz-go/commit/0d01f74) **feature** add `RoundRobinPartitioner`
+- [`5be804d`](https://github.com/YenchangChan/franz-go/commit/5be804d) `LeastBackupPartitioner`: fix, speedup
+- [`733848b`](https://github.com/YenchangChan/franz-go/commit/733848b) **bugfix** CommitRecords: commit next offset to move forward
+- [`4c20135`](https://github.com/YenchangChan/franz-go/commit/4c20135) **bugfix/simplification** sink: simplify decInflight for batches in req
 
 v0.10.1
 ===
@@ -1837,11 +1837,11 @@ and a produced batch has a retriable error, and then some cluster maintenance
 causes the partition to move to a different broker, the client will be unable
 to continue producing to the partition.
 
-- [`029f5e3`](https://github.com/twmb/franz-go/commit/029f5e3) **bugfix** sink: fix decInflight double decrement bug
-- [`2cf62e2`](https://github.com/twmb/franz-go/commit/2cf62e2) sink: properly debug log the number of records written
-- [`370c18e`](https://github.com/twmb/franz-go/commit/370c18e) and [`caadb8b`](https://github.com/twmb/franz-go/commit/caadb8b) **feature**: add LeastBackupPartitioner
-- [`0fee54c`](https://github.com/twmb/franz-go/commit/0fee54c) and [`589c5e5`](https://github.com/twmb/franz-go/commit/589c5e5) add errUnknownBroker and io.EOF to be retriable errors in sink; add errUnknownBroker to be skippable in the client
-- [`ec0c992`](https://github.com/twmb/franz-go/commit/ec0c992) client improvement: retry more when input brokers are invalid
+- [`029f5e3`](https://github.com/YenchangChan/franz-go/commit/029f5e3) **bugfix** sink: fix decInflight double decrement bug
+- [`2cf62e2`](https://github.com/YenchangChan/franz-go/commit/2cf62e2) sink: properly debug log the number of records written
+- [`370c18e`](https://github.com/YenchangChan/franz-go/commit/370c18e) and [`caadb8b`](https://github.com/YenchangChan/franz-go/commit/caadb8b) **feature**: add LeastBackupPartitioner
+- [`0fee54c`](https://github.com/YenchangChan/franz-go/commit/0fee54c) and [`589c5e5`](https://github.com/YenchangChan/franz-go/commit/589c5e5) add errUnknownBroker and io.EOF to be retriable errors in sink; add errUnknownBroker to be skippable in the client
+- [`ec0c992`](https://github.com/YenchangChan/franz-go/commit/ec0c992) client improvement: retry more when input brokers are invalid
 
 v0.10.0
 ===
@@ -1858,10 +1858,10 @@ Three options have been renamed in this release, the fixes are very simple (and
 ideally, if you used `RetryTimeout`, you may find the new `RetryTimeout` even
 simpler).
 
-- [`c1d62a7`](https://github.com/twmb/franz-go/commit/c1d62a7) **feature** config: add DialTLSConfig option
-- [`4e5eca8`](https://github.com/twmb/franz-go/commit/4e5eca8) **breaking**: rename ProduceRetries to RecordRetries
-- [`12808d5`](https://github.com/twmb/franz-go/commit/12808d5) **breaking**: rename RetryBackoff to RetryBackoffFn
-- [`8199f5b`](https://github.com/twmb/franz-go/commit/8199f5b) **breaking**: split RetryTimeout function
+- [`c1d62a7`](https://github.com/YenchangChan/franz-go/commit/c1d62a7) **feature** config: add DialTLSConfig option
+- [`4e5eca8`](https://github.com/YenchangChan/franz-go/commit/4e5eca8) **breaking**: rename ProduceRetries to RecordRetries
+- [`12808d5`](https://github.com/YenchangChan/franz-go/commit/12808d5) **breaking**: rename RetryBackoff to RetryBackoffFn
+- [`8199f5b`](https://github.com/YenchangChan/franz-go/commit/8199f5b) **breaking**: split RetryTimeout function
 
 v0.9.1
 ===
@@ -1870,12 +1870,12 @@ v0.9.0 is to be stabilized, but I would like to address #57 first, which may
 slightly change how autocommitting works. This intermediate release pulls in
 some decent fixes.
 
-- [`fd889cc`](https://github.com/twmb/franz-go/commit/fd889cc) all: work around brokers that have inconsistent request versions
-- [`f591593`](https://github.com/twmb/franz-go/commit/f591593) broker: permanently store the initial ApiVersions response
-- [`8da4eaa`](https://github.com/twmb/franz-go/commit/8da4eaa) and [`37ecd21`](https://github.com/twmb/franz-go/commit/37ecd21) **feature** client: enable ipv6 support in seed brokers (thanks [@vtolstov](https://github.com/vtolstov) and [@SteadBytes](https://github.com/SteadBytes)!)
-- [`aecaf27`](https://github.com/twmb/franz-go/commit/aecaf27) **bugfix** client: force a coordinator refresh if the coordinator is unknown
-- [`f29fb7f`](https://github.com/twmb/franz-go/commit/f29fb7f) **bugfix** sink: fix out-of-order response handling across partition rebalances
-- [`4fadcde`](https://github.com/twmb/franz-go/commit/4fadcde) **rare bugfix** consuming: fix logic race, simplify some logic
+- [`fd889cc`](https://github.com/YenchangChan/franz-go/commit/fd889cc) all: work around brokers that have inconsistent request versions
+- [`f591593`](https://github.com/YenchangChan/franz-go/commit/f591593) broker: permanently store the initial ApiVersions response
+- [`8da4eaa`](https://github.com/YenchangChan/franz-go/commit/8da4eaa) and [`37ecd21`](https://github.com/YenchangChan/franz-go/commit/37ecd21) **feature** client: enable ipv6 support in seed brokers (thanks [@vtolstov](https://github.com/vtolstov) and [@SteadBytes](https://github.com/SteadBytes)!)
+- [`aecaf27`](https://github.com/YenchangChan/franz-go/commit/aecaf27) **bugfix** client: force a coordinator refresh if the coordinator is unknown
+- [`f29fb7f`](https://github.com/YenchangChan/franz-go/commit/f29fb7f) **bugfix** sink: fix out-of-order response handling across partition rebalances
+- [`4fadcde`](https://github.com/YenchangChan/franz-go/commit/4fadcde) **rare bugfix** consuming: fix logic race, simplify some logic
 
 v0.9.0
 ===
@@ -1914,14 +1914,14 @@ avoids some transitive dependency issues.
 If you use the kmsg package directly, the only update you should need to do is:
 
 ```
-go get -u github.com/twmb/franz-go/pkg/kmsg@latest
+go get -u github.com/YenchangChan/franz-go/pkg/kmsg@latest
 ```
 
 ### Other potentially notable changes
 
-- [`f82e5c6`](https://github.com/twmb/franz-go/commit/f82e5c6) consumer: document that a nil / closed context is supported for polling
-- [`8770662`](https://github.com/twmb/franz-go/commit/8770662) very minor bugfix for producing: only opt in to more than 1req if idempotent
-- [`5c0a2c7`](https://github.com/twmb/franz-go/commit/5c0a2c7) bench: add -prometheus flag
+- [`f82e5c6`](https://github.com/YenchangChan/franz-go/commit/f82e5c6) consumer: document that a nil / closed context is supported for polling
+- [`8770662`](https://github.com/YenchangChan/franz-go/commit/8770662) very minor bugfix for producing: only opt in to more than 1req if idempotent
+- [`5c0a2c7`](https://github.com/YenchangChan/franz-go/commit/5c0a2c7) bench: add -prometheus flag
 
 v0.8.7
 ===
@@ -1946,36 +1946,36 @@ package into a dedicated module. More details on that if this happens.
 
 ### Breaking change
 
-- [`ffc94ea`](https://github.com/twmb/franz-go/commit/ffc94ea) **minor breaking change**: embed `FetchPartition` in `FetchTopicPartition` rather than have a named `Partition` field
+- [`ffc94ea`](https://github.com/YenchangChan/franz-go/commit/ffc94ea) **minor breaking change**: embed `FetchPartition` in `FetchTopicPartition` rather than have a named `Partition` field
 
 ### Features
 
-- [`1bb70a5`](https://github.com/twmb/franz-go/commit/1bb70a5) kprom: clarify seed ids, add two new metrics
-- [`916fc10`](https://github.com/twmb/franz-go/commit/916fc10) client: add four new hooks to provide buffer/unbuffer interceptors
-- [`1e74109`](https://github.com/twmb/franz-go/commit/1e74109) hooks: add HookNewClient
-- [`3256518`](https://github.com/twmb/franz-go/commit/3256518) client: add Buffered{Produce,Fetch}Records methods
-- [`ebf2f07`](https://github.com/twmb/franz-go/commit/ebf2f07) support KIP-516 for Fetch (topic IDs in fetch requests)
-- [`e5e37fc`](https://github.com/twmb/franz-go/commit/e5e37fc) and [`3a3cc06`](https://github.com/twmb/franz-go/commit/3a3cc06) support KIP-709: batched OffsetFetchRequest in a forward-compatible way (and minor group sharded request redux)
-- [`eaf9ebe`](https://github.com/twmb/franz-go/commit/eaf9ebe) kprom: use Registerer and Gatherer interface instead of concrete registry type.
-- [`10e3f44`](https://github.com/twmb/franz-go/commit/10e3f44) and [`4fdc7e0`](https://github.com/twmb/franz-go/commit/4fdc7e0) support KIP-699 (batch FindCoordinator requests)
+- [`1bb70a5`](https://github.com/YenchangChan/franz-go/commit/1bb70a5) kprom: clarify seed ids, add two new metrics
+- [`916fc10`](https://github.com/YenchangChan/franz-go/commit/916fc10) client: add four new hooks to provide buffer/unbuffer interceptors
+- [`1e74109`](https://github.com/YenchangChan/franz-go/commit/1e74109) hooks: add HookNewClient
+- [`3256518`](https://github.com/YenchangChan/franz-go/commit/3256518) client: add Buffered{Produce,Fetch}Records methods
+- [`ebf2f07`](https://github.com/YenchangChan/franz-go/commit/ebf2f07) support KIP-516 for Fetch (topic IDs in fetch requests)
+- [`e5e37fc`](https://github.com/YenchangChan/franz-go/commit/e5e37fc) and [`3a3cc06`](https://github.com/YenchangChan/franz-go/commit/3a3cc06) support KIP-709: batched OffsetFetchRequest in a forward-compatible way (and minor group sharded request redux)
+- [`eaf9ebe`](https://github.com/YenchangChan/franz-go/commit/eaf9ebe) kprom: use Registerer and Gatherer interface instead of concrete registry type.
+- [`10e3f44`](https://github.com/YenchangChan/franz-go/commit/10e3f44) and [`4fdc7e0`](https://github.com/YenchangChan/franz-go/commit/4fdc7e0) support KIP-699 (batch FindCoordinator requests)
 
 ### Minor other changes
 
-- [`d9b4fbe`](https://github.com/twmb/franz-go/commit/d9b4fbe) consumer group: add "group" to all log messages
-- [`f70db15`](https://github.com/twmb/franz-go/commit/f70db15) broker: use ErrClientClosed more properly for internal requests that use the client context
-- [`8f1e732`](https://github.com/twmb/franz-go/commit/8f1e732) producer: use ErrClientClosed properly if waiting to produce when the client is closed
-- [`ee918d9`](https://github.com/twmb/franz-go/commit/ee918d9) sink: drop the drain loop sleep from 5ms to 50microsec
-- [`e48c03c`](https://github.com/twmb/franz-go/commit/e48c03c) client: log "seed #" rather than a large negative for seed brokers
+- [`d9b4fbe`](https://github.com/YenchangChan/franz-go/commit/d9b4fbe) consumer group: add "group" to all log messages
+- [`f70db15`](https://github.com/YenchangChan/franz-go/commit/f70db15) broker: use ErrClientClosed more properly for internal requests that use the client context
+- [`8f1e732`](https://github.com/YenchangChan/franz-go/commit/8f1e732) producer: use ErrClientClosed properly if waiting to produce when the client is closed
+- [`ee918d9`](https://github.com/YenchangChan/franz-go/commit/ee918d9) sink: drop the drain loop sleep from 5ms to 50microsec
+- [`e48c03c`](https://github.com/YenchangChan/franz-go/commit/e48c03c) client: log "seed #" rather than a large negative for seed brokers
 
 v0.8.6
 ===
 
 
-- [`7ec0a45`](https://github.com/twmb/franz-go/commit/7ec0a45) **bugfix** consumer group: bugfix regex consuming (from v0.8.0+)
-- [`91fe77b`](https://github.com/twmb/franz-go/commit/91fe77b) bench: faster record value generation, add -static-record flag
-- [`f95859e`](https://github.com/twmb/franz-go/commit/f95859e) generated code: always return typed value if present
-- [`db5fca5`](https://github.com/twmb/franz-go/commit/db5fca5) support KIP-734
-- [`ae7182b`](https://github.com/twmb/franz-go/commit/ae7182b) group balancing: address KAFKA-12898
+- [`7ec0a45`](https://github.com/YenchangChan/franz-go/commit/7ec0a45) **bugfix** consumer group: bugfix regex consuming (from v0.8.0+)
+- [`91fe77b`](https://github.com/YenchangChan/franz-go/commit/91fe77b) bench: faster record value generation, add -static-record flag
+- [`f95859e`](https://github.com/YenchangChan/franz-go/commit/f95859e) generated code: always return typed value if present
+- [`db5fca5`](https://github.com/YenchangChan/franz-go/commit/db5fca5) support KIP-734
+- [`ae7182b`](https://github.com/YenchangChan/franz-go/commit/ae7182b) group balancing: address KAFKA-12898
 
 This small tag fixes a bug in group consuming via regex, adds a new
 `-static-record` flag to the benchmark example, and has a few other very minor
@@ -1987,7 +1987,7 @@ in the benchmarks!
 v0.8.5
 ===
 
-- [`2732fb8`](https://github.com/twmb/franz-go/commit/2732fb8) **bugfix** consumer: bugfix consuming of specific partitions if no topics are specified
+- [`2732fb8`](https://github.com/YenchangChan/franz-go/commit/2732fb8) **bugfix** consumer: bugfix consuming of specific partitions if no topics are specified
 
 If `ConsumePartitions` was used without `ConsumeTopics`, the consumer would not
 start. This was missed in the conversion of starting the consumer after
@@ -1996,8 +1996,8 @@ initializing a client to initializing the consumer _with_ the client.
 v0.8.4
 ===
 
-- [`e0346a2`](https://github.com/twmb/franz-go/commit/e0346a2) **very minor bugfix** consumer group: set defaultCommitCallback
-- [`5047b31`](https://github.com/twmb/franz-go/commit/5047b31) and [`05a6b8a`](https://github.com/twmb/franz-go/commit/05a6b8a) bench: add -linger, -disable-idempotency, -log-level, -compression, -batch-max-bytes options
+- [`e0346a2`](https://github.com/YenchangChan/franz-go/commit/e0346a2) **very minor bugfix** consumer group: set defaultCommitCallback
+- [`5047b31`](https://github.com/YenchangChan/franz-go/commit/5047b31) and [`05a6b8a`](https://github.com/YenchangChan/franz-go/commit/05a6b8a) bench: add -linger, -disable-idempotency, -log-level, -compression, -batch-max-bytes options
 
 This is a small release containing a very minor bugfix and more flags on the
 benchmark program. The bugfix basically re-adds a missing commit callback if
@@ -2008,7 +2008,7 @@ you are using the default commit callback.
 v0.8.3
 ===
 
-- [`053911b`](https://github.com/twmb/franz-go/commit/053911b) plugins: fix module declarations
+- [`053911b`](https://github.com/YenchangChan/franz-go/commit/053911b) plugins: fix module declarations
 
 This is a patch release on the prior commit to fix the path declarations in the
 new plugin modules.
@@ -2016,7 +2016,7 @@ new plugin modules.
 v0.8.2
 ===
 
-- [`65a0ed1`](https://github.com/twmb/franz-go/commit/65a0ed1) add pluggable kgmetrics, kprom, kzap packages & examples
+- [`65a0ed1`](https://github.com/YenchangChan/franz-go/commit/65a0ed1) add pluggable kgmetrics, kprom, kzap packages & examples
 
 This release immediately follows the prior release so that the plugin packages
 can refer to v0.8.1, which contains the (hopefully) final API breakages. This
@@ -2092,19 +2092,19 @@ and describes the downsides of autocommitting.
 
 ### Changes
 
-- [`fa1fd35`](https://github.com/twmb/franz-go/commit/fa1fd35) **feature** consuming: add HookFetchBatchRead
-- [`9810427`](https://github.com/twmb/franz-go/commit/9810427) **feature** producing: add HookProduceBatchWritten
-- [`20e5912`](https://github.com/twmb/franz-go/commit/20e5912) **breaking api** hook: rename OnThrottle => OnBrokerThrottle
-- [`a1d7506`](https://github.com/twmb/franz-go/commit/a1d7506) examples: add group consumer example, with three different commit styles
-- [`058f692`](https://github.com/twmb/franz-go/commit/058f692) behavior change, consuming: only add fetch if it has records or errors
-- [`d9649df`](https://github.com/twmb/franz-go/commit/d9649df) **feature** fetches: add IsClientClosed helper
-- [`bc0add3`](https://github.com/twmb/franz-go/commit/bc0add3) consumer: inject ErrClientClosing when polling if the client is closed
-- [`f50b320`](https://github.com/twmb/franz-go/commit/f50b320) client: make public ErrClientClosed
-- [`8b7b43e`](https://github.com/twmb/franz-go/commit/8b7b43e) behavior change, client: avoid issuing requests to shards that we know are erroring
-- [`96cb1c2`](https://github.com/twmb/franz-go/commit/96cb1c2) **bugfix** fix ACLResourcePatternType: add ANY
-- [`8cf3e5a`](https://github.com/twmb/franz-go/commit/8cf3e5a) **breaking api** rename BlockingCommitOffsets to CommitOffsetsSync
-- [`2092b4c`](https://github.com/twmb/franz-go/commit/2092b4c) and [`922f4b8`](https://github.com/twmb/franz-go/commit/922f4b8) **feature** add CommitRecords and CommitUncommittedOffsets
-- [`6808a55`](https://github.com/twmb/franz-go/commit/6808a55) **feature** add BasicConsistentPartitioner / ManualPartitioner
+- [`fa1fd35`](https://github.com/YenchangChan/franz-go/commit/fa1fd35) **feature** consuming: add HookFetchBatchRead
+- [`9810427`](https://github.com/YenchangChan/franz-go/commit/9810427) **feature** producing: add HookProduceBatchWritten
+- [`20e5912`](https://github.com/YenchangChan/franz-go/commit/20e5912) **breaking api** hook: rename OnThrottle => OnBrokerThrottle
+- [`a1d7506`](https://github.com/YenchangChan/franz-go/commit/a1d7506) examples: add group consumer example, with three different commit styles
+- [`058f692`](https://github.com/YenchangChan/franz-go/commit/058f692) behavior change, consuming: only add fetch if it has records or errors
+- [`d9649df`](https://github.com/YenchangChan/franz-go/commit/d9649df) **feature** fetches: add IsClientClosed helper
+- [`bc0add3`](https://github.com/YenchangChan/franz-go/commit/bc0add3) consumer: inject ErrClientClosing when polling if the client is closed
+- [`f50b320`](https://github.com/YenchangChan/franz-go/commit/f50b320) client: make public ErrClientClosed
+- [`8b7b43e`](https://github.com/YenchangChan/franz-go/commit/8b7b43e) behavior change, client: avoid issuing requests to shards that we know are erroring
+- [`96cb1c2`](https://github.com/YenchangChan/franz-go/commit/96cb1c2) **bugfix** fix ACLResourcePatternType: add ANY
+- [`8cf3e5a`](https://github.com/YenchangChan/franz-go/commit/8cf3e5a) **breaking api** rename BlockingCommitOffsets to CommitOffsetsSync
+- [`2092b4c`](https://github.com/YenchangChan/franz-go/commit/2092b4c) and [`922f4b8`](https://github.com/YenchangChan/franz-go/commit/922f4b8) **feature** add CommitRecords and CommitUncommittedOffsets
+- [`6808a55`](https://github.com/YenchangChan/franz-go/commit/6808a55) **feature** add BasicConsistentPartitioner / ManualPartitioner
 
 v0.8.0
 ===
@@ -2180,28 +2180,28 @@ If using a group transaction session, perform the above group changes, and use `
 
 ## Changes
 
-- [`6a048db`](https://github.com/twmb/franz-go/commit/6a048db) **breaking API** hooks: namespace all hooks with Broker
-- [`8498383`](https://github.com/twmb/franz-go/commit/8498383) **breaking API** client: large breaking change for consuming APIs
-- [`45004f8`](https://github.com/twmb/franz-go/commit/45004f8) **breaking API** config: rename ProduceTopic to DefaultProduceTopic, doc changes
-- [`aa849a1`](https://github.com/twmb/franz-go/commit/aa849a1) **breaking API** options: prefix AutoTopicCreation with Allow
-- [`be6adf5`](https://github.com/twmb/franz-go/commit/be6adf5) **breaking API** client: remove DisableClientID option
-- [`68b1a04`](https://github.com/twmb/franz-go/commit/68b1a04) **breaking API** client: remove BrokerConnDeadRetries option; drop retries to 20
-- [`88e131d`](https://github.com/twmb/franz-go/commit/88e131d) **bugfix** kerberos: fix off-by-one in asn1LengthBytes (but it appears this is still not fully working)
-- [`20e0f66`](https://github.com/twmb/franz-go/commit/20e0f66) **feature** Fetches: add EachError, clarifying documentation
-- [`085ad30`](https://github.com/twmb/franz-go/commit/085ad30) metadata: limit retries, bump produce load errors on failure
-- [`b26489f`](https://github.com/twmb/franz-go/commit/b26489f) config: change default non-produce retries from unlimited to 30 (later commit just above changes down to 20)
+- [`6a048db`](https://github.com/YenchangChan/franz-go/commit/6a048db) **breaking API** hooks: namespace all hooks with Broker
+- [`8498383`](https://github.com/YenchangChan/franz-go/commit/8498383) **breaking API** client: large breaking change for consuming APIs
+- [`45004f8`](https://github.com/YenchangChan/franz-go/commit/45004f8) **breaking API** config: rename ProduceTopic to DefaultProduceTopic, doc changes
+- [`aa849a1`](https://github.com/YenchangChan/franz-go/commit/aa849a1) **breaking API** options: prefix AutoTopicCreation with Allow
+- [`be6adf5`](https://github.com/YenchangChan/franz-go/commit/be6adf5) **breaking API** client: remove DisableClientID option
+- [`68b1a04`](https://github.com/YenchangChan/franz-go/commit/68b1a04) **breaking API** client: remove BrokerConnDeadRetries option; drop retries to 20
+- [`88e131d`](https://github.com/YenchangChan/franz-go/commit/88e131d) **bugfix** kerberos: fix off-by-one in asn1LengthBytes (but it appears this is still not fully working)
+- [`20e0f66`](https://github.com/YenchangChan/franz-go/commit/20e0f66) **feature** Fetches: add EachError, clarifying documentation
+- [`085ad30`](https://github.com/YenchangChan/franz-go/commit/085ad30) metadata: limit retries, bump produce load errors on failure
+- [`b26489f`](https://github.com/YenchangChan/franz-go/commit/b26489f) config: change default non-produce retries from unlimited to 30 (later commit just above changes down to 20)
 
 v0.7.9
 ===
 
-- [`5231902`](https://github.com/twmb/franz-go/commit/5231902) **bugfix** patch on prior commit
+- [`5231902`](https://github.com/YenchangChan/franz-go/commit/5231902) **bugfix** patch on prior commit
 
 If I could yank tags, I would.
 
 v0.7.8
 ===
 
-- [`b7cb533`](https://github.com/twmb/franz-go/commit/b7cb533) **bugfix** allow any `*os.SyscallError` to be retriable
+- [`b7cb533`](https://github.com/YenchangChan/franz-go/commit/b7cb533) **bugfix** allow any `*os.SyscallError` to be retriable
 
 _This_ should be the last v0.7 release. This is a small bugfix to allow much
 more retrying of failing requests, particularly around failed dials, which is
@@ -2210,12 +2210,12 @@ much more resilient to restarting brokers.
 v0.7.7
 ===
 
-- [`afa1209`](https://github.com/twmb/franz-go/commit/afa1209) txn: detect a fatal txnal client when beginning transactions
-- [`5576dce`](https://github.com/twmb/franz-go/commit/5576dce) benchmarks: add comparisons to confluent-kafka-go & sarama
-- [`d848174`](https://github.com/twmb/franz-go/commit/d848174) examples: add benchmarking example
-- [`fec2a18`](https://github.com/twmb/franz-go/commit/fec2a18) client: fix request buffer pool, add promisedNumberedRecord pool
-- [`a0d712e`](https://github.com/twmb/franz-go/commit/a0d712e) transactions: small wording changes in docs
-- [`bad47ba`](https://github.com/twmb/franz-go/commit/bad47ba) and [`a9691bd`](https://github.com/twmb/franz-go/commit/a9691bd) **feature** hooks: add HookBrokerE2E
+- [`afa1209`](https://github.com/YenchangChan/franz-go/commit/afa1209) txn: detect a fatal txnal client when beginning transactions
+- [`5576dce`](https://github.com/YenchangChan/franz-go/commit/5576dce) benchmarks: add comparisons to confluent-kafka-go & sarama
+- [`d848174`](https://github.com/YenchangChan/franz-go/commit/d848174) examples: add benchmarking example
+- [`fec2a18`](https://github.com/YenchangChan/franz-go/commit/fec2a18) client: fix request buffer pool, add promisedNumberedRecord pool
+- [`a0d712e`](https://github.com/YenchangChan/franz-go/commit/a0d712e) transactions: small wording changes in docs
+- [`bad47ba`](https://github.com/YenchangChan/franz-go/commit/bad47ba) and [`a9691bd`](https://github.com/YenchangChan/franz-go/commit/a9691bd) **feature** hooks: add HookBrokerE2E
 
 This is a small release with one useful new hook, a few minor updates /
 internal fixes, and no bug fixes.
@@ -2256,7 +2256,7 @@ as well as adds an [example](./examples/sasl/aws_msk_iam) for how to use
 v0.7.4
 ===
 
-- [`467e739`](https://github.com/twmb/franz-go/commit/467e739) FirstErrPromise: change semantics
+- [`467e739`](https://github.com/YenchangChan/franz-go/commit/467e739) FirstErrPromise: change semantics
 
 This is a small release to change the semantics of `FirstErrPromise`: now, it
 uses a `sync.WaitGroup` on every `Promise` and will wait until all records have
@@ -2267,14 +2267,14 @@ finishes with an error.
 v0.7.3
 ===
 
-- [`30c4ba3`](https://github.com/twmb/franz-go/commit/30c4ba3) **feature** sasl: add support for `AWS_MSK_IAM`
+- [`30c4ba3`](https://github.com/YenchangChan/franz-go/commit/30c4ba3) **feature** sasl: add support for `AWS_MSK_IAM`
 
 This is a small release dedicated to adding support for `AWS_MSK_IAM` sasl.
 
 v0.7.2
 ===
 
-- [`522c9e2`](https://github.com/twmb/franz-go/commit/522c9e2) **bugfix** consumer group: use `JoinGroupResponse.Protocol`, not `SyncGroupResponse.Protocol`
+- [`522c9e2`](https://github.com/YenchangChan/franz-go/commit/522c9e2) **bugfix** consumer group: use `JoinGroupResponse.Protocol`, not `SyncGroupResponse.Protocol`
 
 This is a small bugfix release; the `Protocol` field in `SyncGroupResponse` was
 added in 2.5.0, and my integration tests did not catch this because I usually
@@ -2284,8 +2284,8 @@ protocol that was chosen, so we use that field.
 v0.7.1
 ===
 
-- [`98f74d1`](https://github.com/twmb/franz-go/commit/98f74d1) README: note that we actually do support KIP-533
-- [`528f007`](https://github.com/twmb/franz-go/commit/528f007) and [`ef9a16a`](https://github.com/twmb/franz-go/commit/ef9a16a) and [`d0cc729`](https://github.com/twmb/franz-go/commit/d0cc729) **bugfix** client: avoid caching invalid coordinators; allow retries
+- [`98f74d1`](https://github.com/YenchangChan/franz-go/commit/98f74d1) README: note that we actually do support KIP-533
+- [`528f007`](https://github.com/YenchangChan/franz-go/commit/528f007) and [`ef9a16a`](https://github.com/YenchangChan/franz-go/commit/ef9a16a) and [`d0cc729`](https://github.com/YenchangChan/franz-go/commit/d0cc729) **bugfix** client: avoid caching invalid coordinators; allow retries
 
 This is a small bugfix release: previously, if FindCoordinator returned a node
 ID of -1, we would permanently cache that. -1 is returned when the load has an
@@ -2330,54 +2330,54 @@ The original error return was not really that intuitive and could lead to bugs
 if not understood entirely, so it is much simpler to just always call the
 promise.
 
-- [`215f76f`](https://github.com/twmb/franz-go/commit/215f76f) small breaking API: prefix hook interfaces with "Hook"
-- [`c045366`](https://github.com/twmb/franz-go/commit/c045366) producer: drop error return from Produce (breaking API change)
+- [`215f76f`](https://github.com/YenchangChan/franz-go/commit/215f76f) small breaking API: prefix hook interfaces with "Hook"
+- [`c045366`](https://github.com/YenchangChan/franz-go/commit/c045366) producer: drop error return from Produce (breaking API change)
 
 ## Features
 
-- [`c83d5ba`](https://github.com/twmb/franz-go/commit/c83d5ba) generate: support parsing and encoding unknown tags
-- [`6a9eb0b`](https://github.com/twmb/franz-go/commit/6a9eb0b) kmsg: add Tags opaque type; ReadTags helper
-- [`9de3959`](https://github.com/twmb/franz-go/commit/9de3959) add support for KIP-568 (force rebalance)
-- [`d38ac84`](https://github.com/twmb/franz-go/commit/d38ac84) add HookGroupManageError
-- [`0bfa547`](https://github.com/twmb/franz-go/commit/0bfa547) consumer group: add CommitCallback option
-- [`231d0e4`](https://github.com/twmb/franz-go/commit/231d0e4) fetches: add EachRecord
-- [`aea185e`](https://github.com/twmb/franz-go/commit/aea185e) add FirstErrPromise
-- [`780d168`](https://github.com/twmb/franz-go/commit/780d168) Record: add helper constructors; allocation avoiders w/ unsafe
-- [`55be413`](https://github.com/twmb/franz-go/commit/55be413) producer feature: allow a default Topic to produce to
-- [`e05002b`](https://github.com/twmb/franz-go/commit/e05002b) and [`1b69836`](https://github.com/twmb/franz-go/commit/1b69836) consumer group: export APIs allow custom balancers
-- [`6db1c39`](https://github.com/twmb/franz-go/commit/6db1c39) Fetches: add EachTopic helper
-- [`b983d63`](https://github.com/twmb/franz-go/commit/b983d6), [`7c9f591`](https://github.com/twmb/franz-go/commit/7c9f59), [`3ad8fc7`](https://github.com/twmb/franz-go/commit/3ad8fc), and [`3ad8fc7`](https://github.com/twmb/franz-go/commit/3ad8fc7) producer: add ProduceSync
+- [`c83d5ba`](https://github.com/YenchangChan/franz-go/commit/c83d5ba) generate: support parsing and encoding unknown tags
+- [`6a9eb0b`](https://github.com/YenchangChan/franz-go/commit/6a9eb0b) kmsg: add Tags opaque type; ReadTags helper
+- [`9de3959`](https://github.com/YenchangChan/franz-go/commit/9de3959) add support for KIP-568 (force rebalance)
+- [`d38ac84`](https://github.com/YenchangChan/franz-go/commit/d38ac84) add HookGroupManageError
+- [`0bfa547`](https://github.com/YenchangChan/franz-go/commit/0bfa547) consumer group: add CommitCallback option
+- [`231d0e4`](https://github.com/YenchangChan/franz-go/commit/231d0e4) fetches: add EachRecord
+- [`aea185e`](https://github.com/YenchangChan/franz-go/commit/aea185e) add FirstErrPromise
+- [`780d168`](https://github.com/YenchangChan/franz-go/commit/780d168) Record: add helper constructors; allocation avoiders w/ unsafe
+- [`55be413`](https://github.com/YenchangChan/franz-go/commit/55be413) producer feature: allow a default Topic to produce to
+- [`e05002b`](https://github.com/YenchangChan/franz-go/commit/e05002b) and [`1b69836`](https://github.com/YenchangChan/franz-go/commit/1b69836) consumer group: export APIs allow custom balancers
+- [`6db1c39`](https://github.com/YenchangChan/franz-go/commit/6db1c39) Fetches: add EachTopic helper
+- [`b983d63`](https://github.com/YenchangChan/franz-go/commit/b983d6), [`7c9f591`](https://github.com/YenchangChan/franz-go/commit/7c9f59), [`3ad8fc7`](https://github.com/YenchangChan/franz-go/commit/3ad8fc), and [`3ad8fc7`](https://github.com/YenchangChan/franz-go/commit/3ad8fc7) producer: add ProduceSync
 
 ## Bug fixes
 
-- [`45cb9df`](https://github.com/twmb/franz-go/commit/45cb9df) consumer: fix SetOffsets bug
-- [`46cfcb7`](https://github.com/twmb/franz-go/commit/46cfcb7) group: fix blocking commit on leave; potential deadlock
-- [`1aaa1ef`](https://github.com/twmb/franz-go/commit/1aaa1ef) consumer: fix data race in handleListOrEpochResults
-- [`d1341ae`](https://github.com/twmb/franz-go/commit/d1341ae) sticky: fix extreme edge case for complex balancing
-- [`9ada82d`](https://github.com/twmb/franz-go/commit/9ada82d) sink: create producerID *BEFORE* produce request (partial revert of dc44d10b)
-- [`5475f6b`](https://github.com/twmb/franz-go/commit/5475f6b) sink: bugfix firstTimestamp
-- [`2c473c4`](https://github.com/twmb/franz-go/commit/2c473c4) client: add OffsetDeleteRequest to handleCoordinatorReq
-- [`bf5b74c`](https://github.com/twmb/franz-go/commit/bf5b74c) and 3ad8fc7 broker: avoid reaping produce cxn on no reads when acks == 0
-- [`43a0009`](https://github.com/twmb/franz-go/commit/43a0009) sink w/ no acks: debug log needs to be before finishBatch
-- [`8cf9eb9`](https://github.com/twmb/franz-go/commit/8cf9eb9) sink: bugfix panic on acks=0
+- [`45cb9df`](https://github.com/YenchangChan/franz-go/commit/45cb9df) consumer: fix SetOffsets bug
+- [`46cfcb7`](https://github.com/YenchangChan/franz-go/commit/46cfcb7) group: fix blocking commit on leave; potential deadlock
+- [`1aaa1ef`](https://github.com/YenchangChan/franz-go/commit/1aaa1ef) consumer: fix data race in handleListOrEpochResults
+- [`d1341ae`](https://github.com/YenchangChan/franz-go/commit/d1341ae) sticky: fix extreme edge case for complex balancing
+- [`9ada82d`](https://github.com/YenchangChan/franz-go/commit/9ada82d) sink: create producerID *BEFORE* produce request (partial revert of dc44d10b)
+- [`5475f6b`](https://github.com/YenchangChan/franz-go/commit/5475f6b) sink: bugfix firstTimestamp
+- [`2c473c4`](https://github.com/YenchangChan/franz-go/commit/2c473c4) client: add OffsetDeleteRequest to handleCoordinatorReq
+- [`bf5b74c`](https://github.com/YenchangChan/franz-go/commit/bf5b74c) and 3ad8fc7 broker: avoid reaping produce cxn on no reads when acks == 0
+- [`43a0009`](https://github.com/YenchangChan/franz-go/commit/43a0009) sink w/ no acks: debug log needs to be before finishBatch
+- [`8cf9eb9`](https://github.com/YenchangChan/franz-go/commit/8cf9eb9) sink: bugfix panic on acks=0
 
 ## General
 
-- [`939cba2`](https://github.com/twmb/franz-go/commit/939cba2) txns: make even safer (& drop default txn timeout to 40s)
-- [`faaecd2`](https://github.com/twmb/franz-go/commit/faaecd2) implement KIP-735 (bump session timeout to 45s)
-- [`3a95ec8`](https://github.com/twmb/franz-go/commit/3a95ec8) GroupTxnSession.End: document no error is worth retrying
-- [`c5a47ea`](https://github.com/twmb/franz-go/commit/c5a47ea) GroupTransactSession.End: retry with abort on OperationNotAttempted
-- [`6398677`](https://github.com/twmb/franz-go/commit/6398677) EndTxn: avoid creating a producer ID if nothing was produced
-- [`c7c08fb`](https://github.com/twmb/franz-go/commit/c7c08fb) txnal producer: work around KAFKA-12671, take 2
-- [`9585e1d`](https://github.com/twmb/franz-go/commit/9585e1d) FetchesRecordIter: avoid mutating input fetches
+- [`939cba2`](https://github.com/YenchangChan/franz-go/commit/939cba2) txns: make even safer (& drop default txn timeout to 40s)
+- [`faaecd2`](https://github.com/YenchangChan/franz-go/commit/faaecd2) implement KIP-735 (bump session timeout to 45s)
+- [`3a95ec8`](https://github.com/YenchangChan/franz-go/commit/3a95ec8) GroupTxnSession.End: document no error is worth retrying
+- [`c5a47ea`](https://github.com/YenchangChan/franz-go/commit/c5a47ea) GroupTransactSession.End: retry with abort on OperationNotAttempted
+- [`6398677`](https://github.com/YenchangChan/franz-go/commit/6398677) EndTxn: avoid creating a producer ID if nothing was produced
+- [`c7c08fb`](https://github.com/YenchangChan/franz-go/commit/c7c08fb) txnal producer: work around KAFKA-12671, take 2
+- [`9585e1d`](https://github.com/YenchangChan/franz-go/commit/9585e1d) FetchesRecordIter: avoid mutating input fetches
 
 v0.6.14
 ===
 
-- [`dc44d10`](https://github.com/twmb/franz-go/commit/dc44d10) sink: call producerID after creating the produce request
-- [`ce113d5`](https://github.com/twmb/franz-go/commit/ce113d5) **bugfix** producer: fix potential lingering recBuf issue
-- [`19d57dc`](https://github.com/twmb/franz-go/commit/19d57dc) **bugfix** metadata: do not nil cursors/records pointers ever
-- [`e324b56`](https://github.com/twmb/franz-go/commit/e324b56) producing: evaluate whether a batch should fail before and after
+- [`dc44d10`](https://github.com/YenchangChan/franz-go/commit/dc44d10) sink: call producerID after creating the produce request
+- [`ce113d5`](https://github.com/YenchangChan/franz-go/commit/ce113d5) **bugfix** producer: fix potential lingering recBuf issue
+- [`19d57dc`](https://github.com/YenchangChan/franz-go/commit/19d57dc) **bugfix** metadata: do not nil cursors/records pointers ever
+- [`e324b56`](https://github.com/YenchangChan/franz-go/commit/e324b56) producing: evaluate whether a batch should fail before and after
 
 This is a small bugfix release for v0.6.13, which would panic if a user was
 producing to and consuming from the same topic within a single client.
@@ -2405,14 +2405,14 @@ timeout, and lastly the number of tries.
 v0.6.13
 ===
 
-- [`6ae76d0`](https://github.com/twmb/franz-go/commit/6ae76d0): **feature** producer: allow using the passed in context to cancel records
-- [`2b9b8ca`](https://github.com/twmb/franz-go/commit/2b9b8ca): **bugfix** sink: reset needSeqReset
-- [`314de8e`](https://github.com/twmb/franz-go/commit/314de8e): **feature** producer: allow records to fail when idempotency is enabled
-- [`bf956f4`](https://github.com/twmb/franz-go/commit/bf956f4): **feature** producer: delete knowledge of a topic if we never load it
-- [`83ecd8a`](https://github.com/twmb/franz-go/commit/83ecd8a): **bugfix** producer unknown wait: retry on retriable errors
-- [`a3c2a5c`](https://github.com/twmb/franz-go/commit/a3c2a5c): consumer: backoff when list offsets or load epoch has any err (avoid spinloop)
-- [`9c27589`](https://github.com/twmb/franz-go/commit/9c27589): zstd compression: add more options (switch to minimal memory usage)
-- [`0554ad5`](https://github.com/twmb/franz-go/commit/0554ad5): producer: retry logic changes
+- [`6ae76d0`](https://github.com/YenchangChan/franz-go/commit/6ae76d0): **feature** producer: allow using the passed in context to cancel records
+- [`2b9b8ca`](https://github.com/YenchangChan/franz-go/commit/2b9b8ca): **bugfix** sink: reset needSeqReset
+- [`314de8e`](https://github.com/YenchangChan/franz-go/commit/314de8e): **feature** producer: allow records to fail when idempotency is enabled
+- [`bf956f4`](https://github.com/YenchangChan/franz-go/commit/bf956f4): **feature** producer: delete knowledge of a topic if we never load it
+- [`83ecd8a`](https://github.com/YenchangChan/franz-go/commit/83ecd8a): **bugfix** producer unknown wait: retry on retriable errors
+- [`a3c2a5c`](https://github.com/YenchangChan/franz-go/commit/a3c2a5c): consumer: backoff when list offsets or load epoch has any err (avoid spinloop)
+- [`9c27589`](https://github.com/YenchangChan/franz-go/commit/9c27589): zstd compression: add more options (switch to minimal memory usage)
+- [`0554ad5`](https://github.com/YenchangChan/franz-go/commit/0554ad5): producer: retry logic changes
 
 This release focuses on restructing some code to allow deleting topics from the
 client and, most importantly, to allow records to fail even with idempotency.
@@ -2448,24 +2448,24 @@ about and affords us avoiding worrying about endianness.
 
 v0.6.11
 ===
-- [`46138f7`](https://github.com/twmb/franz-go/commit/46138f7): **feature** client: add ConnIdleTimeout option && connection reaping (further fix to this in later commit)
-- [`26c1ea2`](https://github.com/twmb/franz-go/commit/26c1ea2): generate: return "Unknown" for unknown NameForKey
-- [`557e15f`](https://github.com/twmb/franz-go/commit/557e15f): **module change** update module deps; bump lz4 to v4. This dep update will require go-getting the new v4 module.
-- [`10b743e`](https://github.com/twmb/franz-go/commit/10b743e): producer: work around KAFKA-12671
-- [`89bee85`](https://github.com/twmb/franz-go/commit/89bee85): **bugfix** consumer: fix potential slowReloads problem
-- [`111f922`](https://github.com/twmb/franz-go/commit/111f922): consumer: avoid bubbling up retriable broker errors
-- [`fea3195`](https://github.com/twmb/franz-go/commit/fea3195): **bugfix** client: fix fetchBrokerMetadata
-- [`6b64728`](https://github.com/twmb/franz-go/commit/6b64728): **breaking API**: error redux -- this makes private many named errors; realistically this is a minor breaking change
-- [`b2a0578`](https://github.com/twmb/franz-go/commit/b2a0578): sink: allow concurrent produces (this was lost in a prior release; we now again allow 5 concurrent produce requests per broker!)
-- [`ebc8ee2`](https://github.com/twmb/franz-go/commit/ebc8ee2): **bugfix / improvements** producer: guts overhaul, fixing sequence number issues, and allowing aborting records when aborting transactions
-- [`39caca6`](https://github.com/twmb/franz-go/commit/39caca6): Poll{Records,Fetches}: quit if client is closed
-- [`56b8308`](https://github.com/twmb/franz-go/commit/56b8308): **bugfix** client: fix loadCoordinators
-- [`d4fe91d`](https://github.com/twmb/franz-go/commit/d4fe91d): **bugfix** source: more properly ignore truncated partitions
-- [`71c6109`](https://github.com/twmb/franz-go/commit/71c6109): **bugfix** consumer group: map needs to be one block lower
-- [`009e1ba`](https://github.com/twmb/franz-go/commit/009e1ba): consumer: retry reloading offsets on non-retriable errors
-- [`6318b15`](https://github.com/twmb/franz-go/commit/6318b15): **bugfix** group consumer: revoke all on LeaveGroup, properly blocking commit
-- [`b876c09`](https://github.com/twmb/franz-go/commit/b876c09): **bugfix** kversion: KIP-392 landed in Kafka 2.3, not 2.2
-- [`1c5af12`](https://github.com/twmb/franz-go/commit/1c5af12): kversion: support guessing with skipped keys, guessing raft
+- [`46138f7`](https://github.com/YenchangChan/franz-go/commit/46138f7): **feature** client: add ConnIdleTimeout option && connection reaping (further fix to this in later commit)
+- [`26c1ea2`](https://github.com/YenchangChan/franz-go/commit/26c1ea2): generate: return "Unknown" for unknown NameForKey
+- [`557e15f`](https://github.com/YenchangChan/franz-go/commit/557e15f): **module change** update module deps; bump lz4 to v4. This dep update will require go-getting the new v4 module.
+- [`10b743e`](https://github.com/YenchangChan/franz-go/commit/10b743e): producer: work around KAFKA-12671
+- [`89bee85`](https://github.com/YenchangChan/franz-go/commit/89bee85): **bugfix** consumer: fix potential slowReloads problem
+- [`111f922`](https://github.com/YenchangChan/franz-go/commit/111f922): consumer: avoid bubbling up retriable broker errors
+- [`fea3195`](https://github.com/YenchangChan/franz-go/commit/fea3195): **bugfix** client: fix fetchBrokerMetadata
+- [`6b64728`](https://github.com/YenchangChan/franz-go/commit/6b64728): **breaking API**: error redux -- this makes private many named errors; realistically this is a minor breaking change
+- [`b2a0578`](https://github.com/YenchangChan/franz-go/commit/b2a0578): sink: allow concurrent produces (this was lost in a prior release; we now again allow 5 concurrent produce requests per broker!)
+- [`ebc8ee2`](https://github.com/YenchangChan/franz-go/commit/ebc8ee2): **bugfix / improvements** producer: guts overhaul, fixing sequence number issues, and allowing aborting records when aborting transactions
+- [`39caca6`](https://github.com/YenchangChan/franz-go/commit/39caca6): Poll{Records,Fetches}: quit if client is closed
+- [`56b8308`](https://github.com/YenchangChan/franz-go/commit/56b8308): **bugfix** client: fix loadCoordinators
+- [`d4fe91d`](https://github.com/YenchangChan/franz-go/commit/d4fe91d): **bugfix** source: more properly ignore truncated partitions
+- [`71c6109`](https://github.com/YenchangChan/franz-go/commit/71c6109): **bugfix** consumer group: map needs to be one block lower
+- [`009e1ba`](https://github.com/YenchangChan/franz-go/commit/009e1ba): consumer: retry reloading offsets on non-retriable errors
+- [`6318b15`](https://github.com/YenchangChan/franz-go/commit/6318b15): **bugfix** group consumer: revoke all on LeaveGroup, properly blocking commit
+- [`b876c09`](https://github.com/YenchangChan/franz-go/commit/b876c09): **bugfix** kversion: KIP-392 landed in Kafka 2.3, not 2.2
+- [`1c5af12`](https://github.com/YenchangChan/franz-go/commit/1c5af12): kversion: support guessing with skipped keys, guessing raft
 
 This is an important release with multiple bug fixes. All important commits
 are noted above; less important ones are elided.
@@ -2511,28 +2511,28 @@ improvements for the cooperative adjusting of group balancer plans.
 v0.6.10
 ===
 
-- [`04f8e12`](https://github.com/twmb/franz-go/commit/04f8e12): update debug logging (broker and consumer group)
-- [`62e2e24`](https://github.com/twmb/franz-go/commit/62e2e24): add definitions & code for control record keys and values
-- [`e168855`](https://github.com/twmb/franz-go/commit/e168855): **bugfix** sticky: fix and drastically simplify isComplex detection
-- [`bd5d5ad`](https://github.com/twmb/franz-go/commit/bd5d5ad): **bugfix** consumer: properly shut down manageFetchConcurrency
-- [`a670bc7`](https://github.com/twmb/franz-go/commit/a670bc7): group balancer: debug => info logging; handle join better
-- [`d74bbc3`](https://github.com/twmb/franz-go/commit/d74bbc3): **bugfix** group: avoid concurrently setting err; use better log message
-- [`ca32e19`](https://github.com/twmb/franz-go/commit/ca32e19): **feature** consumer: add PollRecords to poll a limited number of records
-- [`2ce2def`](https://github.com/twmb/franz-go/commit/2ce2def): txn: change what we set offsets to on revoke / error
-- [`582335d`](https://github.com/twmb/franz-go/commit/582335d): txn: add PollFetches and Produce to GroupTransactSession
-- [`c8cd120`](https://github.com/twmb/franz-go/commit/c8cd120): txn: document that canceling contexts is not recommended
-- [`bef2311`](https://github.com/twmb/franz-go/commit/bef2311): enforce KIP-98 idempotency config rules: acks=all, retries > 0
-- [`2dc7d3f`](https://github.com/twmb/franz-go/commit/2dc7d3f): **bugfix** client.EndTransaction: if offsets were added to transaction, ensure we commit
-- [`938651e`](https://github.com/twmb/franz-go/commit/938651e): **bugfix** consumer & consumer group: small redux, bug fixes
-- [`b531098`](https://github.com/twmb/franz-go/commit/b531098): **feature** add support for ListTransactions, minor DescribeTransactions change
-- [`3e6bcc3`](https://github.com/twmb/franz-go/commit/3e6bcc3): **feature** client: add option to disable idempotent writes
-- [`5f50891`](https://github.com/twmb/franz-go/commit/5f50891): **feature**: kgo.Fetches: add EachPartition callback iterator
-- [`05de8e6`](https://github.com/twmb/franz-go/commit/05de8e6): **bugfix** use proper keyvals for join group error
-- [`8178f2c`](https://github.com/twmb/franz-go/commit/8178f2c): group assigning: add debug logs for balancing plans
-- [`e038916`](https://github.com/twmb/franz-go/commit/e038916): **bugfix** range balancer: use correct members for div/rem
-- [`e806126`](https://github.com/twmb/franz-go/commit/e806126): **bugfix** (minor) broker: shift sizeBuf 1 left by 8 for guessing tls version
-- [`cd5e7fe`](https://github.com/twmb/franz-go/commit/cd5e7fe): client: rewrite `*kmsg.ProduceRequest`'s Acks, TimeoutMillis
-- [`8fab998`](https://github.com/twmb/franz-go/commit/8fab998): kgo: use a discard goroutine when produce acks is 0
+- [`04f8e12`](https://github.com/YenchangChan/franz-go/commit/04f8e12): update debug logging (broker and consumer group)
+- [`62e2e24`](https://github.com/YenchangChan/franz-go/commit/62e2e24): add definitions & code for control record keys and values
+- [`e168855`](https://github.com/YenchangChan/franz-go/commit/e168855): **bugfix** sticky: fix and drastically simplify isComplex detection
+- [`bd5d5ad`](https://github.com/YenchangChan/franz-go/commit/bd5d5ad): **bugfix** consumer: properly shut down manageFetchConcurrency
+- [`a670bc7`](https://github.com/YenchangChan/franz-go/commit/a670bc7): group balancer: debug => info logging; handle join better
+- [`d74bbc3`](https://github.com/YenchangChan/franz-go/commit/d74bbc3): **bugfix** group: avoid concurrently setting err; use better log message
+- [`ca32e19`](https://github.com/YenchangChan/franz-go/commit/ca32e19): **feature** consumer: add PollRecords to poll a limited number of records
+- [`2ce2def`](https://github.com/YenchangChan/franz-go/commit/2ce2def): txn: change what we set offsets to on revoke / error
+- [`582335d`](https://github.com/YenchangChan/franz-go/commit/582335d): txn: add PollFetches and Produce to GroupTransactSession
+- [`c8cd120`](https://github.com/YenchangChan/franz-go/commit/c8cd120): txn: document that canceling contexts is not recommended
+- [`bef2311`](https://github.com/YenchangChan/franz-go/commit/bef2311): enforce KIP-98 idempotency config rules: acks=all, retries > 0
+- [`2dc7d3f`](https://github.com/YenchangChan/franz-go/commit/2dc7d3f): **bugfix** client.EndTransaction: if offsets were added to transaction, ensure we commit
+- [`938651e`](https://github.com/YenchangChan/franz-go/commit/938651e): **bugfix** consumer & consumer group: small redux, bug fixes
+- [`b531098`](https://github.com/YenchangChan/franz-go/commit/b531098): **feature** add support for ListTransactions, minor DescribeTransactions change
+- [`3e6bcc3`](https://github.com/YenchangChan/franz-go/commit/3e6bcc3): **feature** client: add option to disable idempotent writes
+- [`5f50891`](https://github.com/YenchangChan/franz-go/commit/5f50891): **feature**: kgo.Fetches: add EachPartition callback iterator
+- [`05de8e6`](https://github.com/YenchangChan/franz-go/commit/05de8e6): **bugfix** use proper keyvals for join group error
+- [`8178f2c`](https://github.com/YenchangChan/franz-go/commit/8178f2c): group assigning: add debug logs for balancing plans
+- [`e038916`](https://github.com/YenchangChan/franz-go/commit/e038916): **bugfix** range balancer: use correct members for div/rem
+- [`e806126`](https://github.com/YenchangChan/franz-go/commit/e806126): **bugfix** (minor) broker: shift sizeBuf 1 left by 8 for guessing tls version
+- [`cd5e7fe`](https://github.com/YenchangChan/franz-go/commit/cd5e7fe): client: rewrite `*kmsg.ProduceRequest`'s Acks, TimeoutMillis
+- [`8fab998`](https://github.com/YenchangChan/franz-go/commit/8fab998): kgo: use a discard goroutine when produce acks is 0
 
 This is an important release that fixes various bugs in the consumer code and
 adds a few nice-to-have features. Particularly, this includes a minor redux of
@@ -2551,10 +2551,10 @@ being very minor documentation updates or something similar.
 v0.6.9
 ===
 
-- [`0ca274c`](https://github.com/twmb/franz-go/commit/0ca274c): **bugfix** consumer group: fix race where we did not wait for a revoke to finish if the group closed
-- [`0cdc2b6`](https://github.com/twmb/franz-go/commit/0cdc2b6): **bugfix** consumer: process FetchResponse's RecordBatches correctly (versions after v0.11.0 can use message sets)
-- [`bcb330b`](https://github.com/twmb/franz-go/commit/bcb330b): kerr: add TypedErrorForCode and four new errors
-- [`31a9bbc`](https://github.com/twmb/franz-go/commit/31a9bbc): **bugfix** (that is not hit by general consumers): FetchResponse's DivergingEpoch.EndOffset is an int64, not int32
+- [`0ca274c`](https://github.com/YenchangChan/franz-go/commit/0ca274c): **bugfix** consumer group: fix race where we did not wait for a revoke to finish if the group closed
+- [`0cdc2b6`](https://github.com/YenchangChan/franz-go/commit/0cdc2b6): **bugfix** consumer: process FetchResponse's RecordBatches correctly (versions after v0.11.0 can use message sets)
+- [`bcb330b`](https://github.com/YenchangChan/franz-go/commit/bcb330b): kerr: add TypedErrorForCode and four new errors
+- [`31a9bbc`](https://github.com/YenchangChan/franz-go/commit/31a9bbc): **bugfix** (that is not hit by general consumers): FetchResponse's DivergingEpoch.EndOffset is an int64, not int32
 
 This release fixes some problems with consuming. As it turns out, message sets,
 which are unused after v0.11.0, are indeed returned with higher FetchResponse
@@ -2577,7 +2577,7 @@ potentially redux internally.
 v0.6.8
 ===
 
-- [`8a42602`](https://github.com/twmb/franz-go/commit/8a42602): **bugfix** kversion: avoid panic on a key with value of max int16 (32767)
+- [`8a42602`](https://github.com/YenchangChan/franz-go/commit/8a42602): **bugfix** kversion: avoid panic on a key with value of max int16 (32767)
 
 This is a small bugfix release; Confluent replies with odd keys sometimes,
 turns out this time it was max int16. That showed that the parentheses was in
@@ -2589,8 +2589,8 @@ This also has one more commit that change the String output a little bit to use
 v0.6.7
 ===
 
-- [`2bea568`](https://github.com/twmb/franz-go/commit/2bea568): **bugfix** producer: fix producing with NoAck
-- [`d1ecc7b`](https://github.com/twmb/franz-go/commit/d1ecc7b): On invalidly broker large reads, guess if the problem is a tls alert on a plaintext connection
+- [`2bea568`](https://github.com/YenchangChan/franz-go/commit/2bea568): **bugfix** producer: fix producing with NoAck
+- [`d1ecc7b`](https://github.com/YenchangChan/franz-go/commit/d1ecc7b): On invalidly broker large reads, guess if the problem is a tls alert on a plaintext connection
 
 This is a small bugfix release to fix producing with no acks. As it turns out,
 Kafka truly sends _no_ response when producing with no acks. Previously, we
@@ -2604,17 +2604,17 @@ we wrote successfully.
 v0.6.6
 ===
 
-- [`21ddc56`](https://github.com/twmb/franz-go/commit/21ddc56): kgo: sort `RequestSharded` by broker metadata before returning
-- [`4979b52`](https://github.com/twmb/franz-go/commit/4979b52): **bugfix** consumer: ensure we advance when consuming compacted topics
+- [`21ddc56`](https://github.com/YenchangChan/franz-go/commit/21ddc56): kgo: sort `RequestSharded` by broker metadata before returning
+- [`4979b52`](https://github.com/YenchangChan/franz-go/commit/4979b52): **bugfix** consumer: ensure we advance when consuming compacted topics
 
 This is a small bugfix release to fix a stuck-consumer bug on compacted topics.
 
 v0.6.5
 ===
 
-- [`d5b9365`](https://github.com/twmb/franz-go/commit/d5b9365): configuration: clamp max partition bytes to max bytes to work around faulty providers
-- [`c7dbafb`](https://github.com/twmb/franz-go/commit/c7dbafb): **bugfix** consumer: kill the session if the response is less than version 7
-- [`f57fc76`](https://github.com/twmb/franz-go/commit/f57fc76): **bugfix** producer: handle ErrBrokerTooOld in doInitProducerID, allowing the producer to work for 0.10.0 through 0.11.0
+- [`d5b9365`](https://github.com/YenchangChan/franz-go/commit/d5b9365): configuration: clamp max partition bytes to max bytes to work around faulty providers
+- [`c7dbafb`](https://github.com/YenchangChan/franz-go/commit/c7dbafb): **bugfix** consumer: kill the session if the response is less than version 7
+- [`f57fc76`](https://github.com/YenchangChan/franz-go/commit/f57fc76): **bugfix** producer: handle ErrBrokerTooOld in doInitProducerID, allowing the producer to work for 0.10.0 through 0.11.0
 
 This is a small release to ensure that we can make progress when producing to
 Kafka clusters v0.10.0 through v0.11.0 (as well as that we can consume from
@@ -2623,21 +2623,21 @@ them if the consume has a partition error).
 v0.6.4
 ===
 
-- [`802bf74`](https://github.com/twmb/franz-go/commit/802bf74): **bugfix** kgo: fix three races
-- [`1e5c11d`](https://github.com/twmb/franz-go/commit/1e5c11d): kgo: Favor non-seeds when selecting brokers for requests that go to a random broker
-- [`4509d41`](https://github.com/twmb/franz-go/commit/4509d41): kgo: Add `AllowedConcurrentFetches` option to allow bounding the maximum possible memory consumed by the client
-- [pr #22](https://github.com/twmb/franz-go/pull/22): Add transactional producer / consumer example (thanks [@dcrodman](https://github.com/dcrodman)!)
-- [`6a041a8`](https://github.com/twmb/franz-go/commit/6a041a8): Add explicit Client.LeaveGroup method
-- [`fe7d976`](https://github.com/twmb/franz-go/commit/fe7d976): KIP-500 / KIP-631: add support for admin-level request DecommissionBroker
-- [`ab66776`](https://github.com/twmb/franz-go/commit/ab66776): KIP-500 / KIP-631: add support for broker-only requests BrokerRegistration and BrokerHeartbeat
-- [`31b1df7`](https://github.com/twmb/franz-go/commit/31b1df7): KIP-664: add support for DescribeProducers
-- [`368bb21`](https://github.com/twmb/franz-go/commit/368bb21): **breaking kmsg protocol changes**: add support for KIP-516 CreateTopics and DeleteTopics bumps
-- [`b50282e`](https://github.com/twmb/franz-go/commit/b50282e): kerr: ReplicaNotAvailable is retriable; add UnknownTopicID
-- [`c05572d`](https://github.com/twmb/franz-go/commit/c05572d): kmsg: change (Request|Response)ForKey to use proper NewPtr functions
-- [`360a4dc`](https://github.com/twmb/franz-go/commit/360a4dc): client: actually use ConnTimeoutOverhead properly; bump base to 20s
-- [`0ff08da`](https://github.com/twmb/franz-go/commit/0ff08da): Allow list offsets v0 to work (for Kafka v0.10.0 and before)
-- [`59c935c` through `c7caea1`](https://github.com/twmb/franz-go/compare/59c935c..c7caea1): fix fetch session bugs
-- [pr #4](https://github.com/twmb/franz-go/pull/4): Redesign readme (thanks [@weeco](https://github.com/weeco)!)
+- [`802bf74`](https://github.com/YenchangChan/franz-go/commit/802bf74): **bugfix** kgo: fix three races
+- [`1e5c11d`](https://github.com/YenchangChan/franz-go/commit/1e5c11d): kgo: Favor non-seeds when selecting brokers for requests that go to a random broker
+- [`4509d41`](https://github.com/YenchangChan/franz-go/commit/4509d41): kgo: Add `AllowedConcurrentFetches` option to allow bounding the maximum possible memory consumed by the client
+- [pr #22](https://github.com/YenchangChan/franz-go/pull/22): Add transactional producer / consumer example (thanks [@dcrodman](https://github.com/dcrodman)!)
+- [`6a041a8`](https://github.com/YenchangChan/franz-go/commit/6a041a8): Add explicit Client.LeaveGroup method
+- [`fe7d976`](https://github.com/YenchangChan/franz-go/commit/fe7d976): KIP-500 / KIP-631: add support for admin-level request DecommissionBroker
+- [`ab66776`](https://github.com/YenchangChan/franz-go/commit/ab66776): KIP-500 / KIP-631: add support for broker-only requests BrokerRegistration and BrokerHeartbeat
+- [`31b1df7`](https://github.com/YenchangChan/franz-go/commit/31b1df7): KIP-664: add support for DescribeProducers
+- [`368bb21`](https://github.com/YenchangChan/franz-go/commit/368bb21): **breaking kmsg protocol changes**: add support for KIP-516 CreateTopics and DeleteTopics bumps
+- [`b50282e`](https://github.com/YenchangChan/franz-go/commit/b50282e): kerr: ReplicaNotAvailable is retriable; add UnknownTopicID
+- [`c05572d`](https://github.com/YenchangChan/franz-go/commit/c05572d): kmsg: change (Request|Response)ForKey to use proper NewPtr functions
+- [`360a4dc`](https://github.com/YenchangChan/franz-go/commit/360a4dc): client: actually use ConnTimeoutOverhead properly; bump base to 20s
+- [`0ff08da`](https://github.com/YenchangChan/franz-go/commit/0ff08da): Allow list offsets v0 to work (for Kafka v0.10.0 and before)
+- [`59c935c` through `c7caea1`](https://github.com/YenchangChan/franz-go/compare/59c935c..c7caea1): fix fetch session bugs
+- [pr #4](https://github.com/YenchangChan/franz-go/pull/4): Redesign readme (thanks [@weeco](https://github.com/weeco)!)
 
 Of note, this fixes three races, fixes fetch session bugs and has small
 breaking protocol changes in kmsg.
@@ -2661,11 +2661,11 @@ struct under Topics.
 v0.6.3
 ===
 
-- [`db09137`](https://github.com/twmb/franz-go/commit/db09137): Add support for new DescribeCluster API (KIP-700); followup commit (`ab5bdd3`) deprecates `Include<*>AuthorizedOperations` in the metadata request.
-- [`3866e0c`](https://github.com/twmb/franz-go/commit/3866e0c): Set Record.Attrs properly before calling Produce callback hook.
-- [`05346db`](https://github.com/twmb/franz-go/commit/05346db) and [`3d3787e`](https://github.com/twmb/franz-go/commit/3d3787e): kgo: breaking change for kversions breaking change two commits ago (see two lines below)
-- [`b921c14`](https://github.com/twmb/franz-go/commit/b921c14): doc fix: v0.10.0 changed produce from MessageSet v0 to MessageSet v1
-- [`33a8b26`](https://github.com/twmb/franz-go/commit/33a8b26): Breaking pointerification change to kversions.Versions; introduce VersionGuess
+- [`db09137`](https://github.com/YenchangChan/franz-go/commit/db09137): Add support for new DescribeCluster API (KIP-700); followup commit (`ab5bdd3`) deprecates `Include<*>AuthorizedOperations` in the metadata request.
+- [`3866e0c`](https://github.com/YenchangChan/franz-go/commit/3866e0c): Set Record.Attrs properly before calling Produce callback hook.
+- [`05346db`](https://github.com/YenchangChan/franz-go/commit/05346db) and [`3d3787e`](https://github.com/YenchangChan/franz-go/commit/3d3787e): kgo: breaking change for kversions breaking change two commits ago (see two lines below)
+- [`b921c14`](https://github.com/YenchangChan/franz-go/commit/b921c14): doc fix: v0.10.0 changed produce from MessageSet v0 to MessageSet v1
+- [`33a8b26`](https://github.com/YenchangChan/franz-go/commit/33a8b26): Breaking pointerification change to kversions.Versions; introduce VersionGuess
 
 Two small breaking changes related to kversions.Versions in this; switching to
 pointers now makes the struct future compatible; if it grows, we avoid the
@@ -2681,28 +2681,28 @@ KAFKA-12152.
 v0.6.2
 ===
 
-- [`9761889`](https://github.com/twmb/franz-go/commit/9761889): bump dependencies
-- [`d07538d`](https://github.com/twmb/franz-go/commit/d07538d) Allow clients to cancel requests with the passed context; fix potential hanging requests
-- [`303186a`](https://github.com/twmb/franz-go/commit/303186a) Add BrokerThrottleHook (thanks [@akesle](https://github.com/akesle))
-- [`63d3a60`](https://github.com/twmb/franz-go/commit/63d3a60) and previous commits: Use new & better kmsg.ThrottleResponse; this removes the usage of reflect to check for a ThrottleMillis field
-- [`b68f112`](https://github.com/twmb/franz-go/commit/b68f112) kerr: add description to error string
-- [`7cef63c`](https://github.com/twmb/franz-go/commit/7cef63c) config: strengthen validation
-- [`faac3cc`](https://github.com/twmb/franz-go/commit/faac3cc) producing: fail large messages more correctly (bugfix)
-- [`bc1f2d1`](https://github.com/twmb/franz-go/commit/bc1f2d1) and [`2493ae7`](https://github.com/twmb/franz-go/commit/2493ae7): kversion: switchup Versions API, finalize 2.7.0
-- [`991e7f3`](https://github.com/twmb/franz-go/commit/991e7f3): Add support for KIP-630's new FetchSnapshot API
-- [`de22e10`](https://github.com/twmb/franz-go/commit/de22e10): and [`9805d36`](https://github.com/twmb/franz-go/commit/9805d36) and [`c1d9ff4`](https://github.com/twmb/franz-go/commit/c1d9ff4): Add Uuid support and some definitions for KIP-516 (topic IDs)
-- [`539b06c`](https://github.com/twmb/franz-go/commit/539b06c): Completely rewrite the consumer.go & source.go logic and fix sink & source broker pointer issues
-- [`385cecb`](https://github.com/twmb/franz-go/commit/385cecb): Adds a warning hint if the connection dies on the first read without sasl
-- [`71cda7b`](https://github.com/twmb/franz-go/commit/71cda7b): Bump another batch of requests to be flexible (per KAFKA-10729 / 85f94d50271)
-- [`9d1238b8e`](https://github.com/twmb/franz-go/commit/9d1238b8ee28ad032e0bc9aa4891e0fbcdd27a63) and [`8a75a8091`](https://github.com/twmb/franz-go/commit/8a75a80914500a7f9c9e0edc4e5aefde327adf45): Fix misleading doc comments on DescribeGroupsRequest and FindCoordinatorResponse
-- [`7f30228b8`](https://github.com/twmb/franz-go/commit/7f30228b87d4f883ba5c344048201dfb4d90336e): Adds FetchMinBytes option
-- [`56ab90c72`](https://github.com/twmb/franz-go/commit/56ab90c7273be5ccc40dc38ff669b36995c505ce): Support EnvelopeRequest & DefaultPrincipalBuilder for KIP-590
-- [`37d6868fc`](https://github.com/twmb/franz-go/commit/37d6868fc474813a6fb1e814b1a7fd87cc34d8ee): Add producer ID and epoch to the Record struct
-- [`9467a951d`](https://github.com/twmb/franz-go/commit/9467a951d71e511c28180239336093225082896c): Add explicit sharded requests and retriable broker specific requests (followup commit settles API naming; later commits fix small problems in initial implementation)
-- [`b94b15549`](https://github.com/twmb/franz-go/commit/b94b155497b4216808236aa393f06e7dccd772ed): Add kmsg constants for enums
-- [`7ac5aaff8`](https://github.com/twmb/franz-go/commit/7ac5aaff8cea693e6a57533c8e18cca75c17ecc0): Add a MinVersions option
-- [`3b06d558b`](https://github.com/twmb/franz-go/commit/3b06d558ba7453a191f434ce5654853322742859): Add a max broker read bytes option
-- [`4c5cf8422`](https://github.com/twmb/franz-go/commit/4c5cf84223401eb1f5f6a78671dc04ff51407bd3): Account for throttling in responses
+- [`9761889`](https://github.com/YenchangChan/franz-go/commit/9761889): bump dependencies
+- [`d07538d`](https://github.com/YenchangChan/franz-go/commit/d07538d) Allow clients to cancel requests with the passed context; fix potential hanging requests
+- [`303186a`](https://github.com/YenchangChan/franz-go/commit/303186a) Add BrokerThrottleHook (thanks [@akesle](https://github.com/akesle))
+- [`63d3a60`](https://github.com/YenchangChan/franz-go/commit/63d3a60) and previous commits: Use new & better kmsg.ThrottleResponse; this removes the usage of reflect to check for a ThrottleMillis field
+- [`b68f112`](https://github.com/YenchangChan/franz-go/commit/b68f112) kerr: add description to error string
+- [`7cef63c`](https://github.com/YenchangChan/franz-go/commit/7cef63c) config: strengthen validation
+- [`faac3cc`](https://github.com/YenchangChan/franz-go/commit/faac3cc) producing: fail large messages more correctly (bugfix)
+- [`bc1f2d1`](https://github.com/YenchangChan/franz-go/commit/bc1f2d1) and [`2493ae7`](https://github.com/YenchangChan/franz-go/commit/2493ae7): kversion: switchup Versions API, finalize 2.7.0
+- [`991e7f3`](https://github.com/YenchangChan/franz-go/commit/991e7f3): Add support for KIP-630's new FetchSnapshot API
+- [`de22e10`](https://github.com/YenchangChan/franz-go/commit/de22e10): and [`9805d36`](https://github.com/YenchangChan/franz-go/commit/9805d36) and [`c1d9ff4`](https://github.com/YenchangChan/franz-go/commit/c1d9ff4): Add Uuid support and some definitions for KIP-516 (topic IDs)
+- [`539b06c`](https://github.com/YenchangChan/franz-go/commit/539b06c): Completely rewrite the consumer.go & source.go logic and fix sink & source broker pointer issues
+- [`385cecb`](https://github.com/YenchangChan/franz-go/commit/385cecb): Adds a warning hint if the connection dies on the first read without sasl
+- [`71cda7b`](https://github.com/YenchangChan/franz-go/commit/71cda7b): Bump another batch of requests to be flexible (per KAFKA-10729 / 85f94d50271)
+- [`9d1238b8e`](https://github.com/YenchangChan/franz-go/commit/9d1238b8ee28ad032e0bc9aa4891e0fbcdd27a63) and [`8a75a8091`](https://github.com/YenchangChan/franz-go/commit/8a75a80914500a7f9c9e0edc4e5aefde327adf45): Fix misleading doc comments on DescribeGroupsRequest and FindCoordinatorResponse
+- [`7f30228b8`](https://github.com/YenchangChan/franz-go/commit/7f30228b87d4f883ba5c344048201dfb4d90336e): Adds FetchMinBytes option
+- [`56ab90c72`](https://github.com/YenchangChan/franz-go/commit/56ab90c7273be5ccc40dc38ff669b36995c505ce): Support EnvelopeRequest & DefaultPrincipalBuilder for KIP-590
+- [`37d6868fc`](https://github.com/YenchangChan/franz-go/commit/37d6868fc474813a6fb1e814b1a7fd87cc34d8ee): Add producer ID and epoch to the Record struct
+- [`9467a951d`](https://github.com/YenchangChan/franz-go/commit/9467a951d71e511c28180239336093225082896c): Add explicit sharded requests and retriable broker specific requests (followup commit settles API naming; later commits fix small problems in initial implementation)
+- [`b94b15549`](https://github.com/YenchangChan/franz-go/commit/b94b155497b4216808236aa393f06e7dccd772ed): Add kmsg constants for enums
+- [`7ac5aaff8`](https://github.com/YenchangChan/franz-go/commit/7ac5aaff8cea693e6a57533c8e18cca75c17ecc0): Add a MinVersions option
+- [`3b06d558b`](https://github.com/YenchangChan/franz-go/commit/3b06d558ba7453a191f434ce5654853322742859): Add a max broker read bytes option
+- [`4c5cf8422`](https://github.com/YenchangChan/franz-go/commit/4c5cf84223401eb1f5f6a78671dc04ff51407bd3): Account for throttling in responses
 
 The primary commit of this release is `539b06c`, which completely rewrites the
 consumer.go and source.go files to be more easily understandable. This commit
@@ -2729,16 +2729,16 @@ Includes a few other minor, not too noteworthy changes.
 v0.6.1
 ===
 
-- [`0ddc468b2`](https://github.com/twmb/franz-go/commit/0ddc468b2ceca4fc0e42206c397f6d7ccd74bc4b): Workaround for two minor EventHubs issues.
+- [`0ddc468b2`](https://github.com/YenchangChan/franz-go/commit/0ddc468b2ceca4fc0e42206c397f6d7ccd74bc4b): Workaround for two minor EventHubs issues.
 
 This is a small release to patch around two minor EventHubs protocol serializing issues.
 
 v0.6.0
 ===
 
-- [`0024a93a4`](https://github.com/twmb/franz-go/commit/0024a93a4d386318869fe029260f3e23a602c03e): Fix bug introduced in pkg/kgo/source.go
-- [`ee58bc706`](https://github.com/twmb/franz-go/commit/ee58bc7065e50a40207a730afc6dfc14b47b1da1): Avoid noise when closing the client if we were not consuming
-- [`6e0b042e3`](https://github.com/twmb/franz-go/commit/6e0b042e3ad2281b82030375257f0c200bc511c3): Pin the client by default to the latest stable API versions
+- [`0024a93a4`](https://github.com/YenchangChan/franz-go/commit/0024a93a4d386318869fe029260f3e23a602c03e): Fix bug introduced in pkg/kgo/source.go
+- [`ee58bc706`](https://github.com/YenchangChan/franz-go/commit/ee58bc7065e50a40207a730afc6dfc14b47b1da1): Avoid noise when closing the client if we were not consuming
+- [`6e0b042e3`](https://github.com/YenchangChan/franz-go/commit/6e0b042e3ad2281b82030375257f0c200bc511c3): Pin the client by default to the latest stable API versions
 
 This release also changes the name to franz-go. After sitting on frang for a
 week, ultimately I was missing the fact that the name related to Kafka. `franz`
@@ -2747,23 +2747,23 @@ is an easy enough mental map, and then this brings back the `-go` suffix.
 v0.5.0
 ===
 
-- [`9dc80fd29`](https://github.com/twmb/franz-go/commit/9dc80fd2978e8fb792f669ec6595cc5dadfc9fa5): Add hooks, which enable metrics to be layered in.
-- [`a68d13bcb`](https://github.com/twmb/franz-go/commit/a68d13bcb4931870c9ca57abc085aa937b47373a): Set SoftwareName & SoftwareVersion on ApiVersions request if missing
-- [`5fb0a3831`](https://github.com/twmb/franz-go/commit/5fb0a3831f56e444497131674b582113344704db): Fix SASL Authenticate
-- [`85243c5c5`](https://github.com/twmb/franz-go/commit/85243c5c5aee1e23f6d360efdc82480fd83fcfc3): Breaking API change for enums in ACL & config managing request / response types
-- [`4bc453bc2`](https://github.com/twmb/franz-go/commit/4bc453bc237bd534947cebdc5bc72f8bd7e855d9): Add NewPtr functions for generated structs in kmsg
-- [`dcaf32daa`](https://github.com/twmb/franz-go/commit/dcaf32daa16fdc20e1c9cf91847b74342d13e36f): Generate RequestWith function for all requests in kmsg
-- [`c27b41c3e`](https://github.com/twmb/franz-go/commit/c27b41c3e85df89651d9634cd024a2114f273cbd): Add Requestor interface to kmsg package
-- [`2262f3a8f`](https://github.com/twmb/franz-go/commit/2262f3a8f90db2f459203b8ae665b089c19901d2): Add New functions for generated structs in kmsg
-- [`7fc3a701e`](https://github.com/twmb/franz-go/commit/7fc3a701ec2155417cc02d2535510fcb5c9cdb6d): Add UpdateFeatures for 2.7.0 (KIP-584)
-- [`f09690186`](https://github.com/twmb/franz-go/commit/f09690186ce2697f78626ba06e7ccfb586f1c7ee): Add shortcuts to get sasl.Mechanisms from sasl structs
-- [PR #12](https://github.com/twmb/franz-go/pull/12): Add clarifying wording on NewClient (thanks [@weeco](https://github.com/weeco)!)
-- [`9687df7ad`](https://github.com/twmb/franz-go/commit/9687df7ad71c552c61eea86376ebf3a9f6bff09e): Breaking API change for kgo.Dialer
-- [`aca99bcf1`](https://github.com/twmb/franz-go/commit/aca99bcf19e741850378adbfe64c62b009340d7d): New APIs for KIP-497 (alter isr)
-- [`a5f66899f`](https://github.com/twmb/franz-go/commit/a5f66899f6b492de37d689566d34869f50744717): New APIs for KIP-595 (raft)
-- [`cd499f4ea`](https://github.com/twmb/franz-go/commit/cd499f4eaceaa0bd73452b5737c7713fe2b60ca9): Fetch request changes for KIP-595 (raft)
-- [`7fd87da1c`](https://github.com/twmb/franz-go/commit/7fd87da1c8562943b095a54b5bc6258e2d2bdc6c): Support defaults in generated code (and a few commits after adding defaults)
-- [`74c7f57e8`](https://github.com/twmb/franz-go/commit/74c7f57e81dd45033e9eec3bacbc4dca75fef83d): Support for KIP-584 (ApiVersions changes for min/max features)
+- [`9dc80fd29`](https://github.com/YenchangChan/franz-go/commit/9dc80fd2978e8fb792f669ec6595cc5dadfc9fa5): Add hooks, which enable metrics to be layered in.
+- [`a68d13bcb`](https://github.com/YenchangChan/franz-go/commit/a68d13bcb4931870c9ca57abc085aa937b47373a): Set SoftwareName & SoftwareVersion on ApiVersions request if missing
+- [`5fb0a3831`](https://github.com/YenchangChan/franz-go/commit/5fb0a3831f56e444497131674b582113344704db): Fix SASL Authenticate
+- [`85243c5c5`](https://github.com/YenchangChan/franz-go/commit/85243c5c5aee1e23f6d360efdc82480fd83fcfc3): Breaking API change for enums in ACL & config managing request / response types
+- [`4bc453bc2`](https://github.com/YenchangChan/franz-go/commit/4bc453bc237bd534947cebdc5bc72f8bd7e855d9): Add NewPtr functions for generated structs in kmsg
+- [`dcaf32daa`](https://github.com/YenchangChan/franz-go/commit/dcaf32daa16fdc20e1c9cf91847b74342d13e36f): Generate RequestWith function for all requests in kmsg
+- [`c27b41c3e`](https://github.com/YenchangChan/franz-go/commit/c27b41c3e85df89651d9634cd024a2114f273cbd): Add Requestor interface to kmsg package
+- [`2262f3a8f`](https://github.com/YenchangChan/franz-go/commit/2262f3a8f90db2f459203b8ae665b089c19901d2): Add New functions for generated structs in kmsg
+- [`7fc3a701e`](https://github.com/YenchangChan/franz-go/commit/7fc3a701ec2155417cc02d2535510fcb5c9cdb6d): Add UpdateFeatures for 2.7.0 (KIP-584)
+- [`f09690186`](https://github.com/YenchangChan/franz-go/commit/f09690186ce2697f78626ba06e7ccfb586f1c7ee): Add shortcuts to get sasl.Mechanisms from sasl structs
+- [PR #12](https://github.com/YenchangChan/franz-go/pull/12): Add clarifying wording on NewClient (thanks [@weeco](https://github.com/weeco)!)
+- [`9687df7ad`](https://github.com/YenchangChan/franz-go/commit/9687df7ad71c552c61eea86376ebf3a9f6bff09e): Breaking API change for kgo.Dialer
+- [`aca99bcf1`](https://github.com/YenchangChan/franz-go/commit/aca99bcf19e741850378adbfe64c62b009340d7d): New APIs for KIP-497 (alter isr)
+- [`a5f66899f`](https://github.com/YenchangChan/franz-go/commit/a5f66899f6b492de37d689566d34869f50744717): New APIs for KIP-595 (raft)
+- [`cd499f4ea`](https://github.com/YenchangChan/franz-go/commit/cd499f4eaceaa0bd73452b5737c7713fe2b60ca9): Fetch request changes for KIP-595 (raft)
+- [`7fd87da1c`](https://github.com/YenchangChan/franz-go/commit/7fd87da1c8562943b095a54b5bc6258e2d2bdc6c): Support defaults in generated code (and a few commits after adding defaults)
+- [`74c7f57e8`](https://github.com/YenchangChan/franz-go/commit/74c7f57e81dd45033e9eec3bacbc4dca75fef83d): Support for KIP-584 (ApiVersions changes for min/max features)
 
 Multiple generator changes were made to better handle tags, add support for
 enums, and parse many files in a `definitions` directory. Minor changes were
@@ -2781,20 +2781,20 @@ Typo fix for the prior release (in 2.7.0 APIs).
 v0.4.8
 ======
 
-- [`2e235164d`](https://github.com/twmb/franz-go/commit/2e235164daca64cafc715642582b13424e494e5c): Further prepare for KIP-588 (recover on txn timed out)
-- [`60de0dafb`](https://github.com/twmb/franz-go/commit/60de0dafbeb7bf72996ad5f24690820962d2f584): Further audit for KIP-360 correctness (recoverable producer id)
-- [`2eb27c653`](https://github.com/twmb/franz-go/commit/2eb27c653a4cdb815bf366894a2b87a3555ee50b): client.Request: shard DeleteRecords, {AlterReplica,Describe}LogDirs
-- [`ebadfdae1`](https://github.com/twmb/franz-go/commit/ebadfdae1d975a5a937a1f1d67fd909b728c7386): Add support for KIP-554 (SCRAM APIs)
-- [`4ea4c4297`](https://github.com/twmb/franz-go/commit/4ea4c4297e0402fcf37ef913f4a161203ff83dd4): Un-admin a lot of requests and fix OffsetDelete to be a group request
+- [`2e235164d`](https://github.com/YenchangChan/franz-go/commit/2e235164daca64cafc715642582b13424e494e5c): Further prepare for KIP-588 (recover on txn timed out)
+- [`60de0dafb`](https://github.com/YenchangChan/franz-go/commit/60de0dafbeb7bf72996ad5f24690820962d2f584): Further audit for KIP-360 correctness (recoverable producer id)
+- [`2eb27c653`](https://github.com/YenchangChan/franz-go/commit/2eb27c653a4cdb815bf366894a2b87a3555ee50b): client.Request: shard DeleteRecords, {AlterReplica,Describe}LogDirs
+- [`ebadfdae1`](https://github.com/YenchangChan/franz-go/commit/ebadfdae1d975a5a937a1f1d67fd909b728c7386): Add support for KIP-554 (SCRAM APIs)
+- [`4ea4c4297`](https://github.com/YenchangChan/franz-go/commit/4ea4c4297e0402fcf37ef913f4a161203ff83dd4): Un-admin a lot of requests and fix OffsetDelete to be a group request
 
 v0.4.7
 ======
 
-- [`598261505`](https://github.com/twmb/franz-go/commit/598261505033d0255c37dc06b9b6c1112818a1be): Breaking API change in kmsg to add validating & erroring when reading records/messages
+- [`598261505`](https://github.com/YenchangChan/franz-go/commit/598261505033d0255c37dc06b9b6c1112818a1be): Breaking API change in kmsg to add validating & erroring when reading records/messages
 
 v0.4.6
 ======
 
 - Introduces the CHANGELOG file
-- [`ff1dc467e`](https://github.com/twmb/franz-go/commit/ff1dc467e32b6be41656c1f3bc57cb4d45e32a0c): Breaking API change in kmsg to support future non-breaking changes
-- [`4eb594044`](https://github.com/twmb/franz-go/commit/4eb594044cfc611b75352530f7122c596b15764c): Correctly copies over Version/ThrottleMillis when merging ListGroups
+- [`ff1dc467e`](https://github.com/YenchangChan/franz-go/commit/ff1dc467e32b6be41656c1f3bc57cb4d45e32a0c): Breaking API change in kmsg to support future non-breaking changes
+- [`4eb594044`](https://github.com/YenchangChan/franz-go/commit/4eb594044cfc611b75352530f7122c596b15764c): Correctly copies over Version/ThrottleMillis when merging ListGroups

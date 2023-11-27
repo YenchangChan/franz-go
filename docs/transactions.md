@@ -10,8 +10,8 @@ to worry about when producing is to make sure that you commit or abort
 appropriately, and for consuming, make sure you use the
 [`FetchIsolationLevel`][1] option with [`ReadCommitted`][2] option.
 
-[1]: https://pkg.go.dev/github.com/twmb/franz-go/pkg/kgo#FetchIsolationLevel
-[2]: https://pkg.go.dev/github.com/twmb/franz-go/pkg/kgo#ReadCommitted
+[1]: https://pkg.go.dev/github.com/YenchangChan/franz-go/pkg/kgo#FetchIsolationLevel
+[2]: https://pkg.go.dev/github.com/YenchangChan/franz-go/pkg/kgo#ReadCommitted
 
 For an example of the EOS consumer/producer, see
 [here](../examples/transactions/eos). Because EOS requires much more care to
@@ -22,7 +22,7 @@ necessary (specifically, when a group rebalance happens). This may occasionally
 lead to extra work, but it should prevent consuming, modifying, producing, and
 _committing_ a record twice.
 
-[3]: https://pkg.go.dev/github.com/twmb/franz-go/pkg/kgo#GroupTransactSession
+[3]: https://pkg.go.dev/github.com/YenchangChan/franz-go/pkg/kgo#GroupTransactSession
 
 KIP-447?
 ===

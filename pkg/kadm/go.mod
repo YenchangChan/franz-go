@@ -1,10 +1,10 @@
-module github.com/twmb/franz-go/pkg/kadm
+module github.com/YenchangChan/franz-go/pkg/kadm
 
 go 1.19
 
 require (
-	github.com/twmb/franz-go v1.15.0
-	github.com/twmb/franz-go/pkg/kmsg v1.6.1
+	github.com/YenchangChan/franz-go v1.15.0
+	github.com/YenchangChan/franz-go/pkg/kmsg v1.6.1
 	golang.org/x/crypto v0.13.0
 )
 
